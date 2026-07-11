@@ -1,0 +1,39 @@
+{
+    "js/ts.tsdk.promptToUseWorkspaceVersion": true,
+    "js/ts.tsdk.path": "node_modules\\typescript\\lib",
+    "editor.formatOnSave": true,
+    "oxc.fmt.configPath": ".oxfmtrc.json",
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "oxc.fixKind": "all",
+    "editor.codeActionsOnSave": {
+        "source.formatDocument": "explicit",
+        "source.organizeImports": "explicit",
+        "source.sortImports": "explicit",
+        "source.fixAll.oxc": "always"
+    },
+    "js/ts.preferences.importModuleSpecifier": "non-relative",
+    "js/ts.preferences.preferTypeOnlyAutoImports": true,
+    "[tailwindcss]": {
+        "editor.defaultFormatter": "stylelint.vscode-stylelint"
+    },
+    "tailwindCSS.experimental.classRegex": [
+        ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+        // enable autocomplete in cx(...)
+        ["cx\\(((?:[^()]|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+        // enable autocomplete in cva(...)
+        ["cva\\(((?:[^()]|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+        // anything that ends with className
+        "[\\S]*ClassName=\"([^\"]*)\"", // double quotes
+        "[\\S]*ClassName='([^']*)'", // single quotes
+        "className=\"([^\"]*)\"", // double quotes
+        "className='([^']*)'", // single quotes
+        "tw=\"([^\"]*)\"", // double quotes
+        "tw='([^']*)'", // single quotes
+        "[\\S]*ClassName: \"([^\"]*)\"", // double quotes
+        "[\\S]*ClassName: '([^']*)'", // single quotes
+        "className: \"([^\"]*)\"", // double quotes
+        "className: '([^']*)'", // single quotes
+        "class: '([^']*)'" // class: mostly for tiptap
+    ],
+    "oxc.typeAware": true
+}

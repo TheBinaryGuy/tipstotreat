@@ -1,0 +1,15 @@
+{
+    "$schema": "./node_modules/oxfmt/configuration_schema.json",
+    "bracketSpacing": true,
+    "bracketSameLine": true,
+    "singleQuote": true,
+    "jsxSingleQuote": true,
+    "trailingComma": "es5",
+    "arrowParens": "avoid",
+    "tabWidth": 4,
+    "printWidth": 100,
+    "semi": true,
+    "sortTailwindcss": {},
+    "sortPackageJson": false,
+    "ignorePatterns": ["package-lock.json", "pnpm-lock.yaml", "yarn.lock", "src/routeTree.gen.ts"]
+}
