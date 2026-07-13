@@ -1,0 +1,18 @@
+package.json
+  h_f7ba60a6997566 7,9-10,38,50-51
+vite.config.ts
+  h_f7ba60a6997566 1,11,15
+wrangler.jsonc
+  h_f7ba60a6997566 1-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "1265cf6dd8c5d6918155f01ed5199839f1855dd2",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
