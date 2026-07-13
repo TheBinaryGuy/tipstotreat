@@ -1,7 +1,9 @@
 packages: []
 
 allowBuilds:
-    esbuild: true
-    lightningcss: true
-    unrs-resolver: true
-    msw: false
+  esbuild: true
+  lightningcss: true
+  unrs-resolver: true
+  msw: false
+  sharp: true
+  workerd: true
