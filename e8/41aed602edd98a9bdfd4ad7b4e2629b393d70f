@@ -1,0 +1,24 @@
+vite.config.ts
+  s_744fc95b1ed17f::t_685acb384d7ce7 9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "e841aed602edd98a9bdfd4ad7b4e2629b393d70f",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  },
+  "sessions": {
+    "s_744fc95b1ed17f": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019f7c9e-b2f6-7977-87bd-856bb0a49399",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
