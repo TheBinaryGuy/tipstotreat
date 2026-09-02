@@ -1,0 +1,14 @@
+src/routes/__root.tsx
+  h_f7ba60a6997566 1-3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "35ffcce12717b29d892053d6474935b8877552ab",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
