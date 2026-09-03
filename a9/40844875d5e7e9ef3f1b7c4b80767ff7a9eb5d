@@ -1,0 +1,41 @@
+worker-configuration.d.ts
+  s_dda73c4b992cc4::t_7d429bb7c77de3 2,13-14,32-33
+src/features/entries/server/entries.functions.ts
+  s_dda73c4b992cc4::t_7d429bb7c77de3 21-22,24,72-74,83-85,102-116
+src/routes/__root.tsx
+  s_dda73c4b992cc4::t_7d429bb7c77de3 4-9,26-31,51-53,94-103
+src/routes/feed[.]xml.ts
+  s_dda73c4b992cc4::t_7d429bb7c77de3 1-59
+src/lib/site.ts
+  s_dda73c4b992cc4::t_7d429bb7c77de3 3,11-15
+src/routeTree.gen.ts
+  s_dda73c4b992cc4::t_7d429bb7c77de3 13,18,43-47,68-73,174,179,200,205,228,233,258,263,284,289,311,316,340,345,363-369,398-404,587
+  s_dda73c4b992cc4::t_7ec2f7c4c85a0a 592
+src/lib/indexnow.server.ts
+  s_dda73c4b992cc4::t_7d429bb7c77de3 1-27
+wrangler.jsonc
+  s_dda73c4b992cc4::t_7d429bb7c77de3 16-19
+src/routes/{$indexnowKey}[.]txt.ts
+  s_dda73c4b992cc4::t_3d1ea981008c97 1-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "a940844875d5e7e9ef3f1b7c4b80767ff7a9eb5d",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  },
+  "sessions": {
+    "s_dda73c4b992cc4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "41b53d0c-eb1a-4374-91e9-0eac17bef4ea",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
