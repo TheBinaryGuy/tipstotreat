@@ -5,7 +5,7 @@ import { UserMenu } from '@/features/auth/components/user-menu';
 import { kindMeta } from '@/lib/format';
 import { Link, useLocation, useNavigate, useRouteContext } from '@tanstack/react-router';
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
-import { SearchIcon } from 'lucide-react';
+import { PenLineIcon, SearchIcon } from 'lucide-react';
 
 export function SiteHeader() {
     const navigate = useNavigate();
@@ -35,6 +35,14 @@ export function SiteHeader() {
                             {kindMeta[kind].plural}
                         </Link>
                     ))}
+                    {session?.user.role === 'admin' ? (
+                        <Link
+                            activeProps={{ className: 'text-foreground' }}
+                            className='text-primary hover:text-foreground inline-flex items-center gap-1 font-medium transition-colors'
+                            to='/admin'>
+                            <PenLineIcon className='size-3.5' /> Author
+                        </Link>
+                    ) : null}
                 </nav>
 
                 <form
