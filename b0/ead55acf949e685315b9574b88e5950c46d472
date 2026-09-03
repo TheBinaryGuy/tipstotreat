@@ -1,0 +1,28 @@
+src/components/admin/entry-form.tsx
+  s_dda73c4b992cc4::t_c54892d3e71ec7 1
+src/features/account/components/two-factor-card.tsx
+  s_dda73c4b992cc4::t_d250e2857585cf 31-34
+src/components/admin/body-editor-lazy.tsx
+  s_dda73c4b992cc4::t_2a2771a38e4896 1-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "b0ead55acf949e685315b9574b88e5950c46d472",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  },
+  "sessions": {
+    "s_dda73c4b992cc4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "41b53d0c-eb1a-4374-91e9-0eac17bef4ea",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
