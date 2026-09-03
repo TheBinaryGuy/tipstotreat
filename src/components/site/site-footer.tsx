@@ -1,7 +1,6 @@
 import { Mark } from '@/components/site/mark';
 import { kindMeta } from '@/lib/format';
 import { Link } from '@tanstack/react-router';
-import { RssIcon } from 'lucide-react';
 
 const KINDS = ['remedy', 'tip', 'recipe', 'article'] as const;
 
