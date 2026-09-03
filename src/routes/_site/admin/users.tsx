@@ -10,7 +10,21 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import { BanDialog } from '@/features/admin/components/ban-dialog';
-import { adminUnbanUserServerFn } from '@/features/admin/server/admin.functions';
+import {
+    adminSetRoleServerFn,
+    adminUnbanUserServerFn,
+} from '@/features/admin/server/admin.functions';
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 import { adminKeys, adminUsersQuery } from '@/features/admin/shared/queries';
 import { formatDate } from '@/lib/format';
 import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
@@ -43,6 +57,16 @@ function UsersPage() {
         onSuccess: async () => {
             await queryClient.invalidateQueries({ queryKey: adminKeys.users });
             toast.success('Ban lifted');
+        },
+        onError: error => toast.error(error.message),
+    });
+    const setRole = useMutation({
+        mutationFn: adminSetRoleServerFn,
+        onSuccess: async (_, variables) => {
+            await queryClient.invalidateQueries({ queryKey: adminKeys.users });
+            toast.success(
+                variables.data.role === 'admin' ? 'Made an author' : 'Author role removed'
+            );
         },
         onError: error => toast.error(error.message),
     });
@@ -110,17 +134,29 @@ function UsersPage() {
                                 )}
                             </TableCell>
                             <TableCell className='text-right'>
-                                {u.role === 'admin' ||
-                                u.id === session?.user.id ? null : u.banned ? (
-                                    <Button
-                                        disabled={unban.isPending}
-                                        onClick={() => unban.mutate({ data: { userId: u.id } })}
-                                        size='sm'
-                                        variant='outline'>
-                                        Unban
-                                    </Button>
-                                ) : (
-                                    <BanDialog user={u} />
+                                {u.id === session?.user.id ? null : (
+                                    <div className='inline-flex items-center gap-2'>
+                                        <RoleButton
+                                            onConfirm={role =>
+                                                setRole.mutate({ data: { userId: u.id, role } })
+                                            }
+                                            pending={setRole.isPending}
+                                            user={u}
+                                        />
+                                        {u.role === 'admin' ? null : u.banned ? (
+                                            <Button
+                                                disabled={unban.isPending}
+                                                onClick={() =>
+                                                    unban.mutate({ data: { userId: u.id } })
+                                                }
+                                                size='sm'
+                                                variant='outline'>
+                                                Unban
+                                            </Button>
+                                        ) : (
+                                            <BanDialog user={u} />
+                                        )}
+                                    </div>
                                 )}
                             </TableCell>
                         </TableRow>
@@ -128,5 +164,46 @@ function UsersPage() {
                 </TableBody>
             </Table>
         </div>
+    );
+}
+
+function RoleButton({
+    user,
+    pending,
+    onConfirm,
+}: {
+    user: { name: string; role: 'admin' | 'user'; banned: boolean };
+    pending: boolean;
+    onConfirm: (role: 'admin' | 'user') => void;
+}) {
+    if (user.role === 'admin') {
+        return (
+            <Button disabled={pending} onClick={() => onConfirm('user')} size='sm' variant='ghost'>
+                Remove author
+            </Button>
+        );
+    }
+    if (user.banned) return null;
+    return (
+        <AlertDialog>
+            <AlertDialogTrigger render={<Button disabled={pending} size='sm' variant='ghost' />}>
+                Make author
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+                <AlertDialogHeader>
+                    <AlertDialogTitle>Make {user.name} an author?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                        Authors can write and publish entries, manage users, ban readers, and delete
+                        any comment. You can remove the role later.
+                    </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction onClick={() => onConfirm('admin')}>
+                        Make author
+                    </AlertDialogAction>
+                </AlertDialogFooter>
+            </AlertDialogContent>
+        </AlertDialog>
     );
 }
