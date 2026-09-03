@@ -1,0 +1,46 @@
+src/components/ui/input-group.tsx
+  s_3b9f586cd9a895::t_c21f74f93194e5 1,3-4,6-9,11-22,26-44,47-65,68-70,72-78,81,83-84,87-104,107-116,119-132,135-148,152-158
+src/components/ui/input.tsx
+  s_3b9f586cd9a895::t_c21f74f93194e5 1-2,4,6-17,20
+src/components/ui/textarea.tsx
+  s_3b9f586cd9a895::t_c21f74f93194e5 1,3,5-15,18
+src/components/ui/command.tsx
+  s_3b9f586cd9a895::t_c21f74f93194e5 1-194
+src/components/ui/button.tsx
+  s_3b9f586cd9a895::t_c21f74f93194e5 1-2,4,7-41,44-47,49-55,58
+src/components/ui/sheet.tsx
+  s_3b9f586cd9a895::t_8a18133f78ba05 1-136
+src/components/site/search-dialog.tsx
+  s_3b9f586cd9a895::t_c21f74f93194e5 1-2,4-68,70-118,120-123
+  s_3b9f586cd9a895::t_29ed3a62cf500a 3,69,119
+src/components/site/site-header.tsx
+  s_3b9f586cd9a895::t_29ed3a62cf500a 2,5-13,17-19,27,33-34,48,53,60-109
+  s_3b9f586cd9a895::t_c21f74f93194e5 47
+src/components/ui/dialog.tsx
+  s_3b9f586cd9a895::t_c21f74f93194e5 1-2,4-6,9,13,17,21,24-37,41-44,46,48-78,81-88,92-97,99-115,119-128,131-144,148-158
+package.json
+  s_3b9f586cd9a895::t_c21f74f93194e5 46
+pnpm-lock.yaml
+  s_3b9f586cd9a895::t_861f7738b8f614 83-85,1596-1757,2918-2921,3107-3112,3265-3267,3741-3744,4723-4752,5195-5214,6445-6581,7709-7712,7867-7878,7989-7990,8438-8439,9525-9551,10096-10110
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "17c27709753d9d668980e0d8667625bfb0619b85",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  },
+  "sessions": {
+    "s_3b9f586cd9a895": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "afda4623-2b20-4651-96f1-f71430a41fb6",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
