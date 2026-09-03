@@ -111,7 +111,11 @@ export function ShareMenu({
             label: 'X',
             href: `https://x.com/intent/post?url=${encodedUrl}&text=${encodeURIComponent(title)}`,
         },
-        { label: 'Facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}` },
+        {
+            label: 'Facebook',
+            mark: 'facebook' as const,
+            href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+        },
     ];
 
     const CopyState = ({ kind, idle }: { kind: Exclude<Copied, null>; idle: React.ReactNode }) =>
