@@ -15,12 +15,16 @@ export function SiteHeader() {
     return (
         <header className='border-b'>
             <div className='mx-auto flex max-w-4xl flex-wrap items-center gap-x-6 gap-y-3 px-5 py-4'>
-                <Link className='flex items-center gap-2 font-semibold tracking-tight' to='/'>
+                <Link
+                    className='order-1 flex items-center gap-2 font-semibold tracking-tight'
+                    to='/'>
                     <Mark className='text-primary size-5' />
                     TipsToTreat
                 </Link>
 
-                <nav aria-label='Sections' className='flex items-center gap-4 text-sm'>
+                <nav
+                    aria-label='Sections'
+                    className='order-3 flex items-center gap-4 text-sm sm:order-2'>
                     {(['remedy', 'tip', 'recipe'] as const).map(kind => (
                         <Link
                             activeProps={{ className: 'text-foreground' }}
@@ -35,7 +39,7 @@ export function SiteHeader() {
 
                 <form
                     action='/search'
-                    className='relative ml-auto w-full sm:w-56'
+                    className='order-4 min-w-0 flex-1 sm:order-3 sm:ml-auto sm:w-56 sm:flex-none'
                     method='get'
                     onSubmit={event => {
                         event.preventDefault();
@@ -62,7 +66,7 @@ export function SiteHeader() {
                     </InputGroup>
                 </form>
 
-                <div className='flex items-center gap-2'>
+                <div className='order-2 ml-auto flex items-center gap-2 sm:order-4 sm:ml-0'>
                     {session ? (
                         <UserMenu user={session.user} />
                     ) : (
@@ -73,9 +77,7 @@ export function SiteHeader() {
                             Sign in
                         </Button>
                     )}
-                    <div className='hidden sm:block'>
-                        <ThemeToggle />
-                    </div>
+                    <ThemeToggle />
                 </div>
             </div>
         </header>

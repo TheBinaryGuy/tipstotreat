@@ -1,5 +1,3 @@
-import { ThemeToggle } from '@/components/theme-toggle';
-
 export function SiteFooter() {
     return (
         <footer className='mt-24 border-t'>
@@ -8,9 +6,6 @@ export function SiteFooter() {
                     Household practices, not medical advice. For anything serious, or anything that
                     does not improve, please see a doctor.
                 </p>
-                <div className='sm:hidden'>
-                    <ThemeToggle />
-                </div>
             </div>
         </footer>
     );
