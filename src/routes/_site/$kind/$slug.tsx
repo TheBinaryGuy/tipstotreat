@@ -2,7 +2,6 @@ import { IngredientList, KindMark, StepList, metaLine } from '@/components/site/
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CopyPageMenu } from '@/features/entries/components/copy-page-menu';
 import { ShareMenu } from '@/features/entries/components/share-menu';
 import { entriesQuery, entryQuery } from '@/features/entries/shared/queries';
 import { Comments } from '@/features/social/components/comments';
@@ -147,13 +146,17 @@ function EntryPage() {
                     signedIn={viewer !== null}
                     slug={slug}
                 />
-                <ShareMenu text={entry.summary} title={entry.title} url={pageUrl} />
                 <p className='text-muted-foreground text-sm'>
                     Published {formatDate(entry.publishedAt)}
                     {updated}
                 </p>
                 <div className='ml-auto'>
-                    <CopyPageMenu markdownUrl={`${pageUrl}.md`} pageUrl={pageUrl} />
+                    <ShareMenu
+                        markdownUrl={`${pageUrl}.md`}
+                        pageUrl={pageUrl}
+                        text={entry.summary}
+                        title={entry.title}
+                    />
                 </div>
             </div>
 
