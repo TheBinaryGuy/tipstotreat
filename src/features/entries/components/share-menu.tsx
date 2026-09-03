@@ -198,7 +198,7 @@ export function ShareMenu({
                                         target='_blank'
                                     />
                                 }>
-                                {target.label}
+                                <AiMark className='size-4' name={target.mark} /> {target.label}
                             </DropdownMenuItem>
                         ))}
                         <DropdownMenuItem
