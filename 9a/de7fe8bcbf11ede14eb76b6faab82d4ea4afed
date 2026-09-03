@@ -1,0 +1,24 @@
+src/features/entries/components/share-menu.tsx
+  s_3b9f586cd9a895::t_6c565e0e5c8711 201
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "9ade7fe8bcbf11ede14eb76b6faab82d4ea4afed",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  },
+  "sessions": {
+    "s_3b9f586cd9a895": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "afda4623-2b20-4651-96f1-f71430a41fb6",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
