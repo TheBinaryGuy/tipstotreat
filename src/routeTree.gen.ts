@@ -21,6 +21,8 @@ import { Route as SiteOfflineRouteImport } from './routes/_site/offline'
 import { Route as SiteSearchRouteImport } from './routes/_site/search'
 import { Route as SiteSignInRouteImport } from './routes/_site/sign-in'
 import { Route as SiteSignUpRouteImport } from './routes/_site/sign-up'
+import { Route as ApiMediaRouteImport } from './routes/api/media'
+import { Route as MediaSplatRouteImport } from './routes/media/$'
 import { Route as OgSiteDotpngRouteImport } from './routes/og/site[.]png'
 import { Route as SiteKindIndexRouteImport } from './routes/_site/$kind/index'
 import { Route as SiteKindSlugRouteImport } from './routes/_site/$kind/$slug'
@@ -92,6 +94,16 @@ const SiteSignUpRoute = SiteSignUpRouteImport.update({
   path: '/sign-up',
   getParentRoute: () => SiteRoute,
 } as any)
+const ApiMediaRoute = ApiMediaRouteImport.update({
+  id: '/api/media',
+  path: '/api/media',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MediaSplatRoute = MediaSplatRouteImport.update({
+  id: '/media/$',
+  path: '/media/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OgSiteDotpngRoute = OgSiteDotpngRouteImport.update({
   id: '/og/site.png',
   path: '/og/site.png',
@@ -156,6 +168,8 @@ export interface FileRoutesByFullPath {
   '/search': typeof SiteSearchRoute
   '/sign-in': typeof SiteSignInRoute
   '/sign-up': typeof SiteSignUpRoute
+  '/api/media': typeof ApiMediaRoute
+  '/media/$': typeof MediaSplatRoute
   '/og/site.png': typeof OgSiteDotpngRoute
   '/$kind/$slug': typeof SiteKindSlugRoute
   '/admin/comments': typeof SiteAdminCommentsRoute
@@ -177,6 +191,8 @@ export interface FileRoutesByTo {
   '/search': typeof SiteSearchRoute
   '/sign-in': typeof SiteSignInRoute
   '/sign-up': typeof SiteSignUpRoute
+  '/api/media': typeof ApiMediaRoute
+  '/media/$': typeof MediaSplatRoute
   '/og/site.png': typeof OgSiteDotpngRoute
   '/': typeof SiteIndexRoute
   '/$kind/$slug': typeof SiteKindSlugRoute
@@ -202,6 +218,8 @@ export interface FileRoutesById {
   '/_site/search': typeof SiteSearchRoute
   '/_site/sign-in': typeof SiteSignInRoute
   '/_site/sign-up': typeof SiteSignUpRoute
+  '/api/media': typeof ApiMediaRoute
+  '/media/$': typeof MediaSplatRoute
   '/og/site.png': typeof OgSiteDotpngRoute
   '/_site/': typeof SiteIndexRoute
   '/_site/$kind/$slug': typeof SiteKindSlugRoute
@@ -228,6 +246,8 @@ export interface FileRouteTypes {
     | '/search'
     | '/sign-in'
     | '/sign-up'
+    | '/api/media'
+    | '/media/$'
     | '/og/site.png'
     | '/$kind/$slug'
     | '/admin/comments'
@@ -249,6 +269,8 @@ export interface FileRouteTypes {
     | '/search'
     | '/sign-in'
     | '/sign-up'
+    | '/api/media'
+    | '/media/$'
     | '/og/site.png'
     | '/'
     | '/$kind/$slug'
@@ -273,6 +295,8 @@ export interface FileRouteTypes {
     | '/_site/search'
     | '/_site/sign-in'
     | '/_site/sign-up'
+    | '/api/media'
+    | '/media/$'
     | '/og/site.png'
     | '/_site/'
     | '/_site/$kind/$slug'
@@ -293,6 +317,8 @@ export interface RootRouteChildren {
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   KindChar123slugChar125DotmdRoute: typeof KindChar123slugChar125DotmdRoute
+  ApiMediaRoute: typeof ApiMediaRoute
+  MediaSplatRoute: typeof MediaSplatRoute
   OgSiteDotpngRoute: typeof OgSiteDotpngRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   OgKindChar123slugChar125DotpngRoute: typeof OgKindChar123slugChar125DotpngRoute
@@ -383,6 +409,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/sign-up'
       preLoaderRoute: typeof SiteSignUpRouteImport
       parentRoute: typeof SiteRoute
+    }
+    '/api/media': {
+      id: '/api/media'
+      path: '/api/media'
+      fullPath: '/api/media'
+      preLoaderRoute: typeof ApiMediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/media/$': {
+      id: '/media/$'
+      path: '/media/$'
+      fullPath: '/media/$'
+      preLoaderRoute: typeof MediaSplatRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/og/site.png': {
       id: '/og/site.png'
@@ -508,6 +548,8 @@ const rootRouteChildren: RootRouteChildren = {
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   KindChar123slugChar125DotmdRoute: KindChar123slugChar125DotmdRoute,
+  ApiMediaRoute: ApiMediaRoute,
+  MediaSplatRoute: MediaSplatRoute,
   OgSiteDotpngRoute: OgSiteDotpngRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   OgKindChar123slugChar125DotpngRoute: OgKindChar123slugChar125DotpngRoute,

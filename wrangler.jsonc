@@ -15,6 +15,10 @@
         // Google OAuth client id (public). The secret is set with `wrangler secret put`.
         "GOOGLE_CLIENT_ID": "273459277368-uuat056qvmoe40o5s2bjuqbth6bdteiu.apps.googleusercontent.com"
     },
+    "ai": { "binding": "AI" },
+    "r2_buckets": [
+        { "binding": "MEDIA", "bucket_name": "tipstotreat-media" }
+    ],
     "d1_databases": [
         {
             "binding": "DB",

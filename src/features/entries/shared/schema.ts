@@ -36,6 +36,7 @@ export const entryInputSchema = z.object({
         .max(24 * 60)
         .nullable(),
     servings: z.string().trim().max(40).optional(),
+    coverImage: z.string().trim().max(500).nullable(),
 });
 
 export type EntryInput = z.infer<typeof entryInputSchema>;

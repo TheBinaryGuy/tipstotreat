@@ -87,7 +87,16 @@ export function EntryRow({ entry, showKind = false }: { entry: Entry; showKind?:
                 className='group hover:bg-muted/60 -mx-3 flex gap-4 rounded-xl px-3 py-4 transition-colors'
                 params={{ kind: meta.path, slug: entry.slug }}
                 to='/$kind/$slug'>
-                {showKind ? <KindMark className='mt-0.5' kind={entry.kind} /> : null}
+                {entry.coverImage ? (
+                    <img
+                        alt=''
+                        className='hidden size-20 shrink-0 rounded-lg border object-cover sm:block'
+                        loading='lazy'
+                        src={entry.coverImage}
+                    />
+                ) : showKind ? (
+                    <KindMark className='mt-0.5' kind={entry.kind} />
+                ) : null}
                 <div className='min-w-0 flex-1'>
                     <h3 className='text-lg font-medium tracking-tight group-hover:underline group-hover:underline-offset-4'>
                         {entry.title}

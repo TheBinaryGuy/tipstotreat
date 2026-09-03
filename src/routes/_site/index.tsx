@@ -112,6 +112,13 @@ function Featured({ entry }: { entry: Entry }) {
                 className='block p-5'
                 params={{ kind: meta.path, slug: entry.slug }}
                 to='/$kind/$slug'>
+                {entry.coverImage ? (
+                    <img
+                        alt=''
+                        className='mb-4 aspect-[1.91/1] w-full rounded-lg border object-cover'
+                        src={entry.coverImage}
+                    />
+                ) : null}
                 <p className='text-primary flex items-center gap-1.5 text-sm font-medium'>
                     <SparklesIcon className='size-4' /> Newest {meta.label.toLowerCase()}
                 </p>

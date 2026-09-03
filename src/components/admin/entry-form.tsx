@@ -1,4 +1,7 @@
 import { BodyEditor } from '@/components/admin/body-editor';
+import { AiAssist } from '@/features/ai/components/ai-assist';
+import { CoverImageField } from '@/features/ai/components/cover-image';
+import type { AiDraft } from '@/features/ai/shared/schema';
 import { TagInput } from '@/components/admin/tag-input';
 import { adminSlugAvailableServerFn } from '@/features/entries/server/entries.functions';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -78,6 +81,7 @@ export const entryFormSchema = z.object({
     prepMinutes: minutes,
     cookMinutes: minutes,
     servings: z.string().trim().max(40),
+    coverImage: z.string().nullable(),
 });
 
 export type EntryFormValues = z.infer<typeof entryFormSchema>;
@@ -115,6 +119,7 @@ function toValues(entry?: Entry): EntryFormValues {
         prepMinutes: entry?.prepMinutes?.toString() ?? '',
         cookMinutes: entry?.cookMinutes?.toString() ?? '',
         servings: entry?.servings ?? '',
+        coverImage: entry?.coverImage ?? null,
     };
 }
 
@@ -140,6 +145,7 @@ function toInput(values: EntryFormValues, status: EntryStatus): EntryInput {
         prepMinutes: isRecipe && values.prepMinutes ? Number(values.prepMinutes) : null,
         cookMinutes: isRecipe && values.cookMinutes ? Number(values.cookMinutes) : null,
         servings: isRecipe ? values.servings || undefined : undefined,
+        coverImage: values.coverImage,
     };
 }
 
@@ -162,6 +168,7 @@ export function EntryForm({
     onDelete?: () => void;
 }) {
     const [slugTouched, setSlugTouched] = useState(Boolean(entry));
+    const [editorKey, setEditorKey] = useState(0);
 
     const form = useForm({
         defaultValues: toValues(entry),
@@ -172,6 +179,7 @@ export function EntryForm({
     });
 
     const isDirty = useStore(form.store, state => state.isDirty);
+    const attempted = useStore(form.store, state => state.submissionAttempts > 0);
     const kind = useStore(form.store, state => state.values.kind);
     const invalidFields = useStore(form.store, state =>
         Object.entries(state.fieldMeta)
@@ -191,6 +199,30 @@ export function EntryForm({
 
     const meta = kindMeta[kind];
     const isRecipe = kind === 'recipe';
+    const title = useStore(form.store, state => state.values.title);
+    const ingredientNames = useStore(form.store, state =>
+        state.values.ingredients.map(item => item.name).filter(Boolean)
+    );
+
+    function applyDraft(draft: AiDraft) {
+        form.setFieldValue('kind', draft.kind);
+        form.setFieldValue('title', draft.title);
+        if (!slugTouched) form.setFieldValue('slug', slugify(draft.title));
+        form.setFieldValue('useFor', draft.useFor);
+        form.setFieldValue('summary', draft.summary);
+        form.setFieldValue(
+            'ingredients',
+            draft.ingredients.map(item => ({ name: item.name, quantity: item.quantity }))
+        );
+        form.setFieldValue('stepsText', draft.steps.join('\n'));
+        form.setFieldValue('body', draft.body);
+        form.setFieldValue('tags', draft.tags);
+        form.setFieldValue('caution', draft.caution);
+        form.setFieldValue('prepMinutes', draft.prepMinutes?.toString() ?? '');
+        form.setFieldValue('cookMinutes', draft.cookMinutes?.toString() ?? '');
+        form.setFieldValue('servings', draft.servings);
+        setEditorKey(key => key + 1);
+    }
     const currentStatus = entry?.status ?? 'draft';
 
     function submit(status: EntryStatus) {
@@ -235,7 +267,6 @@ export function EntryForm({
                         )}
                     </form.Field>
                     <form.Field
-                        validators={{ onBlur: entryFormSchema.shape.title }}
                         listeners={{
                             onChange: ({ value }) => {
                                 if (!slugTouched) form.setFieldValue('slug', slugify(value));
@@ -248,7 +279,6 @@ export function EntryForm({
                                 <Input
                                     aria-invalid={field.state.meta.errors.length > 0}
                                     autoFocus={!entry}
-                                    className='h-10 text-lg font-medium md:text-lg'
                                     id={field.name}
                                     name={field.name}
                                     onBlur={field.handleBlur}
@@ -288,7 +318,7 @@ export function EntryForm({
                     )}
                 </form.Field>
 
-                <form.Field name='summary' validators={{ onBlur: entryFormSchema.shape.summary }}>
+                <form.Field name='summary'>
                     {field => (
                         <Field data-invalid={field.state.meta.errors.length > 0}>
                             <FieldLabel htmlFor={field.name}>Summary</FieldLabel>
@@ -405,6 +435,7 @@ export function EntryForm({
                         <Field>
                             <FieldLabel>Notes</FieldLabel>
                             <BodyEditor
+                                key={editorKey}
                                 initial={field.state.value}
                                 onChange={markdown => field.handleChange(markdown)}
                             />
@@ -437,8 +468,8 @@ export function EntryForm({
                 ) : null}
             </FieldGroup>
 
-            <aside className='space-y-5 lg:sticky lg:top-6 lg:self-start'>
-                <Card size='sm'>
+            <aside className='flex flex-col gap-5 lg:sticky lg:top-6 lg:self-start'>
+                <Card className='order-2 lg:order-1' size='sm'>
                     <CardContent className='space-y-3'>
                         <p className='text-sm'>
                             <span className='text-muted-foreground'>
@@ -458,7 +489,7 @@ export function EntryForm({
                                 <AlertDescription>{error}</AlertDescription>
                             </Alert>
                         ) : null}
-                        {uniqueInvalid.length > 0 ? (
+                        {attempted && uniqueInvalid.length > 0 ? (
                             <Alert variant='destructive'>
                                 <AlertDescription>
                                     Fix before saving: {uniqueInvalid.join(', ')}.
@@ -522,92 +553,112 @@ export function EntryForm({
                     </CardContent>
                 </Card>
 
-                <form.Field
-                    name='slug'
-                    validators={{
-                        onChange: slugSchema,
-                        onChangeAsyncDebounceMs: 350,
-                        onChangeAsync: async ({ value }) => {
-                            const available = await adminSlugAvailableServerFn({
-                                data: { slug: value, exceptId: entry?.id },
-                            });
-                            return available ? undefined : 'That address is already in use';
-                        },
-                    }}>
+                <div className='order-3 lg:order-2'>
+                    <AiAssist kind={kind} onDraft={applyDraft} />
+                </div>
+
+                <form.Field name='coverImage'>
                     {field => (
-                        <Field data-invalid={field.state.meta.errors.length > 0}>
-                            <FieldLabel htmlFor={field.name}>Address</FieldLabel>
-                            <Input
-                                aria-invalid={field.state.meta.errors.length > 0}
-                                className='font-mono'
-                                id={field.name}
-                                name={field.name}
-                                onBlur={field.handleBlur}
-                                onChange={event => {
-                                    setSlugTouched(true);
-                                    field.handleChange(event.target.value);
-                                }}
+                        <div className='order-4 lg:order-3'>
+                            <CoverImageField
+                                ingredients={ingredientNames}
+                                kind={kind}
+                                onChange={url => field.handleChange(url)}
+                                title={title}
                                 value={field.state.value}
                             />
-                            <FieldDescription>
-                                /{meta.path}/{field.state.value || '…'}
-                            </FieldDescription>
-                            <FieldError errors={issues(field.state.meta.errors)} />
-                        </Field>
+                        </div>
                     )}
                 </form.Field>
 
-                <form.Field name='tags'>
-                    {field => (
-                        <Field data-invalid={field.state.meta.errors.length > 0}>
-                            <FieldLabel htmlFor={field.name}>Tags</FieldLabel>
-                            <TagInput
-                                id={field.name}
-                                onBlur={field.handleBlur}
-                                onChange={tags => field.handleChange(tags)}
-                                placeholder='cough, winter, bedtime'
-                                value={field.state.value}
-                            />
-                            <FieldDescription>
-                                Press Enter or a comma after each one. Used for search.
-                            </FieldDescription>
-                            <FieldError errors={issues(field.state.meta.errors)} />
-                        </Field>
-                    )}
-                </form.Field>
+                <div className='order-1 flex flex-col gap-5 lg:order-4'>
+                    <form.Field
+                        name='slug'
+                        validators={{
+                            onChange: slugSchema,
+                            onChangeAsyncDebounceMs: 350,
+                            onChangeAsync: async ({ value }) => {
+                                const available = await adminSlugAvailableServerFn({
+                                    data: { slug: value, exceptId: entry?.id },
+                                });
+                                return available ? undefined : 'That address is already in use';
+                            },
+                        }}>
+                        {field => (
+                            <Field data-invalid={field.state.meta.errors.length > 0}>
+                                <FieldLabel htmlFor={field.name}>Address</FieldLabel>
+                                <Input
+                                    aria-invalid={field.state.meta.errors.length > 0}
+                                    className='font-mono'
+                                    id={field.name}
+                                    name={field.name}
+                                    onBlur={field.handleBlur}
+                                    onChange={event => {
+                                        setSlugTouched(true);
+                                        field.handleChange(event.target.value);
+                                    }}
+                                    value={field.state.value}
+                                />
+                                <FieldDescription>
+                                    /{meta.path}/{field.state.value || '…'}
+                                </FieldDescription>
+                                <FieldError errors={issues(field.state.meta.errors)} />
+                            </Field>
+                        )}
+                    </form.Field>
 
-                {isRecipe ? (
-                    <div className='grid grid-cols-3 gap-3'>
-                        {(
-                            [
-                                ['prepMinutes', 'Prep min', ''],
-                                ['cookMinutes', 'Cook min', ''],
-                                ['servings', 'Serves', '3 to 4'],
-                            ] as const
-                        ).map(([name, label, placeholder]) => (
-                            <form.Field key={name} name={name}>
-                                {field => (
-                                    <Field data-invalid={field.state.meta.errors.length > 0}>
-                                        <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
-                                        <Input
-                                            aria-invalid={field.state.meta.errors.length > 0}
-                                            id={field.name}
-                                            inputMode={name === 'servings' ? 'text' : 'numeric'}
-                                            name={field.name}
-                                            onBlur={field.handleBlur}
-                                            onChange={event =>
-                                                field.handleChange(event.target.value)
-                                            }
-                                            placeholder={placeholder}
-                                            value={field.state.value}
-                                        />
-                                        <FieldError errors={issues(field.state.meta.errors)} />
-                                    </Field>
-                                )}
-                            </form.Field>
-                        ))}
-                    </div>
-                ) : null}
+                    <form.Field name='tags'>
+                        {field => (
+                            <Field data-invalid={field.state.meta.errors.length > 0}>
+                                <FieldLabel htmlFor={field.name}>Tags</FieldLabel>
+                                <TagInput
+                                    id={field.name}
+                                    onBlur={field.handleBlur}
+                                    onChange={tags => field.handleChange(tags)}
+                                    placeholder='cough, winter, bedtime'
+                                    value={field.state.value}
+                                />
+                                <FieldDescription>
+                                    Press Enter or a comma after each one. Used for search.
+                                </FieldDescription>
+                                <FieldError errors={issues(field.state.meta.errors)} />
+                            </Field>
+                        )}
+                    </form.Field>
+
+                    {isRecipe ? (
+                        <div className='grid grid-cols-3 gap-3'>
+                            {(
+                                [
+                                    ['prepMinutes', 'Prep min', ''],
+                                    ['cookMinutes', 'Cook min', ''],
+                                    ['servings', 'Serves', '3 to 4'],
+                                ] as const
+                            ).map(([name, label, placeholder]) => (
+                                <form.Field key={name} name={name}>
+                                    {field => (
+                                        <Field data-invalid={field.state.meta.errors.length > 0}>
+                                            <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
+                                            <Input
+                                                aria-invalid={field.state.meta.errors.length > 0}
+                                                id={field.name}
+                                                inputMode={name === 'servings' ? 'text' : 'numeric'}
+                                                name={field.name}
+                                                onBlur={field.handleBlur}
+                                                onChange={event =>
+                                                    field.handleChange(event.target.value)
+                                                }
+                                                placeholder={placeholder}
+                                                value={field.state.value}
+                                            />
+                                            <FieldError errors={issues(field.state.meta.errors)} />
+                                        </Field>
+                                    )}
+                                </form.Field>
+                            ))}
+                        </div>
+                    ) : null}
+                </div>
             </aside>
         </form>
     );

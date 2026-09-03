@@ -8,6 +8,7 @@ import { TanStackDevtools } from '@tanstack/react-devtools';
 import type { QueryClient } from '@tanstack/react-query';
 import { FormDevtoolsPanel } from '@tanstack/react-form-devtools';
 import { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools';
+import { aiDevtoolsPlugin } from '@tanstack/react-ai-devtools';
 import { HeadContent, Scripts, createRootRouteWithContext } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 
@@ -131,6 +132,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                         { name: 'Tanstack Router', render: <TanStackRouterDevtoolsPanel /> },
                         { name: 'Tanstack Query', render: <ReactQueryDevtoolsPanel /> },
                         { name: 'Tanstack Form', render: <FormDevtoolsPanel /> },
+                        aiDevtoolsPlugin(),
                     ]}
                 />
                 <Scripts />

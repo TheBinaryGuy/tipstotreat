@@ -34,6 +34,11 @@ export const Route = createFileRoute('/_site/$kind/$slug')({
         const { entry } = loaderData;
         const origin = (matches[0]?.loaderData as { origin?: string } | undefined)?.origin;
         const url = origin ? `${origin}/${params.kind}/${params.slug}` : undefined;
+        const image = origin
+            ? entry.coverImage
+                ? `${origin}${entry.coverImage}`
+                : `${origin}/og/${params.kind}/${params.slug}.png`
+            : undefined;
         return {
             meta: [
                 { title: `${entry.title} · TipsToTreat` },
@@ -51,15 +56,15 @@ export const Route = createFileRoute('/_site/$kind/$slug')({
                       ]
                     : []),
                 { property: 'article:modified_time', content: entry.updatedAt.toISOString() },
-                ...(origin
+                ...(origin && image
                     ? [
                           {
                               property: 'og:image',
-                              content: `${origin}/og/${params.kind}/${params.slug}.png`,
+                              content: image,
                           },
                           {
                               property: 'og:image:secure_url',
-                              content: `${origin}/og/${params.kind}/${params.slug}.png`,
+                              content: image,
                           },
                           { property: 'og:image:type', content: 'image/png' },
                           { property: 'og:image:width', content: '1200' },
@@ -70,7 +75,7 @@ export const Route = createFileRoute('/_site/$kind/$slug')({
                           { name: 'twitter:description', content: entry.summary },
                           {
                               name: 'twitter:image',
-                              content: `${origin}/og/${params.kind}/${params.slug}.png`,
+                              content: image,
                           },
                           { name: 'twitter:image:alt', content: entry.title },
                       ]
@@ -159,6 +164,15 @@ function EntryPage() {
                     />
                 </div>
             </div>
+
+            {entry.coverImage ? (
+                <img
+                    alt=''
+                    className='mt-8 aspect-[1.91/1] w-full rounded-xl border object-cover'
+                    fetchPriority='high'
+                    src={entry.coverImage}
+                />
+            ) : null}
 
             <div className='mt-10 grid gap-10 md:grid-cols-[minmax(0,1fr)_16rem]'>
                 <aside className='md:order-last'>

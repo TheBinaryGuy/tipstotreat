@@ -96,6 +96,7 @@ async function toRow(input: EntryInput) {
         prepMinutes: input.prepMinutes,
         cookMinutes: input.cookMinutes,
         servings: input.servings || null,
+        coverImage: input.coverImage || null,
     };
 }
 

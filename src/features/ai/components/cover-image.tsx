@@ -1,0 +1,111 @@
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { aiGenerateImageServerFn } from '@/features/ai/server/ai.functions';
+import type { EntryKind } from '@/lib/db/schema';
+import { useMutation } from '@tanstack/react-query';
+import { ImageIcon, SparklesIcon, Trash2Icon, UploadIcon } from 'lucide-react';
+import { useRef } from 'react';
+import { toast } from 'sonner';
+
+export async function uploadImage(file: File): Promise<string> {
+    const body = new FormData();
+    body.append('file', file);
+    const response = await fetch('/api/media', { method: 'POST', body });
+    const json = (await response.json()) as { url?: string; error?: string };
+    if (!response.ok || !json.url) throw new Error(json.error ?? 'Upload failed');
+    return json.url;
+}
+
+/** Cover image: upload your own, or let AI paint one from the entry. */
+export function CoverImageField({
+    value,
+    onChange,
+    title,
+    kind,
+    ingredients,
+}: {
+    value: string | null;
+    onChange: (url: string | null) => void;
+    title: string;
+    kind: EntryKind;
+    ingredients: string[];
+}) {
+    const fileRef = useRef<HTMLInputElement>(null);
+    const upload = useMutation({
+        mutationFn: uploadImage,
+        onSuccess: url => onChange(url),
+        onError: error => toast.error(error.message),
+    });
+    const generate = useMutation({
+        mutationFn: aiGenerateImageServerFn,
+        onSuccess: result => onChange(result.url),
+        onError: error => toast.error(error.message),
+    });
+    const busy = upload.isPending || generate.isPending;
+
+    return (
+        <Card size='sm'>
+            <CardHeader>
+                <CardTitle className='flex items-center gap-2'>
+                    <ImageIcon className='size-4' /> Cover image
+                </CardTitle>
+            </CardHeader>
+            <CardContent className='space-y-3'>
+                {value ? (
+                    <img
+                        alt=''
+                        className='aspect-[1.91/1] w-full rounded-md border object-cover'
+                        src={value}
+                    />
+                ) : (
+                    <div className='text-muted-foreground bg-muted/40 grid aspect-[1.91/1] place-items-center rounded-md border border-dashed text-sm'>
+                        {busy ? 'Working…' : 'No image yet'}
+                    </div>
+                )}
+                <input
+                    accept='image/png,image/jpeg,image/webp,image/gif,image/avif'
+                    className='hidden'
+                    onChange={event => {
+                        const file = event.target.files?.[0];
+                        if (file) upload.mutate(file);
+                        event.target.value = '';
+                    }}
+                    ref={fileRef}
+                    type='file'
+                />
+                <div className='grid grid-cols-2 gap-2'>
+                    <Button
+                        disabled={busy}
+                        onClick={() => fileRef.current?.click()}
+                        size='sm'
+                        type='button'
+                        variant='outline'>
+                        <UploadIcon data-icon='inline-start' />{' '}
+                        {upload.isPending ? 'Uploading…' : 'Upload'}
+                    </Button>
+                    <Button
+                        disabled={busy || title.trim().length < 2}
+                        onClick={() => generate.mutate({ data: { title, kind, ingredients } })}
+                        size='sm'
+                        title={title.trim().length < 2 ? 'Add a title first' : 'Generate with AI'}
+                        type='button'
+                        variant='outline'>
+                        <SparklesIcon data-icon='inline-start' />{' '}
+                        {generate.isPending ? 'Painting…' : 'Generate'}
+                    </Button>
+                </div>
+                {value ? (
+                    <Button
+                        className='w-full'
+                        disabled={busy}
+                        onClick={() => onChange(null)}
+                        size='sm'
+                        type='button'
+                        variant='ghost'>
+                        <Trash2Icon data-icon='inline-start' /> Remove image
+                    </Button>
+                ) : null}
+            </CardContent>
+        </Card>
+    );
+}
