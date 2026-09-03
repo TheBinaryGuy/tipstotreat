@@ -49,6 +49,8 @@ export const imageInputSchema = z.object({
     title: z.string().trim().min(2).max(160),
     kind: z.enum(ENTRY_KINDS),
     ingredients: z.array(z.string()).max(12).default([]),
+    useFor: z.string().trim().max(160).optional(),
+    summary: z.string().trim().max(400).optional(),
     notes: z.string().trim().max(300).optional(),
 });
 

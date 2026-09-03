@@ -108,6 +108,31 @@ export const aiExtractEntryServerFn = createServerFn({ method: 'POST' })
         return normalize(draft);
     });
 
+/**
+ * Build the scene from what the entry is actually about. Recipes show the dish; remedies with
+ * ingredients show those ingredients; anything else (a pressure-point tip, a habit, an article)
+ * is described from its title and summary so the model does not default to a spice still life.
+ */
+function describeScene(data: {
+    kind: string;
+    title: string;
+    ingredients: string[];
+    useFor?: string;
+    summary?: string;
+}) {
+    const context = [data.useFor, data.summary].filter(Boolean).join('. ');
+    if (data.kind === 'recipe') {
+        return `${data.title}, a home-cooked Indian dish, plated simply. ${context}`;
+    }
+    if (data.ingredients.length > 0) {
+        return `A still life of the ingredients for "${data.title}": ${data.ingredients.slice(0, 5).join(', ')}. ${context}`;
+    }
+    if (data.kind === 'article') {
+        return `A quiet scene that evokes "${data.title}". ${context}. An Indian home, morning light.`;
+    }
+    return `A calm, symbolic still life for a home health tip titled "${data.title}". ${context}. Show the objects or setting involved (for example a cushion, a bowl of warm water, a towel, a window seat), never a person.`;
+}
+
 const IMAGE_STYLE =
     'Editorial food photography, photorealistic, shot on a 50mm lens, soft natural window light, shallow depth of field, an Indian home kitchen, brass and steel utensils, a worn wooden table, quiet muted colours. No people, no hands, no faces, no text, no letters, no logos, no watermark.';
 
@@ -116,13 +141,7 @@ export const aiGenerateImageServerFn = createServerFn({ method: 'POST' })
     .validator(imageInputSchema)
     .handler(async ({ data }) => {
         await requireAuthor();
-        const subject =
-            data.kind === 'recipe'
-                ? `${data.title}, a home-cooked Indian dish, plated simply`
-                : data.kind === 'article'
-                  ? `a quiet still life that evokes "${data.title}": an Indian kitchen corner, spices, brass and steel vessels, morning light`
-                  : `the ingredients for ${data.title}: ${data.ingredients.slice(0, 5).join(', ') || 'kitchen spices'}, arranged as a still life`;
-        const prompt = `${subject}. ${data.notes ?? ''} ${IMAGE_STYLE}`.trim();
+        const prompt = `${describeScene(data)} ${data.notes ?? ''} ${IMAGE_STYLE}`.trim();
         const result = await generateImage({
             adapter: createCloudflareImage(IMAGE_MODEL, { binding: env.AI }),
             prompt,

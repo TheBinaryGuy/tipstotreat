@@ -23,12 +23,16 @@ export function CoverImageField({
     title,
     kind,
     ingredients,
+    useFor,
+    summary,
 }: {
     value: string | null;
     onChange: (url: string | null) => void;
     title: string;
     kind: EntryKind;
     ingredients: string[];
+    useFor?: string;
+    summary?: string;
 }) {
     const fileRef = useRef<HTMLInputElement>(null);
     const upload = useMutation({
@@ -85,7 +89,9 @@ export function CoverImageField({
                     </Button>
                     <Button
                         disabled={busy || title.trim().length < 2}
-                        onClick={() => generate.mutate({ data: { title, kind, ingredients } })}
+                        onClick={() =>
+                            generate.mutate({ data: { title, kind, ingredients, useFor, summary } })
+                        }
                         size='sm'
                         title={title.trim().length < 2 ? 'Add a title first' : 'Generate with AI'}
                         type='button'

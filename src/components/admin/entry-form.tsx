@@ -291,6 +291,8 @@ export function EntryForm({
     const isArticle = kind === 'article';
     const copy = kindForm[kind];
     const title = useStore(form.store, state => state.values.title);
+    const useForValue = useStore(form.store, state => state.values.useFor);
+    const summaryValue = useStore(form.store, state => state.values.summary);
     const ingredientNames = useStore(form.store, state =>
         state.values.ingredients.map(item => item.name).filter(Boolean)
     );

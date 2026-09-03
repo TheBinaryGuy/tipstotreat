@@ -16,7 +16,7 @@
         // IndexNow key (Bing, Yandex, DuckDuckGo via Bing); served at /indexnow.txt.
         "INDEXNOW_KEY": "70d53f8e382a42d1897aa87d67bd07b0",
         // Google Search Console HTML-tag verification token (the content attribute).
-        "GOOGLE_SITE_VERIFICATION": "",
+        "GOOGLE_SITE_VERIFICATION": "fGsaqGAHBhBd-TzDE2hymdpumSGwxuGD2-BvbJjXZOk",
         "GOOGLE_CLIENT_ID": "273459277368-uuat056qvmoe40o5s2bjuqbth6bdteiu.apps.googleusercontent.com"
     },
     "ai": { "binding": "AI" },
