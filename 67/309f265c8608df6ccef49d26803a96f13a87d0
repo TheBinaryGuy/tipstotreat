@@ -1,0 +1,30 @@
+src/lib/indexnow.server.ts
+  s_dda73c4b992cc4::t_4bdca9aa834037 19
+src/routeTree.gen.ts
+  s_dda73c4b992cc4::t_137f3943d56a4b 14,48-52,174,200,228,258,284,311,340,369-375,587
+src/routes/indexnow[.]txt.ts
+  s_dda73c4b992cc4::t_7a7130fafb21d4 4-5,8,10
+wrangler.jsonc
+  s_dda73c4b992cc4::t_df85233c03c560 16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "67309f265c8608df6ccef49d26803a96f13a87d0",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  },
+  "sessions": {
+    "s_dda73c4b992cc4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "41b53d0c-eb1a-4374-91e9-0eac17bef4ea",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
