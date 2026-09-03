@@ -1,0 +1,72 @@
+src/features/admin/server/admin.functions.ts
+  s_3b9f586cd9a895::t_3834157fd1b43c 83-86,131-136
+  s_3b9f586cd9a895::t_d82da0c1e40a7c 1-82,87-130,137-139
+src/features/auth/shared/types.ts
+  s_3b9f586cd9a895::t_d82da0c1e40a7c 7-8
+src/features/auth/server/auth.functions.ts
+  s_3b9f586cd9a895::t_996693fca1229c 4,15-31
+src/components/site/site-header.tsx
+  s_3b9f586cd9a895::t_7bc450a8d9b815 1,7,15-16,23,36-37
+src/components/ui/dialog.tsx
+  s_3b9f586cd9a895::t_d82da0c1e40a7c 3,7-8,10-12,14-16,18-20,22-23,35-37,42,44,73-74,83-85,92,109-111,119-120,132-134
+  s_3b9f586cd9a895::t_3834157fd1b43c 1-2,4-6,9,13,17,21,24-34,38-41,43,45-72,75-82,86-91,93-108,112-118,121-131,135-145
+src/features/auth/server/session.server.ts
+  s_3b9f586cd9a895::t_d82da0c1e40a7c 15-16,24-30
+src/routes/_site/admin/comments.tsx
+  s_3b9f586cd9a895::t_d82da0c1e40a7c 1-64,71-76,81-105
+  s_3b9f586cd9a895::t_3834157fd1b43c 65-70,77-80
+src/routeTree.gen.ts
+  s_3b9f586cd9a895::t_d82da0c1e40a7c 28-29,75-79,115-124,155,161-162,176,183-184,201,208-209,227,233-234,248,255-256,272,279-280,359-365,415-428,461-462,469-470,493
+  s_3b9f586cd9a895::t_54d56fd43abc92 20,482
+src/features/admin/components/ban-dialog.tsx
+  s_3b9f586cd9a895::t_d82da0c1e40a7c 1-49,55-94,98-99,103-114,119-152
+  s_3b9f586cd9a895::t_3834157fd1b43c 50-54,95-97,100-102,115-118
+package.json
+  s_3b9f586cd9a895::t_7bc450a8d9b815 48
+src/routes/_site/admin/route.tsx
+  s_3b9f586cd9a895::t_d82da0c1e40a7c 11,70-81
+src/components/site/expanding-search.tsx
+  s_3b9f586cd9a895::t_7bc450a8d9b815 1-110
+src/routes/_site/admin/users.tsx
+  s_3b9f586cd9a895::t_d82da0c1e40a7c 1-74,78-80,84-87,93-102,106-112,115-132
+  s_3b9f586cd9a895::t_3834157fd1b43c 75-77,81-83,88-92,103-105,113-114
+src/features/admin/shared/queries.ts
+  s_3b9f586cd9a895::t_d82da0c1e40a7c 1-12,18-24
+  s_3b9f586cd9a895::t_3834157fd1b43c 13-17
+src/routes/_site/sign-in.tsx
+  s_3b9f586cd9a895::t_4a1ad6ac0cac59 84-94
+  s_3b9f586cd9a895::t_996693fca1229c 3-7
+pnpm-lock.yaml
+  s_3b9f586cd9a895::t_f9574cc28afb92 89-91,3535-3545,4249-4265,8050-8058,8811-8824
+public/manifest.json
+  s_3b9f586cd9a895::t_fea94a81ba7831 2,5-13,15-18,20-24
+public/sw.js
+  s_3b9f586cd9a895::t_72675e86bd4da3 1-66
+src/components/pwa-register.tsx
+  s_3b9f586cd9a895::t_481713d1b9089a 1-12
+src/routes/__root.tsx
+  s_3b9f586cd9a895::t_8fd4fa536ab89e 2,30-34
+src/routes/_site/offline.tsx
+  s_3b9f586cd9a895::t_5ca3e6d507a09d 1-23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "e42d4201d1f82710f05f28c9b162b696978852c6",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  },
+  "sessions": {
+    "s_3b9f586cd9a895": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "afda4623-2b20-4651-96f1-f71430a41fb6",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
