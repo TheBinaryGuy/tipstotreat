@@ -4,6 +4,7 @@ import {
     addComment,
     deleteComment,
     entrySocial,
+    toggleCommentLike,
     toggleLike,
 } from '@/features/social/server/social.server';
 import { notFound } from '@tanstack/react-router';
@@ -35,10 +36,23 @@ export const commentBodySchema = z
     .max(1000, 'Keep it under 1000 characters');
 
 export const addCommentServerFn = createServerFn({ method: 'POST' })
-    .validator(z.object({ entryId: z.string().min(1), body: commentBodySchema }))
+    .validator(
+        z.object({
+            entryId: z.string().min(1),
+            body: commentBodySchema,
+            parentId: z.string().min(1).nullable().optional(),
+        })
+    )
     .handler(async ({ data }) => {
         const user = await requireUser();
-        return { id: await addComment(data.entryId, user.id, data.body) };
+        return { id: await addComment(data.entryId, user.id, data.body, data.parentId ?? null) };
+    });
+
+export const toggleCommentLikeServerFn = createServerFn({ method: 'POST' })
+    .validator(z.object({ commentId: z.string().min(1) }))
+    .handler(async ({ data }) => {
+        const user = await requireUser();
+        return { liked: await toggleCommentLike(data.commentId, user.id) };
     });
 
 export const deleteCommentServerFn = createServerFn({ method: 'POST' })

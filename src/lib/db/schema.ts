@@ -190,13 +190,35 @@ export const comments = sqliteTable(
             .notNull()
             .references(() => user.id, { onDelete: 'cascade' }),
         body: text('body').notNull(),
+        /** Top-level comments have no parent; replies point at a top-level comment. */
+        parentId: text('parent_id'),
         createdAt: integer('created_at', { mode: 'timestamp_ms' }).default(nowMs).notNull(),
         updatedAt: integer('updated_at', { mode: 'timestamp_ms' })
             .default(nowMs)
             .$onUpdate(() => new Date())
             .notNull(),
     },
-    table => [index('comments_entry_idx').on(table.entryId, table.createdAt)]
+    table => [
+        index('comments_entry_idx').on(table.entryId, table.createdAt),
+        index('comments_parent_idx').on(table.parentId),
+    ]
+);
+
+export const commentLikes = sqliteTable(
+    'comment_likes',
+    {
+        commentId: text('comment_id')
+            .notNull()
+            .references(() => comments.id, { onDelete: 'cascade' }),
+        userId: text('user_id')
+            .notNull()
+            .references(() => user.id, { onDelete: 'cascade' }),
+        createdAt: integer('created_at', { mode: 'timestamp_ms' }).default(nowMs).notNull(),
+    },
+    table => [
+        primaryKey({ columns: [table.commentId, table.userId] }),
+        index('comment_likes_comment_idx').on(table.commentId),
+    ]
 );
 
 export type Comment = typeof comments.$inferSelect;

@@ -87,10 +87,24 @@ export const adminUnbanUserServerFn = createServerFn({ method: 'POST' })
         return { ok: true };
     });
 
+/** Promote a reader to author (admin role) or step an author back down. */
+export const adminSetRoleServerFn = createServerFn({ method: 'POST' })
+    .validator(z.object({ userId: z.string().min(1), role: z.enum(['admin', 'user']) }))
+    .handler(async ({ data }) => {
+        const me = await requireAuthor();
+        if (data.userId === me.id) throw new Error('You cannot change your own role.');
+        await getAuth().api.setRole({
+            body: { userId: data.userId, role: data.role },
+            headers: getRequestHeaders(),
+        });
+        return { ok: true };
+    });
+
 export type AdminComment = {
     id: string;
     body: string;
     createdAt: Date;
+    isReply: boolean;
     author: { id: string; name: string; email: string; banned: boolean };
     entry: { id: string; title: string; slug: string; kind: 'remedy' | 'tip' | 'recipe' };
 };
@@ -103,6 +117,7 @@ export const adminListCommentsServerFn = createServerFn().handler(
             .select({
                 id: comments.id,
                 body: comments.body,
+                parentId: comments.parentId,
                 createdAt: comments.createdAt,
                 authorId: user.id,
                 authorName: user.name,
@@ -122,6 +137,7 @@ export const adminListCommentsServerFn = createServerFn().handler(
             id: row.id,
             body: row.body,
             createdAt: row.createdAt,
+            isReply: row.parentId !== null,
             author: {
                 id: row.authorId,
                 name: row.authorName,
