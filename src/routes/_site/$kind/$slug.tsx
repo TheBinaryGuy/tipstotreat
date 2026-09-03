@@ -3,6 +3,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CopyPageMenu } from '@/features/entries/components/copy-page-menu';
+import { ShareMenu } from '@/features/entries/components/share-menu';
 import { entriesQuery, entryQuery } from '@/features/entries/shared/queries';
 import { Comments } from '@/features/social/components/comments';
 import { LikeButton } from '@/features/social/components/like-button';
@@ -146,6 +147,7 @@ function EntryPage() {
                     signedIn={viewer !== null}
                     slug={slug}
                 />
+                <ShareMenu text={entry.summary} title={entry.title} url={pageUrl} />
                 <p className='text-muted-foreground text-sm'>
                     Published {formatDate(entry.publishedAt)}
                     {updated}
