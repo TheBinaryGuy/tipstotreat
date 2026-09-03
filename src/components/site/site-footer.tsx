@@ -1,10 +1,11 @@
 import { Mark } from '@/components/site/mark';
 import { kindMeta } from '@/lib/format';
-import { Link } from '@tanstack/react-router';
+import { Link, useRouteContext } from '@tanstack/react-router';
 
 const KINDS = ['remedy', 'tip', 'recipe', 'article'] as const;
 
 export function SiteFooter() {
+    const { session } = useRouteContext({ from: '/_site' });
     const year = new Date().getFullYear();
     return (
         <footer className='mt-24 border-t'>
@@ -61,9 +62,19 @@ export function SiteFooter() {
                             </a>
                         </li>
                         <li>
-                            <Link className='hover:text-foreground transition-colors' to='/sign-in'>
-                                Sign in
-                            </Link>
+                            {session ? (
+                                <Link
+                                    className='hover:text-foreground transition-colors'
+                                    to='/account'>
+                                    Settings
+                                </Link>
+                            ) : (
+                                <Link
+                                    className='hover:text-foreground transition-colors'
+                                    to='/sign-in'>
+                                    Sign in
+                                </Link>
+                            )}
                         </li>
                     </ul>
                 </nav>
