@@ -1,0 +1,39 @@
+src/features/ai/server/ai.functions.ts
+  s_dda73c4b992cc4::t_ec707f3a33be5e 16,18,68,93,108,120,122,125,127,134,136,153
+  s_dda73c4b992cc4::t_180d51684f428b 117-118
+src/features/social/components/comments.tsx
+  s_dda73c4b992cc4::t_ec707f3a33be5e 174
+src/components/admin/body-editor.tsx
+  s_dda73c4b992cc4::t_180d51684f428b 16-22,427-431,461,466
+  s_dda73c4b992cc4::t_2a82aefd9a6e93 477-484
+src/features/ai/components/model-picker.tsx
+  s_dda73c4b992cc4::t_180d51684f428b 1-90
+src/features/ai/shared/schema.ts
+  s_dda73c4b992cc4::t_180d51684f428b 41-46,49-51,54-56,60-61,63-65,67,70-72
+  s_dda73c4b992cc4::t_ec707f3a33be5e 39-40,47-48,52-53,57-59,62,66,68-69,73,75,81,86-88,97
+src/features/ai/components/ai-assist.tsx
+  s_dda73c4b992cc4::t_180d51684f428b 14-20,42-46,95-101,143-145,166
+src/features/ai/components/cover-image.tsx
+  s_dda73c4b992cc4::t_180d51684f428b 4-12,16,47-52,95-119,131,136-140
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "774853dcdd520f2c9c9959de54fc6e769bafe7b2",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  },
+  "sessions": {
+    "s_dda73c4b992cc4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "41b53d0c-eb1a-4374-91e9-0eac17bef4ea",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
