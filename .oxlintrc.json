@@ -97,6 +97,10 @@
     },
     "overrides": [
         {
+            "files": ["public/sw.js"],
+            "env": { "serviceworker": true, "browser": true }
+        },
+        {
             "files": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
             "rules": {
                 "constructor-super": "off",

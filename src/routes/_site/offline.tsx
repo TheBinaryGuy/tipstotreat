@@ -3,7 +3,9 @@ import { Link, createFileRoute } from '@tanstack/react-router';
 import { WifiOffIcon } from 'lucide-react';
 
 export const Route = createFileRoute('/_site/offline')({
-    head: () => ({ meta: [{ title: 'Offline · TipsToTreat' }, { name: 'robots', content: 'noindex' }] }),
+    head: () => ({
+        meta: [{ title: 'Offline · TipsToTreat' }, { name: 'robots', content: 'noindex' }],
+    }),
     component: OfflinePage,
 });
 

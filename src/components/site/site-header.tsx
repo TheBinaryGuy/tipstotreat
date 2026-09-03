@@ -59,13 +59,22 @@ export function SiteHeader() {
                     )}
                     <Sheet>
                         <SheetTrigger
-                            render={<Button aria-label='Menu' className='md:hidden' size='icon' variant='outline' />}>
+                            render={
+                                <Button
+                                    aria-label='Menu'
+                                    className='md:hidden'
+                                    size='icon'
+                                    variant='outline'
+                                />
+                            }>
                             <MenuIcon />
                         </SheetTrigger>
                         <SheetContent className='w-72' side='right'>
                             <SheetHeader>
                                 <SheetTitle>TipsToTreat</SheetTitle>
-                                <SheetDescription>Home remedies, tips and recipes.</SheetDescription>
+                                <SheetDescription>
+                                    Home remedies, tips and recipes.
+                                </SheetDescription>
                             </SheetHeader>
                             <nav aria-label='Sections' className='flex flex-col px-4'>
                                 {KINDS.map(kind => (
@@ -73,7 +82,9 @@ export function SiteHeader() {
                                         key={kind}
                                         render={
                                             <Link
-                                                activeProps={{ className: 'text-foreground font-medium' }}
+                                                activeProps={{
+                                                    className: 'text-foreground font-medium',
+                                                }}
                                                 className='text-muted-foreground hover:text-foreground border-b py-3 text-lg transition-colors'
                                                 params={{ kind: kindMeta[kind].path }}
                                                 to='/$kind'
@@ -98,7 +109,12 @@ export function SiteHeader() {
                                         render={
                                             <Button
                                                 className='mt-4'
-                                                render={<Link search={{ redirect: location.href }} to='/sign-in' />}
+                                                render={
+                                                    <Link
+                                                        search={{ redirect: location.href }}
+                                                        to='/sign-in'
+                                                    />
+                                                }
                                             />
                                         }>
                                         Sign in

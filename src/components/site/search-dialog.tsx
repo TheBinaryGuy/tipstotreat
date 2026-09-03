@@ -67,55 +67,66 @@ export function SearchDialog() {
                 open={open}
                 title='Search'>
                 <Command shouldFilter={false}>
-                <CommandInput
-                    onValueChange={setValue}
-                    placeholder='A complaint, an ingredient, or a dish…'
-                    value={value}
-                />
-                <CommandList>
-                    {q.length === 0 ? (
-                        <CommandEmpty>Try “cough”, “ajwain”, or “khichdi”.</CommandEmpty>
-                    ) : results.isPending ? (
-                        <CommandEmpty>Searching…</CommandEmpty>
-                    ) : results.data && results.data.length > 0 ? (
-                        <>
-                            <CommandGroup heading='Entries'>
-                                {results.data.slice(0, 8).map(entry => (
-                                    <CommandItem
-                                        key={entry.id}
-                                        onSelect={() =>
-                                            go(() =>
-                                                navigate({
-                                                    to: '/$kind/$slug',
-                                                    params: { kind: kindMeta[entry.kind].path, slug: entry.slug },
-                                                })
-                                            )
-                                        }
-                                        value={entry.id}>
-                                        <KindMark className='size-7 rounded-md [&_svg]:size-3.5' kind={entry.kind} />
-                                        <span className='min-w-0 flex-1'>
-                                            <span className='block truncate font-medium'>{entry.title}</span>
-                                            {entry.useFor ? (
-                                                <span className='text-muted-foreground block truncate text-xs'>
-                                                    {kindMeta[entry.kind].lead} {entry.useFor.toLowerCase()}
+                    <CommandInput
+                        onValueChange={setValue}
+                        placeholder='A complaint, an ingredient, or a dish…'
+                        value={value}
+                    />
+                    <CommandList>
+                        {q.length === 0 ? (
+                            <CommandEmpty>Try “cough”, “ajwain”, or “khichdi”.</CommandEmpty>
+                        ) : results.isPending ? (
+                            <CommandEmpty>Searching…</CommandEmpty>
+                        ) : results.data && results.data.length > 0 ? (
+                            <>
+                                <CommandGroup heading='Entries'>
+                                    {results.data.slice(0, 8).map(entry => (
+                                        <CommandItem
+                                            key={entry.id}
+                                            onSelect={() =>
+                                                go(() =>
+                                                    navigate({
+                                                        to: '/$kind/$slug',
+                                                        params: {
+                                                            kind: kindMeta[entry.kind].path,
+                                                            slug: entry.slug,
+                                                        },
+                                                    })
+                                                )
+                                            }
+                                            value={entry.id}>
+                                            <KindMark
+                                                className='size-7 rounded-md [&_svg]:size-3.5'
+                                                kind={entry.kind}
+                                            />
+                                            <span className='min-w-0 flex-1'>
+                                                <span className='block truncate font-medium'>
+                                                    {entry.title}
                                                 </span>
-                                            ) : null}
-                                        </span>
+                                                {entry.useFor ? (
+                                                    <span className='text-muted-foreground block truncate text-xs'>
+                                                        {kindMeta[entry.kind].lead}{' '}
+                                                        {entry.useFor.toLowerCase()}
+                                                    </span>
+                                                ) : null}
+                                            </span>
+                                        </CommandItem>
+                                    ))}
+                                </CommandGroup>
+                                <CommandGroup>
+                                    <CommandItem
+                                        onSelect={() =>
+                                            go(() => navigate({ to: '/search', search: { q } }))
+                                        }
+                                        value='__all'>
+                                        <ArrowRightIcon /> See all results for “{q}”
                                     </CommandItem>
-                                ))}
-                            </CommandGroup>
-                            <CommandGroup>
-                                <CommandItem
-                                    onSelect={() => go(() => navigate({ to: '/search', search: { q } }))}
-                                    value='__all'>
-                                    <ArrowRightIcon /> See all results for “{q}”
-                                </CommandItem>
-                            </CommandGroup>
-                        </>
-                    ) : (
-                        <CommandEmpty>Nothing matched “{q}”.</CommandEmpty>
-                    )}
-                </CommandList>
+                                </CommandGroup>
+                            </>
+                        ) : (
+                            <CommandEmpty>Nothing matched “{q}”.</CommandEmpty>
+                        )}
+                    </CommandList>
                 </Command>
             </CommandDialog>
         </>
