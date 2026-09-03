@@ -1,0 +1,24 @@
+README.md
+  s_dda73c4b992cc4::t_b92b681e8a6426 58-59
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "8f0ad99b5af533f68be95cc70ac020dc81ab770c",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  },
+  "sessions": {
+    "s_dda73c4b992cc4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "41b53d0c-eb1a-4374-91e9-0eac17bef4ea",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
