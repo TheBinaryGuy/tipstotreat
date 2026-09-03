@@ -1,0 +1,37 @@
+src/routes/__root.tsx
+  s_3b9f586cd9a895::t_d6f0511f038eae 38,52
+  s_3b9f586cd9a895::t_d6642a84158619 34-37,39-43,46-51,53-56
+src/routes/og/$kind/{$slug}[.]png.ts
+  s_3b9f586cd9a895::t_d6642a84158619 47-52,112-114,117
+  s_3b9f586cd9a895::t_d6f0511f038eae 6-15,46,53-61
+src/lib/og.server.ts
+  s_3b9f586cd9a895::t_d6f0511f038eae 1-61
+src/routes/og/site[.]png.ts
+  s_3b9f586cd9a895::t_d6642a84158619 1-12,27-31,33-40,50-54
+  s_3b9f586cd9a895::t_d6f0511f038eae 13-26,32,41-49,55-59
+src/routes/_site/$kind/$slug.tsx
+  s_3b9f586cd9a895::t_06f423be52119f 60-64,67,69-70,75
+src/routeTree.gen.ts
+  s_3b9f586cd9a895::t_d6f0511f038eae 23,87-91,140,158,180,203,221,242,260,344-350,448
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "25324166c79e5fc0276a04a636d3e564fc858f43",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  },
+  "sessions": {
+    "s_3b9f586cd9a895": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "afda4623-2b20-4651-96f1-f71430a41fb6",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
