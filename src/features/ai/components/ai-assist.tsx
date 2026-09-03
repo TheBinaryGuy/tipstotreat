@@ -11,7 +11,13 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { aiExtractEntryServerFn, aiGenerateEntryServerFn } from '@/features/ai/server/ai.functions';
-import type { AiDraft } from '@/features/ai/shared/schema';
+import {
+    ModelPicker,
+    defaultTextModel,
+    textModelCatalog,
+    useRememberedModel,
+} from '@/features/ai/components/model-picker';
+import type { AiDraft, TextModelId } from '@/features/ai/shared/schema';
 import { ENTRY_KINDS, type EntryKind } from '@/lib/db/schema';
 import { kindMeta } from '@/lib/format';
 import { useMutation } from '@tanstack/react-query';
@@ -33,6 +39,11 @@ export function AiAssist({
     const [brief, setBrief] = useState('');
     const [draftKind, setDraftKind] = useState<EntryKind>(kind);
     const [pasted, setPasted] = useState('');
+    const [model, setModel] = useRememberedModel<TextModelId>(
+        'ai.textModel',
+        textModelCatalog,
+        defaultTextModel
+    );
 
     const generate = useMutation({
         mutationFn: aiGenerateEntryServerFn,
@@ -81,6 +92,13 @@ export function AiAssist({
                     </ToggleGroupItem>
                 </ToggleGroup>
 
+                <ModelPicker
+                    catalog={textModelCatalog}
+                    id='ai-text-model'
+                    onChange={next => setModel(next as TextModelId)}
+                    value={model}
+                />
+
                 {mode === 'generate' ? (
                     <>
                         <Field>
@@ -122,7 +140,9 @@ export function AiAssist({
                         <Button
                             className='w-full'
                             disabled={busy || brief.trim().length < 3}
-                            onClick={() => generate.mutate({ data: { brief, kind: draftKind } })}
+                            onClick={() =>
+                                generate.mutate({ data: { brief, kind: draftKind, model } })
+                            }
                             type='button'>
                             <SparklesIcon data-icon='inline-start' />
                             {generate.isPending ? 'Writing…' : 'Write a draft'}
@@ -143,7 +163,7 @@ export function AiAssist({
                         <Button
                             className='w-full'
                             disabled={busy || pasted.trim().length < 20}
-                            onClick={() => extract.mutate({ data: { text: pasted } })}
+                            onClick={() => extract.mutate({ data: { text: pasted, model } })}
                             type='button'>
                             <ClipboardPasteIcon data-icon='inline-start' />
                             {extract.isPending ? 'Reading…' : 'Fill the form'}

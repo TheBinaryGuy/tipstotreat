@@ -13,6 +13,13 @@ import { Separator } from '@/components/ui/separator';
 import { Toggle } from '@/components/ui/toggle';
 import { uploadImage } from '@/features/ai/components/cover-image';
 import { aiGenerateInlineImageServerFn } from '@/features/ai/server/ai.functions';
+import {
+    ModelPicker,
+    defaultImageModel,
+    imageModelCatalog,
+    useRememberedModel,
+} from '@/features/ai/components/model-picker';
+import type { ImageModelId } from '@/features/ai/shared/schema';
 import { Textarea } from '@/components/ui/textarea';
 import { useMutation } from '@tanstack/react-query';
 import { CharacterCount } from '@tiptap/extension-character-count';
@@ -417,6 +424,11 @@ function Toolbar({ editor }: { editor: Editor }) {
 function GenerateImageButton({ editor }: { editor: Editor }) {
     const [open, setOpen] = useState(false);
     const [prompt, setPrompt] = useState('');
+    const [model, setModel] = useRememberedModel<ImageModelId>(
+        'ai.imageModel',
+        imageModelCatalog,
+        defaultImageModel
+    );
     const generate = useMutation({
         mutationFn: aiGenerateInlineImageServerFn,
         onSuccess: ({ url }) => {
@@ -446,12 +458,12 @@ function GenerateImageButton({ editor }: { editor: Editor }) {
                     className='space-y-3'
                     onSubmit={event => {
                         event.preventDefault();
-                        generate.mutate({ data: { prompt } });
+                        generate.mutate({ data: { prompt, model } });
                     }}>
                     <div>
                         <p className='text-sm font-medium'>Paint a picture</p>
                         <p className='text-muted-foreground text-xs'>
-                            Describe the scene. It is drawn as a still life, no people or text.
+                            Describe the scene. Photographic, no people or text.
                         </p>
                     </div>
                     <Textarea
@@ -461,6 +473,14 @@ function GenerateImageButton({ editor }: { editor: Editor }) {
                         placeholder='A steel glass of haldi doodh on a wooden table at night'
                         rows={3}
                         value={prompt}
+                    />
+                    <ModelPicker
+                        catalog={imageModelCatalog}
+                        compact
+                        id='inline-image-model'
+                        label='Image model'
+                        onChange={next => setModel(next as ImageModelId)}
+                        value={model}
                     />
                     <Button
                         className='w-full'

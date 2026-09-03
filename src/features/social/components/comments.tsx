@@ -171,7 +171,7 @@ function CommentItem({
                                 className={cn(comment.liked && 'fill-current')}
                                 data-icon='inline-start'
                             />
-                            {comment.likeCount || ''}
+                            Like
                         </Button>
                     ) : (
                         <Button

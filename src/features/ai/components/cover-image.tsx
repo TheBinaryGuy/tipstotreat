@@ -1,10 +1,19 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { aiGenerateImageServerFn } from '@/features/ai/server/ai.functions';
+import {
+    ModelPicker,
+    defaultImageModel,
+    imageModelCatalog,
+    useRememberedModel,
+} from '@/features/ai/components/model-picker';
+import type { ImageModelId } from '@/features/ai/shared/schema';
+import { Field, FieldDescription, FieldLabel } from '@/components/ui/field';
+import { Textarea } from '@/components/ui/textarea';
 import type { EntryKind } from '@/lib/db/schema';
 import { useMutation } from '@tanstack/react-query';
 import { ImageIcon, SparklesIcon, Trash2Icon, UploadIcon } from 'lucide-react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { toast } from 'sonner';
 
 export async function uploadImage(file: File): Promise<string> {
@@ -35,6 +44,12 @@ export function CoverImageField({
     summary?: string;
 }) {
     const fileRef = useRef<HTMLInputElement>(null);
+    const [prompt, setPrompt] = useState('');
+    const [model, setModel] = useRememberedModel<ImageModelId>(
+        'ai.imageModel',
+        imageModelCatalog,
+        defaultImageModel
+    );
     const upload = useMutation({
         mutationFn: uploadImage,
         onSuccess: url => onChange(url),
@@ -77,6 +92,31 @@ export function CoverImageField({
                     ref={fileRef}
                     type='file'
                 />
+                <Field>
+                    <FieldLabel htmlFor='cover-prompt'>Describe the picture</FieldLabel>
+                    <Textarea
+                        id='cover-prompt'
+                        onChange={event => setPrompt(event.target.value)}
+                        placeholder={
+                            title.trim()
+                                ? `Leave empty to picture "${title.trim()}" from the entry`
+                                : 'What should the image show?'
+                        }
+                        rows={2}
+                        value={prompt}
+                    />
+                    <FieldDescription>
+                        Photographic, no people or text. Empty means it is drawn from the title and
+                        summary.
+                    </FieldDescription>
+                </Field>
+                <ModelPicker
+                    catalog={imageModelCatalog}
+                    id='cover-model'
+                    label='Image model'
+                    onChange={next => setModel(next as ImageModelId)}
+                    value={model}
+                />
                 <div className='grid grid-cols-2 gap-2'>
                     <Button
                         disabled={busy}
@@ -88,12 +128,16 @@ export function CoverImageField({
                         {upload.isPending ? 'Uploading…' : 'Upload'}
                     </Button>
                     <Button
-                        disabled={busy || title.trim().length < 2}
+                        disabled={busy || (title.trim().length < 2 && prompt.trim().length < 3)}
                         onClick={() =>
                             generate.mutate({ data: { title, kind, ingredients, useFor, summary } })
                         }
                         size='sm'
-                        title={title.trim().length < 2 ? 'Add a title first' : 'Generate with AI'}
+                        title={
+                            title.trim().length < 2 && prompt.trim().length < 3
+                                ? 'Add a title or describe the picture first'
+                                : 'Generate with AI'
+                        }
                         type='button'
                         variant='outline'>
                         <SparklesIcon data-icon='inline-start' />{' '}

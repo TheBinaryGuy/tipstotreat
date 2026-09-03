@@ -13,12 +13,9 @@ import { chat, generateImage } from '@tanstack/ai';
 import { createServerFn } from '@tanstack/react-start';
 import { env } from 'cloudflare:workers';
 
-const TEXT_MODEL = '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
-const IMAGE_MODEL = '@cf/black-forest-labs/flux-1-schnell';
-
-const VOICE = `You write for TipsToTreat, a site where one Indian home cook writes down her own remedies, health tips, and recipes.
+const VOICE = `You write for TipsToTreat, a personal site where one author writes down her own home remedies, health tips, recipes, and longer articles from everyday life.
 Voice: warm, plain, first person ("I"), the way she would tell a neighbour. No hype, no miracle claims, no medical jargon.
-Ingredients are ordinary Indian pantry items (turmeric, ginger, ajwain, jaggery, ghee, tulsi, curd, hing, methi). Use English names; a common Hindi name may follow in brackets.
+Stay true to the topic the author gives; do not steer everything towards food or the kitchen. When ingredients are involved they are ordinary household items, named in English (a common Hindi name may follow in brackets when it helps).
 Remedies and tips must include a caution: when to stop and see a doctor. Never claim to cure anything.
 Recipes get prep and cook minutes and servings; remedies and tips leave those null or empty.
 Articles are long-form posts of at least 900 words (aim for 1000 to 1500) with ## section headings, written as a personal essay from the kitchen: a season, a habit, a story behind a remedy, what the family eats when. Articles have no ingredients, steps, or caution (return empty arrays and strings) unless the piece genuinely needs a short list.
@@ -68,7 +65,7 @@ export const aiGenerateEntryServerFn = createServerFn({ method: 'POST' })
         await requireAuthor();
         const draft = await draftWithRetry(() =>
             chat({
-                adapter: createCloudflareText(TEXT_MODEL, { binding: env.AI }),
+                adapter: createCloudflareText(data.model, { binding: env.AI }),
                 systemPrompts: [VOICE],
                 messages: [
                     {
@@ -93,7 +90,7 @@ export const aiExtractEntryServerFn = createServerFn({ method: 'POST' })
         await requireAuthor();
         const draft = await draftWithRetry(() =>
             chat({
-                adapter: createCloudflareText(TEXT_MODEL, { binding: env.AI }),
+                adapter: createCloudflareText(data.model, { binding: env.AI }),
                 systemPrompts: [
                     VOICE,
                     'You are filling in a form from text the author pasted. Keep her facts, quantities, and steps exactly; do not invent ingredients or steps that are not there. Rewrite only for clarity and the site voice. Decide the kind from the content. The title names the remedy, tip, or dish only; never mention who sent the text or where it came from.',
@@ -108,11 +105,7 @@ export const aiExtractEntryServerFn = createServerFn({ method: 'POST' })
         return normalize(draft);
     });
 
-/**
- * Build the scene from what the entry is actually about. Recipes show the dish; remedies with
- * ingredients show those ingredients; anything else (a pressure-point tip, a habit, an article)
- * is described from its title and summary so the model does not default to a spice still life.
- */
+/** A default picture description from the entry itself, used when the author writes none. */
 function describeScene(data: {
     kind: string;
     title: string;
@@ -121,29 +114,26 @@ function describeScene(data: {
     summary?: string;
 }) {
     const context = [data.useFor, data.summary].filter(Boolean).join('. ');
-    if (data.kind === 'recipe') {
-        return `${data.title}, a home-cooked Indian dish, plated simply. ${context}`;
-    }
+    if (data.kind === 'recipe')
+        return `${data.title}, the finished dish, plated simply. ${context}`;
     if (data.ingredients.length > 0) {
-        return `A still life of the ingredients for "${data.title}": ${data.ingredients.slice(0, 5).join(', ')}. ${context}`;
+        return `A still life of what is needed for "${data.title}": ${data.ingredients.slice(0, 5).join(', ')}. ${context}`;
     }
-    if (data.kind === 'article') {
-        return `A quiet scene that evokes "${data.title}". ${context}. An Indian home, morning light.`;
-    }
-    return `A calm, symbolic still life for a home health tip titled "${data.title}". ${context}. Show the objects or setting involved (for example a cushion, a bowl of warm water, a towel, a window seat), never a person.`;
+    return `A calm, literal scene that represents "${data.title}". ${context}. Show the objects, place, or setting the subject is about.`;
 }
 
+/** House style appended to every image prompt. Deliberately neutral about subject matter. */
 const IMAGE_STYLE =
-    'Editorial food photography, photorealistic, shot on a 50mm lens, soft natural window light, shallow depth of field, an Indian home kitchen, brass and steel utensils, a worn wooden table, quiet muted colours. No people, no hands, no faces, no text, no letters, no logos, no watermark.';
+    'Photorealistic editorial photograph, natural light, calm composition, shallow depth of field, muted colours, real textures. No people, no hands, no faces, no text, no letters, no logos, no watermark.';
 
 /** Generate a cover image, store it in R2, and return its URL. */
 export const aiGenerateImageServerFn = createServerFn({ method: 'POST' })
     .validator(imageInputSchema)
     .handler(async ({ data }) => {
         await requireAuthor();
-        const prompt = `${describeScene(data)} ${data.notes ?? ''} ${IMAGE_STYLE}`.trim();
+        const prompt = `${data.prompt?.trim() || describeScene(data)} ${IMAGE_STYLE}`.trim();
         const result = await generateImage({
-            adapter: createCloudflareImage(IMAGE_MODEL, { binding: env.AI }),
+            adapter: createCloudflareImage(data.model, { binding: env.AI }),
             prompt,
             numberOfImages: 1,
         });
@@ -160,7 +150,7 @@ export const aiGenerateInlineImageServerFn = createServerFn({ method: 'POST' })
     .handler(async ({ data }) => {
         await requireAuthor();
         const result = await generateImage({
-            adapter: createCloudflareImage(IMAGE_MODEL, { binding: env.AI }),
+            adapter: createCloudflareImage(data.model, { binding: env.AI }),
             prompt: `${data.prompt}. ${IMAGE_STYLE}`,
             numberOfImages: 1,
         });
