@@ -1,0 +1,30 @@
+README.md
+  s_dda73c4b992cc4::t_7cd912855909d6 59
+src/routes/__root.tsx
+  s_dda73c4b992cc4::t_97e3ff5f06ed44 4,21-22
+worker-configuration.d.ts
+  s_dda73c4b992cc4::t_fc16153fe2f729 2
+wrangler.jsonc
+  s_dda73c4b992cc4::t_97840134640b4e 16-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "e89b51a175e50edb6e531692c568485a45749480",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  },
+  "sessions": {
+    "s_dda73c4b992cc4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "41b53d0c-eb1a-4374-91e9-0eac17bef4ea",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
