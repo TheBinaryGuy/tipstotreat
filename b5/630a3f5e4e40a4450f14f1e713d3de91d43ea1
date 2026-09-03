@@ -1,0 +1,121 @@
+src/lib/ai/cloudflare/utils/config.ts
+  s_3b9f586cd9a895::t_bf9583119d8057 1-2,10,12,19-22,27-32,41,43,45,51-58,63,71,73-96,105,107-120
+  s_3b9f586cd9a895::t_c91e0047d8ef91 3-9,11,13-18,23-26,33-40,42,44,46-50,59-62,64-70,72,97-104,106,121
+src/features/ai/shared/schema.ts
+  s_3b9f586cd9a895::t_53cb1f5ab74855 1-5,12-53
+  s_3b9f586cd9a895::t_bf9583119d8057 6-11
+src/features/ai/components/cover-image.tsx
+  s_3b9f586cd9a895::t_bf9583119d8057 83-84,93-94
+  s_3b9f586cd9a895::t_cd8d7c21d05e01 1-82,85-92,95-111
+src/features/ai/server/ai.functions.ts
+  s_dda73c4b992cc4::t_6be5c9455a9192 93,95-97
+  s_3b9f586cd9a895::t_bf9583119d8057 50-53
+  s_3b9f586cd9a895::t_53cb1f5ab74855 1-24,39-49,54-65,80-87,102-128
+  s_dda73c4b992cc4::t_23261acf1b8000 25-38,66-79,88-92,94,98-101
+src/routes/_site/$kind/$slug.tsx
+  s_3b9f586cd9a895::t_630bc3c45b3f88 37-41,59,63,67,78,168-175
+  s_dda73c4b992cc4::t_b013efa74e5c69 176
+src/routes/_site/index.tsx
+  s_3b9f586cd9a895::t_253ebb693e1661 115-121
+src/features/entries/shared/schema.ts
+  s_3b9f586cd9a895::t_53cb1f5ab74855 39
+src/lib/media.server.ts
+  s_3b9f586cd9a895::t_53cb1f5ab74855 1-12,18-25
+  s_3b9f586cd9a895::t_bf9583119d8057 13-17
+src/routes/api/media.ts
+  s_3b9f586cd9a895::t_53cb1f5ab74855 1-20,25-34
+  s_3b9f586cd9a895::t_bf9583119d8057 21-24
+src/lib/ai/cloudflare/adapters/embedding.ts
+  s_3b9f586cd9a895::t_bf9583119d8057 1-9,12,20,22,24-28,30-69,73-77,81-82,84
+  s_3b9f586cd9a895::t_c91e0047d8ef91 10-11,13-19,21,23,29,70-72,78-80,83,85
+package.json
+  s_3b9f586cd9a895::t_34b3714d73adfd 82
+  s_3b9f586cd9a895::t_c91e0047d8ef91 30-31
+  s_3b9f586cd9a895::t_4de51eb805dfd1 79
+  s_3b9f586cd9a895::t_39c73c4cee5c82 42-44,47-49
+  s_3b9f586cd9a895::t_6c08a034cf51c3 27-29
+  s_3b9f586cd9a895::t_d39c88b84d5c96 60
+src/lib/ai/cloudflare/index.ts
+  s_3b9f586cd9a895::t_c91e0047d8ef91 1-9,15-16,21-22,28-29,35-36,42-43,49,51-52,61-62
+  s_3b9f586cd9a895::t_bf9583119d8057 10-14,17-20,23-27,30-34,37-41,44-48,50,53-60,63-68
+src/lib/ai/cloudflare/utils/fetch.ts
+  s_3b9f586cd9a895::t_c91e0047d8ef91 2-10,14,49-56,80,86-89,91-97,116-119,122
+  s_3b9f586cd9a895::t_bf9583119d8057 1,11-13,15-48,57-79,81-85,90,98-115,120-121
+src/lib/ai/cloudflare/adapters/text.ts
+  s_3b9f586cd9a895::t_c91e0047d8ef91 3,10,14,21-27,41-43,52,61-72,75,78,82,93-94,103,112-125,128,130-136,139,141
+  s_3b9f586cd9a895::t_bf9583119d8057 1-2,4-9,11-13,15-20,28-40,44-51,53-60,73-74,76-77,79-81,83-92,95-102,104-111,126-127,129,137-138,140
+src/routeTree.gen.ts
+  s_3b9f586cd9a895::t_53cb1f5ab74855 24-25,97-106,171-172,194-195,221-222,249-250,272-273,298-299,320-321,413-426,551-552
+src/routes/media/$.ts
+  s_3b9f586cd9a895::t_53cb1f5ab74855 1-27
+worker-configuration.d.ts
+  s_3b9f586cd9a895::t_e13484f23bb9e4 2
+  s_3b9f586cd9a895::t_bf9583119d8057 5,7
+src/components/admin/entry-form.tsx
+  s_3b9f586cd9a895::t_cd8d7c21d05e01 2-4,84,122,148,171,202-225,438,560
+  s_3b9f586cd9a895::t_253ebb693e1661 182,492
+  s_dda73c4b992cc4::t_6be5c9455a9192 321,471-472,556-558,562-567,570,574-661
+src/lib/ai/cloudflare/utils/models.ts
+  s_3b9f586cd9a895::t_bf9583119d8057 3-4,11,13,15,18-22,25-28
+  s_3b9f586cd9a895::t_c91e0047d8ef91 1-2,5-10,12,14,16-17,23-24
+src/lib/ai/cloudflare/adapters/image.ts
+  s_3b9f586cd9a895::t_bf9583119d8057 1-9,13-18,26-30,32-36,38-75,80-81,83,87-88,90
+  s_3b9f586cd9a895::t_c91e0047d8ef91 10-12,19-25,31,37,76-79,82,84-86,89,91
+src/features/entries/server/entries.server.ts
+  s_3b9f586cd9a895::t_53cb1f5ab74855 99
+src/lib/ai/cloudflare/adapters/tts.ts
+  s_3b9f586cd9a895::t_bf9583119d8057 1-8,12-17,21-27,34-38,40-44,46-83,88-89,91,95-96,98
+  s_3b9f586cd9a895::t_c91e0047d8ef91 9-11,18-20,28-33,39,45,84-87,90,92-94,97,99
+src/lib/ai/cloudflare/utils/run.ts
+  s_3b9f586cd9a895::t_bf9583119d8057 1-3,5,8-11,22-25,27-49,51-66,68-78,80-91,93,98-113
+  s_3b9f586cd9a895::t_c91e0047d8ef91 4,6-7,12-21,26,50,67,79,92,94-97,114
+src/routes/__root.tsx
+  s_3b9f586cd9a895::t_0ce77e2a9cff83 11,135
+wrangler.jsonc
+  s_3b9f586cd9a895::t_e13484f23bb9e4 18-21
+src/features/ai/components/ai-assist.tsx
+  s_3b9f586cd9a895::t_bf9583119d8057 13,25-31
+  s_3b9f586cd9a895::t_cd8d7c21d05e01 1-12,14-24,32-154
+src/components/site/entry-parts.tsx
+  s_3b9f586cd9a895::t_630bc3c45b3f88 90-99
+src/lib/ai/cloudflare/adapters/summarize.ts
+  s_3b9f586cd9a895::t_c91e0047d8ef91 5,11,13-17,27-33,38
+  s_3b9f586cd9a895::t_bf9583119d8057 1-4,6-10,12,18-26,34-37
+src/lib/ai/cloudflare/adapters/transcription.ts
+  s_3b9f586cd9a895::t_c91e0047d8ef91 6,14-15,17-18,23-25,35-37,41,60,68-75,79,85-86,119-120,154,183-186,188,194-195,199,201-202,206,208
+  s_3b9f586cd9a895::t_bf9583119d8057 1-5,7-13,16,19-22,26-34,38-40,42-59,61-67,76-78,80-84,87-118,121-153,155-182,187,189-193,196-198,200,203-205,207
+src/lib/ai/cloudflare/gateway.ts
+  s_3b9f586cd9a895::t_bf9583119d8057 1-2,4-8,19,40-41,43-52
+  s_3b9f586cd9a895::t_c91e0047d8ef91 3,9-18,20-39,42,53
+pnpm-lock.yaml
+  s_3b9f586cd9a895::t_0b3105cb0b29aa 26-40,71-79,86-94,125-127,177-179,186-188,228-235,2074-2113,2170-2197,2230-2234,2245-2250,2489-2493,2515-2521,2550-2554,2602-2622,2676-2678,2705-2707,3261-3263,3634-3637,3780-3782,4004-4015,4022-4030,4034-4040,4045-4047,4086-4088,4097-4102,4106-4108,4127-4129,4446-4448,4496-4504,4729-4748,4818-4820,4829-4831,4836-4838,4993-4998,5041-5046,5296-5301,5415-5417,5522-5524,5591-5593,5698-5701,7067-7141,7196-7201,7273-7284,7291-7306,7634-7637,7655-7660,7685-7688,7728-7744,7843-7846,7873-7874,8298-8299,8488-8489,8706-8707,8948-8982,9003-9039,9044-9053,9056-9057,9089-9090,9095-9101,9104-9105,9116-9117,9336-9341,9441-9479,9815-9819,9949-9958,9968-9971,9974-9975,10141-10158,10198-10211,10547-10554,10678-10682,10782-10786,10828-10829
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "b5630a3f5e4e40a4450f14f1e713d3de91d43ea1",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  },
+  "sessions": {
+    "s_3b9f586cd9a895": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "afda4623-2b20-4651-96f1-f71430a41fb6",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "TheBinaryGuy <hello@thebinary.dev>"
+    },
+    "s_dda73c4b992cc4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "41b53d0c-eb1a-4374-91e9-0eac17bef4ea",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
