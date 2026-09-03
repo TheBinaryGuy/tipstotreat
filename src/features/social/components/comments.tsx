@@ -179,7 +179,7 @@ function CommentItem({
                             size='sm'
                             title='Sign in to like'
                             variant='ghost'>
-                            <HeartIcon data-icon='inline-start' /> {comment.likeCount || ''}
+                            <HeartIcon data-icon='inline-start' /> Like
                         </Button>
                     )}
                     {viewer ? (

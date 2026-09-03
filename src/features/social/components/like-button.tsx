@@ -9,13 +9,11 @@ import { HeartIcon } from 'lucide-react';
 export function LikeButton({
     entryId,
     slug,
-    count,
     liked,
     signedIn,
 }: {
     entryId: string;
     slug: string;
-    count: number;
     liked: boolean;
     signedIn: boolean;
 }) {
@@ -26,7 +24,7 @@ export function LikeButton({
         onSuccess: () => queryClient.invalidateQueries({ queryKey: socialKeys.entry(slug) }),
     });
 
-    const label = `${count} ${count === 1 ? 'like' : 'likes'}`;
+    const label = liked ? 'Liked' : 'Like';
 
     if (!signedIn) {
         return (

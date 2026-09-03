@@ -143,27 +143,24 @@ function EntryPage() {
             </div>
             {line ? <p className='text-muted-foreground mt-3'>{line}</p> : null}
             <p className='mt-5 max-w-prose text-lg'>{entry.summary}</p>
-            <div className='mt-4 flex flex-wrap items-center gap-4'>
+            <div className='mt-4 flex items-center gap-2'>
                 <LikeButton
-                    count={social.likeCount}
                     entryId={entry.id}
                     liked={social.liked}
                     signedIn={viewer !== null}
                     slug={slug}
                 />
-                <p className='text-muted-foreground text-sm'>
-                    Published {formatDate(entry.publishedAt)}
-                    {updated}
-                </p>
-                <div className='ml-auto'>
-                    <ShareMenu
-                        markdownUrl={`${pageUrl}.md`}
-                        pageUrl={pageUrl}
-                        text={entry.summary}
-                        title={entry.title}
-                    />
-                </div>
+                <ShareMenu
+                    markdownUrl={`${pageUrl}.md`}
+                    pageUrl={pageUrl}
+                    text={entry.summary}
+                    title={entry.title}
+                />
             </div>
+            <p className='text-muted-foreground mt-3 text-sm'>
+                Published {formatDate(entry.publishedAt)}
+                {updated}
+            </p>
 
             {entry.coverImage ? (
                 <img

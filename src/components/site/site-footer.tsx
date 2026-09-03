@@ -18,8 +18,11 @@ export function SiteFooter() {
                         that does not improve, please see a doctor.
                     </p>
                     <p className='text-muted-foreground mt-3'>
-                        © {year} TipsToTreat. All rights reserved. Recipes, remedies, and
-                        photographs may not be republished without permission.
+                        © {year} TipsToTreat. All rights reserved.
+                    </p>
+                    <p className='text-muted-foreground mt-1'>
+                        Recipes, remedies, and photographs may not be republished without
+                        permission.
                     </p>
                 </div>
                 <nav aria-label='Sections'>
@@ -41,10 +44,8 @@ export function SiteFooter() {
                     <p className='font-medium'>Follow</p>
                     <ul className='text-muted-foreground mt-2 space-y-1.5'>
                         <li>
-                            <a
-                                className='hover:text-foreground inline-flex items-center gap-1.5 transition-colors'
-                                href='/feed.xml'>
-                                <RssIcon className='size-3.5' /> RSS feed
+                            <a className='hover:text-foreground transition-colors' href='/feed.xml'>
+                                RSS feed
                             </a>
                         </li>
                         <li>
