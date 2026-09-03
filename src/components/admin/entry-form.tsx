@@ -500,6 +500,7 @@ export function EntryForm({
                                     variant='outline'>
                                     <PlusIcon data-icon='inline-start' /> Add ingredient
                                 </Button>
+                                <FieldError errors={issues(field.state.meta.errors)} />
                             </FieldSet>
                         )}
                     </form.Field>

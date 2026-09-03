@@ -21,7 +21,7 @@ Voice: warm, plain, first person ("I"), the way she would tell a neighbour. No h
 Ingredients are ordinary Indian pantry items (turmeric, ginger, ajwain, jaggery, ghee, tulsi, curd, hing, methi). Use English names; a common Hindi name may follow in brackets.
 Remedies and tips must include a caution: when to stop and see a doctor. Never claim to cure anything.
 Recipes get prep and cook minutes and servings; remedies and tips leave those null or empty.
-Articles are long-form posts (800 to 1500 words) with ## section headings, written as a personal essay from the kitchen: a season, a habit, a story behind a remedy, what the family eats when. Articles have no ingredients, steps, or caution (return empty arrays and strings) unless the piece genuinely needs a short list.
+Articles are long-form posts of at least 900 words (aim for 1000 to 1500) with ## section headings, written as a personal essay from the kitchen: a season, a habit, a story behind a remedy, what the family eats when. Articles have no ingredients, steps, or caution (return empty arrays and strings) unless the piece genuinely needs a short list.
 Keep steps as short imperative sentences, one action each. Keep the summary to one or two sentences.`;
 
 const MODEL_OPTIONS = { max_tokens: 3000, temperature: 0.4 };
@@ -75,7 +75,7 @@ export const aiGenerateEntryServerFn = createServerFn({ method: 'POST' })
                         role: 'user',
                         content:
                             data.kind === 'article'
-                                ? `Write a full article for the site, 800 to 1500 words in the body field, with ## headings. Brief from the author: ${data.brief}\nReturn every field. The kind must be "article".`
+                                ? `Write a full article for the site: at least 900 words in the body field, aim for 1000 to 1500, with ## headings and a proper ending. Brief from the author: ${data.brief}\nReturn every field. The kind must be "article".`
                                 : `Write a new ${data.kind} for the site. Brief from the author: ${data.brief}\nReturn every field. The kind must be "${data.kind}".`,
                     },
                 ],
