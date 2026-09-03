@@ -665,7 +665,9 @@ export function EntryForm({
                                 ingredients={ingredientNames}
                                 kind={kind}
                                 onChange={url => field.handleChange(url)}
+                                summary={summaryValue}
                                 title={title}
+                                useFor={useForValue}
                                 value={field.state.value}
                             />
                         </div>
