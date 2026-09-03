@@ -1,0 +1,24 @@
+src/routes/__root.tsx
+  s_3b9f586cd9a895::t_f5e9a4b3db5f26 123
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "e80d8277ec9ca491aaed9a3244a466976dee4854",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  },
+  "sessions": {
+    "s_3b9f586cd9a895": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "afda4623-2b20-4651-96f1-f71430a41fb6",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
