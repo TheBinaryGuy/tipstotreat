@@ -46,7 +46,7 @@ function HomePage() {
                         when to see a doctor.
                     </p>
                     <div className='mt-6 flex flex-wrap gap-2'>
-                        {KINDS.map(kind => (
+                        {KINDS.filter(kind => counts[kind] > 0).map(kind => (
                             <Button
                                 key={kind}
                                 render={<Link params={{ kind: kindMeta[kind].path }} to='/$kind' />}
