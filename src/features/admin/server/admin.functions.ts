@@ -1,6 +1,6 @@
 import { requireAuthor } from '@/features/auth/server/session.server';
 import { getDb } from '@/lib/db';
-import { comments, entries, user } from '@/lib/db/schema';
+import { comments, entries, user, type EntryKind } from '@/lib/db/schema';
 import { getAuth } from '@/lib/auth';
 import { createServerFn } from '@tanstack/react-start';
 import { getRequestHeaders } from '@tanstack/react-start/server';
@@ -106,7 +106,7 @@ export type AdminComment = {
     createdAt: Date;
     isReply: boolean;
     author: { id: string; name: string; email: string; banned: boolean };
-    entry: { id: string; title: string; slug: string; kind: 'remedy' | 'tip' | 'recipe' };
+    entry: { id: string; title: string; slug: string; kind: EntryKind };
 };
 
 /** Every comment on the site, newest first. */

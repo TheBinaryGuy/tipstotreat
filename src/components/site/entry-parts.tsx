@@ -3,12 +3,13 @@ import type { Entry, EntryKind, Ingredient } from '@/lib/db/schema';
 import { kindMeta, minutesLabel } from '@/lib/format';
 import { cn } from '@/lib/utils';
 import { Link } from '@tanstack/react-router';
-import { CookingPotIcon, LeafIcon, LightbulbIcon } from 'lucide-react';
+import { CookingPotIcon, LeafIcon, LightbulbIcon, NewspaperIcon } from 'lucide-react';
 
 export const kindIcon: Record<EntryKind, typeof LeafIcon> = {
     remedy: LeafIcon,
     tip: LightbulbIcon,
     recipe: CookingPotIcon,
+    article: NewspaperIcon,
 };
 
 export function KindMark({ kind, className }: { kind: EntryKind; className?: string }) {

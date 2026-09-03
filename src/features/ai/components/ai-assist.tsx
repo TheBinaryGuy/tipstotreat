@@ -111,7 +111,9 @@ export function AiAssist({
                                 placeholder={
                                     draftKind === 'recipe'
                                         ? 'Moong dal khichdi the way I make it for sick days'
-                                        : 'Ajwain water for gas after a heavy meal'
+                                        : draftKind === 'article'
+                                          ? 'What we eat in the first week of monsoon, and why'
+                                          : 'Ajwain water for gas after a heavy meal'
                                 }
                                 rows={3}
                                 value={brief}

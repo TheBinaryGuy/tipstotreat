@@ -40,5 +40,5 @@ export function entryJsonLd(entry: Entry, url: string) {
             step: entry.steps.map(step => ({ '@type': 'HowToStep', text: step })),
         };
     }
-    return { ...base, '@type': 'Article' };
+    return { ...base, '@type': entry.kind === 'article' ? 'BlogPosting' : 'Article' };
 }

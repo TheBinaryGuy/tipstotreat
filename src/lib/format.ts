@@ -17,12 +17,14 @@ export const kindMeta: Record<
         path: 'recipes',
         lead: 'Good for',
     },
+    article: { label: 'Article', plural: 'Articles', path: 'articles', lead: 'About' },
 };
 
 export const kindFromPath: Record<string, EntryKind> = {
     remedies: 'remedy',
     tips: 'tip',
     recipes: 'recipe',
+    articles: 'article',
 };
 
 export function formatDate(value: Date | number | string | null | undefined) {

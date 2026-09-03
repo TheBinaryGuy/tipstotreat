@@ -27,7 +27,7 @@ import { z } from 'zod';
 
 export const Route = createFileRoute('/_site/admin/')({
     validateSearch: z.object({
-        kind: z.enum(['remedy', 'tip', 'recipe']).optional().catch(undefined),
+        kind: z.enum(['remedy', 'tip', 'recipe', 'article']).optional().catch(undefined),
         status: z.enum(['draft', 'published']).optional().catch(undefined),
     }),
     loader: ({ context }) => context.queryClient.ensureQueryData(adminEntriesQuery()),
@@ -67,6 +67,7 @@ function AdminIndex() {
                         ['remedy', 'Remedies'],
                         ['tip', 'Tips'],
                         ['recipe', 'Recipes'],
+                        ['article', 'Articles'],
                     ]}
                     param='kind'
                 />

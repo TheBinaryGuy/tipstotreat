@@ -34,6 +34,8 @@ const sectionBlurb = {
     remedy: 'Indian home remedies for everyday complaints, with the ingredients you already have.',
     tip: 'Small daily habits from an Indian household that keep the family well.',
     recipe: 'Everyday Indian home recipes, written the way they are made at home.',
+    article:
+        'Longer reads from an Indian kitchen: seasons, habits, and the stories behind the remedies.',
 } as const;
 
 function SectionPage() {

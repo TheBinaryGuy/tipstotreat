@@ -19,7 +19,7 @@ export const Route = createFileRoute('/llms.txt')({
                     'Every entry is available as Markdown by adding `.md` to its URL.',
                     '',
                 ];
-                for (const kind of ['remedy', 'tip', 'recipe'] as const) {
+                for (const kind of ['remedy', 'tip', 'recipe', 'article'] as const) {
                     const list = entries.filter(entry => entry.kind === kind);
                     if (list.length === 0) continue;
                     lines.push(`## ${kindMeta[kind].plural}`, '');

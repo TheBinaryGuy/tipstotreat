@@ -97,7 +97,7 @@ export const verification = sqliteTable(
 /* Content                                                             */
 /* ------------------------------------------------------------------ */
 
-export const ENTRY_KINDS = ['remedy', 'tip', 'recipe'] as const;
+export const ENTRY_KINDS = ['remedy', 'tip', 'recipe', 'article'] as const;
 export type EntryKind = (typeof ENTRY_KINDS)[number];
 
 export const ENTRY_STATUSES = ['draft', 'published'] as const;

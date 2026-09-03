@@ -4,6 +4,7 @@ import {
     extractInputSchema,
     generateInputSchema,
     imageInputSchema,
+    inlineImageInputSchema,
     type AiDraft,
 } from '@/features/ai/shared/schema';
 import { createCloudflareImage, createCloudflareText } from '@/lib/ai/cloudflare';
@@ -20,9 +21,11 @@ Voice: warm, plain, first person ("I"), the way she would tell a neighbour. No h
 Ingredients are ordinary Indian pantry items (turmeric, ginger, ajwain, jaggery, ghee, tulsi, curd, hing, methi). Use English names; a common Hindi name may follow in brackets.
 Remedies and tips must include a caution: when to stop and see a doctor. Never claim to cure anything.
 Recipes get prep and cook minutes and servings; remedies and tips leave those null or empty.
+Articles are long-form posts (800 to 1500 words) with ## section headings, written as a personal essay from the kitchen: a season, a habit, a story behind a remedy, what the family eats when. Articles have no ingredients, steps, or caution (return empty arrays and strings) unless the piece genuinely needs a short list.
 Keep steps as short imperative sentences, one action each. Keep the summary to one or two sentences.`;
 
 const MODEL_OPTIONS = { max_tokens: 3000, temperature: 0.4 };
+const ARTICLE_OPTIONS = { max_tokens: 6000, temperature: 0.6 };
 
 /** Structured output occasionally comes back as malformed JSON; one retry fixes most of those. */
 async function draftWithRetry(run: () => Promise<AiDraft>): Promise<AiDraft> {
@@ -70,11 +73,14 @@ export const aiGenerateEntryServerFn = createServerFn({ method: 'POST' })
                 messages: [
                     {
                         role: 'user',
-                        content: `Write a new ${data.kind} for the site. Brief from the author: ${data.brief}\nReturn every field. The kind must be "${data.kind}".`,
+                        content:
+                            data.kind === 'article'
+                                ? `Write a full article for the site, 800 to 1500 words in the body field, with ## headings. Brief from the author: ${data.brief}\nReturn every field. The kind must be "article".`
+                                : `Write a new ${data.kind} for the site. Brief from the author: ${data.brief}\nReturn every field. The kind must be "${data.kind}".`,
                     },
                 ],
                 outputSchema: aiDraftSchema,
-                modelOptions: MODEL_OPTIONS,
+                modelOptions: data.kind === 'article' ? ARTICLE_OPTIONS : MODEL_OPTIONS,
             })
         );
         return normalize({ ...draft, kind: data.kind });
@@ -113,7 +119,9 @@ export const aiGenerateImageServerFn = createServerFn({ method: 'POST' })
         const subject =
             data.kind === 'recipe'
                 ? `${data.title}, a home-cooked Indian dish, plated simply`
-                : `the ingredients for ${data.title}: ${data.ingredients.slice(0, 5).join(', ') || 'kitchen spices'}, arranged as a still life`;
+                : data.kind === 'article'
+                  ? `a quiet still life that evokes "${data.title}": an Indian kitchen corner, spices, brass and steel vessels, morning light`
+                  : `the ingredients for ${data.title}: ${data.ingredients.slice(0, 5).join(', ') || 'kitchen spices'}, arranged as a still life`;
         const prompt = `${subject}. ${data.notes ?? ''} ${IMAGE_STYLE}`.trim();
         const result = await generateImage({
             adapter: createCloudflareImage(IMAGE_MODEL, { binding: env.AI }),
@@ -125,4 +133,21 @@ export const aiGenerateImageServerFn = createServerFn({ method: 'POST' })
         const bytes = Uint8Array.from(atob(image.b64Json), c => c.charCodeAt(0));
         const { url } = await putMedia(bytes, 'image/png', 'generated');
         return { url, prompt };
+    });
+
+/** Generate an image for the editor from the author's own description, in the house style. */
+export const aiGenerateInlineImageServerFn = createServerFn({ method: 'POST' })
+    .validator(inlineImageInputSchema)
+    .handler(async ({ data }) => {
+        await requireAuthor();
+        const result = await generateImage({
+            adapter: createCloudflareImage(IMAGE_MODEL, { binding: env.AI }),
+            prompt: `${data.prompt}. ${IMAGE_STYLE}`,
+            numberOfImages: 1,
+        });
+        const image = result.images[0];
+        if (!image?.b64Json) throw new Error('The model returned no image. Try again.');
+        const bytes = Uint8Array.from(atob(image.b64Json), c => c.charCodeAt(0));
+        const { url } = await putMedia(bytes, 'image/png', 'generated');
+        return { url };
     });

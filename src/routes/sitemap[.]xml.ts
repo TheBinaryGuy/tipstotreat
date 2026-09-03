@@ -10,7 +10,7 @@ export const Route = createFileRoute('/sitemap.xml')({
                 const entries = await listPublished();
                 const urls = [
                     { loc: `${origin}/`, priority: '1.0' },
-                    ...(['remedy', 'tip', 'recipe'] as const).map(kind => ({
+                    ...(['remedy', 'tip', 'recipe', 'article'] as const).map(kind => ({
                         loc: `${origin}/${kindMeta[kind].path}`,
                         priority: '0.8',
                     })),

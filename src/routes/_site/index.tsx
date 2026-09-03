@@ -18,12 +18,13 @@ export const Route = createFileRoute('/_site/')({
     component: HomePage,
 });
 
-const KINDS: EntryKind[] = ['remedy', 'tip', 'recipe'];
+const KINDS: EntryKind[] = ['remedy', 'tip', 'recipe', 'article'];
 
 const blurb: Record<EntryKind, string> = {
     remedy: 'A complaint, and what to do about it with what is already in the kitchen.',
     tip: 'Small habits that keep the house well.',
     recipe: 'Everyday home food, written the way it is actually made.',
+    article: 'Longer reads: seasons, habits, and stories from the kitchen.',
 };
 
 function HomePage() {

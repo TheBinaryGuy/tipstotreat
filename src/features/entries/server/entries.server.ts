@@ -32,7 +32,7 @@ export async function countPublishedByKind(): Promise<Record<EntryKind, number>>
         .from(entries)
         .where(published)
         .groupBy(entries.kind);
-    const counts: Record<EntryKind, number> = { remedy: 0, tip: 0, recipe: 0 };
+    const counts: Record<EntryKind, number> = { remedy: 0, tip: 0, recipe: 0, article: 0 };
     for (const row of rows) counts[row.kind] = Number(row.n);
     return counts;
 }

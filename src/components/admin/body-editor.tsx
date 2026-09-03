@@ -12,6 +12,9 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Separator } from '@/components/ui/separator';
 import { Toggle } from '@/components/ui/toggle';
 import { uploadImage } from '@/features/ai/components/cover-image';
+import { aiGenerateInlineImageServerFn } from '@/features/ai/server/ai.functions';
+import { Textarea } from '@/components/ui/textarea';
+import { useMutation } from '@tanstack/react-query';
 import { CharacterCount } from '@tiptap/extension-character-count';
 import { FileHandler } from '@tiptap/extension-file-handler';
 import Image from '@tiptap/extension-image';
@@ -37,6 +40,7 @@ import {
     MinusIcon,
     QuoteIcon,
     RedoIcon,
+    SparklesIcon,
     SquareCodeIcon,
     StrikethroughIcon,
     TableIcon,
@@ -328,6 +332,7 @@ function Toolbar({ editor }: { editor: Editor }) {
                 variant='ghost'>
                 <ImageIcon />
             </Button>
+            <GenerateImageButton editor={editor} />
             <DropdownMenu>
                 <DropdownMenuTrigger
                     render={
@@ -406,5 +411,67 @@ function Toolbar({ editor }: { editor: Editor }) {
                 <RedoIcon />
             </Button>
         </div>
+    );
+}
+
+function GenerateImageButton({ editor }: { editor: Editor }) {
+    const [open, setOpen] = useState(false);
+    const [prompt, setPrompt] = useState('');
+    const generate = useMutation({
+        mutationFn: aiGenerateInlineImageServerFn,
+        onSuccess: ({ url }) => {
+            editor.chain().focus().setImage({ src: url, alt: prompt.trim() }).run();
+            setOpen(false);
+            setPrompt('');
+        },
+        onError: error => toast.error(error.message),
+    });
+
+    return (
+        <Popover onOpenChange={setOpen} open={open}>
+            <PopoverTrigger
+                render={
+                    <Button
+                        aria-label='Generate image with AI'
+                        size='icon-sm'
+                        title='Generate image with AI'
+                        type='button'
+                        variant='ghost'>
+                        <SparklesIcon />
+                    </Button>
+                }
+            />
+            <PopoverContent align='start' className='w-80'>
+                <form
+                    className='space-y-3'
+                    onSubmit={event => {
+                        event.preventDefault();
+                        generate.mutate({ data: { prompt } });
+                    }}>
+                    <div>
+                        <p className='text-sm font-medium'>Paint a picture</p>
+                        <p className='text-muted-foreground text-xs'>
+                            Describe the scene. It is drawn as a still life, no people or text.
+                        </p>
+                    </div>
+                    <Textarea
+                        aria-label='Image description'
+                        autoFocus
+                        onChange={event => setPrompt(event.target.value)}
+                        placeholder='A steel glass of haldi doodh on a wooden table at night'
+                        rows={3}
+                        value={prompt}
+                    />
+                    <Button
+                        className='w-full'
+                        disabled={generate.isPending || prompt.trim().length < 3}
+                        size='sm'
+                        type='submit'>
+                        <SparklesIcon data-icon='inline-start' />{' '}
+                        {generate.isPending ? 'Painting…' : 'Generate and insert'}
+                    </Button>
+                </form>
+            </PopoverContent>
+        </Popover>
     );
 }

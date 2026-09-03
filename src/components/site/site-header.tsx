@@ -16,7 +16,7 @@ import { kindMeta } from '@/lib/format';
 import { Link, useLocation, useRouteContext } from '@tanstack/react-router';
 import { MenuIcon, PenLineIcon } from 'lucide-react';
 
-const KINDS = ['remedy', 'tip', 'recipe'] as const;
+const KINDS = ['remedy', 'tip', 'recipe', 'article'] as const;
 
 export function SiteHeader() {
     const { session } = useRouteContext({ from: '/_site' });

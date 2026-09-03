@@ -51,3 +51,7 @@ export const imageInputSchema = z.object({
     ingredients: z.array(z.string()).max(12).default([]),
     notes: z.string().trim().max(300).optional(),
 });
+
+export const inlineImageInputSchema = z.object({
+    prompt: z.string().trim().min(3, 'Describe the picture').max(400),
+});
