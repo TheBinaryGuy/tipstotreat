@@ -19,13 +19,12 @@ import {
 } from '@/components/ui/table';
 import { adminEntryLikesQuery } from '@/features/admin/shared/queries';
 import { adminEntriesQuery } from '@/features/entries/shared/queries';
-import { LikersList } from '@/features/social/components/like-button';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { LikesPeek } from '@/features/social/components/likes-peek';
 import type { EntryKind, EntryStatus } from '@/lib/db/schema';
 import { formatDate, kindMeta } from '@/lib/format';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { Link, createFileRoute, useNavigate } from '@tanstack/react-router';
-import { FileTextIcon, HeartIcon, PlusIcon } from 'lucide-react';
+import { FileTextIcon, PlusIcon } from 'lucide-react';
 import { z } from 'zod';
 
 export const Route = createFileRoute('/_site/admin/')({
@@ -112,59 +111,83 @@ function AdminIndex() {
                     ) : null}
                 </Empty>
             ) : (
-                <Table className='mt-2'>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Title</TableHead>
-                            <TableHead className='hidden sm:table-cell'>Kind</TableHead>
-                            <TableHead>Status</TableHead>
-                            <TableHead className='text-right'>Likes</TableHead>
-                            <TableHead className='hidden md:table-cell'>Updated</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
+                <>
+                    {/* Phones: one card per entry. */}
+                    <ul className='mt-4 space-y-3 md:hidden'>
                         {rows.map(entry => (
-                            <TableRow key={entry.id}>
-                                <TableCell>
-                                    <Link
-                                        className='block font-medium hover:underline hover:underline-offset-4'
-                                        params={{ id: entry.id }}
-                                        to='/admin/entries/$id'>
-                                        {entry.title}
-                                    </Link>
-                                    {entry.useFor ? (
-                                        <span className='text-muted-foreground text-sm'>
-                                            {entry.useFor}
-                                        </span>
-                                    ) : null}
-                                </TableCell>
-                                <TableCell className='hidden sm:table-cell'>
-                                    {kindMeta[entry.kind].label}
-                                </TableCell>
-                                <TableCell>
+                            <li className='bg-card rounded-lg border p-4' key={entry.id}>
+                                <div className='flex items-start justify-between gap-3'>
+                                    <div className='min-w-0'>
+                                        <Link
+                                            className='block font-medium hover:underline hover:underline-offset-4'
+                                            params={{ id: entry.id }}
+                                            to='/admin/entries/$id'>
+                                            {entry.title}
+                                        </Link>
+                                        {entry.useFor ? (
+                                            <p className='text-muted-foreground mt-0.5 text-sm'>
+                                                {entry.useFor}
+                                            </p>
+                                        ) : null}
+                                    </div>
                                     <StatusPill status={entry.status} />
-                                </TableCell>
-                                <TableCell className='text-right tabular-nums'>
-                                    <HoverCard>
-                                        <HoverCardTrigger
-                                            render={
-                                                <span className='text-muted-foreground inline-flex cursor-default items-center gap-1' />
-                                            }>
-                                            <HeartIcon className='size-3.5' />
-                                            {entryLikes[entry.id]?.length ?? 0}
-                                        </HoverCardTrigger>
-                                        <HoverCardContent align='end' className='w-64 p-3'>
-                                            <LikersList likers={entryLikes[entry.id] ?? []} />
-                                        </HoverCardContent>
-                                    </HoverCard>
-                                </TableCell>
-                                <TableCell className='text-muted-foreground hidden tabular-nums md:table-cell'>
-                                    {formatDate(entry.updatedAt)}
-                                </TableCell>
-                            </TableRow>
+                                </div>
+                                <div className='text-muted-foreground mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm'>
+                                    <span>{kindMeta[entry.kind].label}</span>
+                                    <span aria-hidden>·</span>
+                                    <LikesPeek align='end' likers={entryLikes[entry.id] ?? []} />
+                                    <span aria-hidden>·</span>
+                                    <span className='tabular-nums'>
+                                        {formatDate(entry.updatedAt)}
+                                    </span>
+                                </div>
+                            </li>
                         ))}
-                    </TableBody>
-                </Table>
+                    </ul>
+                    <Table className='mt-2 hidden md:table'>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>Title</TableHead>
+                                <TableHead>Kind</TableHead>
+                                <TableHead>Status</TableHead>
+                                <TableHead className='text-right'>Likes</TableHead>
+                                <TableHead>Updated</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {rows.map(entry => (
+                                <TableRow key={entry.id}>
+                                    <TableCell>
+                                        <Link
+                                            className='block font-medium hover:underline hover:underline-offset-4'
+                                            params={{ id: entry.id }}
+                                            to='/admin/entries/$id'>
+                                            {entry.title}
+                                        </Link>
+                                        {entry.useFor ? (
+                                            <span className='text-muted-foreground text-sm'>
+                                                {entry.useFor}
+                                            </span>
+                                        ) : null}
+                                    </TableCell>
+                                    <TableCell>{kindMeta[entry.kind].label}</TableCell>
+                                    <TableCell>
+                                        <StatusPill status={entry.status} />
+                                    </TableCell>
+                                    <TableCell className='text-right tabular-nums'>
+                                        <LikesPeek
+                                            align='end'
+                                            likers={entryLikes[entry.id] ?? []}
+                                        />
+                                    </TableCell>
+                                    <TableCell className='text-muted-foreground tabular-nums'>
+                                        {formatDate(entry.updatedAt)}
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </>
             )}
         </div>
     );
@@ -192,9 +215,10 @@ function FilterGroup<T extends EntryKind | EntryStatus>({
     const navigate = useNavigate({ from: '/admin' });
     const choices: [string, string][] = [['all', 'All'], ...options];
     return (
-        <div className='flex items-center gap-2'>
+        <div className='flex flex-wrap items-center gap-2'>
             <span className='text-muted-foreground text-sm'>{label}</span>
             <ToggleGroup
+                className='flex-wrap'
                 aria-label={`Filter by ${label.toLowerCase()}`}
                 onValueChange={value => {
                     const next = value[0];

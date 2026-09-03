@@ -79,12 +79,60 @@ function UsersPage() {
                 {users.length} {users.length === 1 ? 'account' : 'accounts'}
                 {banned ? ` · ${banned} banned` : ''}
             </p>
-            <Table className='mt-6'>
+            <ul className='mt-6 space-y-3 md:hidden'>
+                {users.map(u => (
+                    <li className='bg-card rounded-lg border p-4' key={u.id}>
+                        <div className='flex items-center gap-3'>
+                            <Avatar className='size-10'>
+                                {u.image ? <AvatarImage alt='' src={u.image} /> : null}
+                                <AvatarFallback>{initials(u.name)}</AvatarFallback>
+                            </Avatar>
+                            <div className='min-w-0 flex-1'>
+                                <p className='truncate font-medium'>{u.name}</p>
+                                <p className='text-muted-foreground truncate text-sm'>{u.email}</p>
+                            </div>
+                            {u.role === 'admin' ? (
+                                <Badge>Author</Badge>
+                            ) : (
+                                <Badge variant='secondary'>Reader</Badge>
+                            )}
+                        </div>
+                        <div className='text-muted-foreground mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm'>
+                            <span className='tabular-nums'>Joined {formatDate(u.createdAt)}</span>
+                            <span aria-hidden>·</span>
+                            <UserStatus user={u} />
+                        </div>
+                        {u.id === session?.user.id ? null : (
+                            <div className='mt-3 flex flex-wrap justify-end gap-2 border-t pt-3'>
+                                <RoleButton
+                                    onConfirm={role =>
+                                        setRole.mutate({ data: { userId: u.id, role } })
+                                    }
+                                    pending={setRole.isPending}
+                                    user={u}
+                                />
+                                {u.role === 'admin' ? null : u.banned ? (
+                                    <Button
+                                        disabled={unban.isPending}
+                                        onClick={() => unban.mutate({ data: { userId: u.id } })}
+                                        size='sm'
+                                        variant='outline'>
+                                        Unban
+                                    </Button>
+                                ) : (
+                                    <BanDialog user={u} />
+                                )}
+                            </div>
+                        )}
+                    </li>
+                ))}
+            </ul>
+            <Table className='mt-6 hidden md:table'>
                 <TableHeader>
                     <TableRow>
                         <TableHead>Person</TableHead>
-                        <TableHead className='hidden sm:table-cell'>Role</TableHead>
-                        <TableHead className='hidden md:table-cell'>Joined</TableHead>
+                        <TableHead>Role</TableHead>
+                        <TableHead>Joined</TableHead>
                         <TableHead>Status</TableHead>
                         <TableHead className='text-right'>Actions</TableHead>
                     </TableRow>
@@ -108,30 +156,18 @@ function UsersPage() {
                                     </div>
                                 </div>
                             </TableCell>
-                            <TableCell className='hidden sm:table-cell'>
+                            <TableCell>
                                 {u.role === 'admin' ? (
                                     <Badge>Author</Badge>
                                 ) : (
                                     <Badge variant='secondary'>Reader</Badge>
                                 )}
                             </TableCell>
-                            <TableCell className='text-muted-foreground hidden tabular-nums md:table-cell'>
+                            <TableCell className='text-muted-foreground tabular-nums'>
                                 {formatDate(u.createdAt)}
                             </TableCell>
                             <TableCell>
-                                {u.banned ? (
-                                    <div>
-                                        <Badge variant='destructive'>Banned</Badge>
-                                        <p className='text-muted-foreground mt-1 max-w-xs text-xs'>
-                                            {u.banReason}
-                                            {u.banExpires
-                                                ? ` · until ${formatDate(u.banExpires)}`
-                                                : ''}
-                                        </p>
-                                    </div>
-                                ) : (
-                                    <span className='text-muted-foreground text-sm'>Active</span>
-                                )}
+                                <UserStatus user={u} />
                             </TableCell>
                             <TableCell className='text-right'>
                                 {u.id === session?.user.id ? null : (
@@ -164,6 +200,23 @@ function UsersPage() {
                 </TableBody>
             </Table>
         </div>
+    );
+}
+
+function UserStatus({
+    user,
+}: {
+    user: { banned: boolean; banReason: string | null; banExpires: Date | null };
+}) {
+    if (!user.banned) return <span className='text-muted-foreground text-sm'>Active</span>;
+    return (
+        <span className='inline-flex flex-wrap items-center gap-x-2 gap-y-1'>
+            <Badge variant='destructive'>Banned</Badge>
+            <span className='text-muted-foreground text-xs'>
+                {user.banReason}
+                {user.banExpires ? ` · until ${formatDate(user.banExpires)}` : ''}
+            </span>
+        </span>
     );
 }
 

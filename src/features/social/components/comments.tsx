@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { LikesPeek } from '@/features/social/components/likes-peek';
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
 import { Textarea } from '@/components/ui/textarea';
 import type { SessionUser } from '@/features/auth/shared/types';
@@ -303,7 +303,7 @@ function CommentForm({
     );
 }
 
-/** Readers see Like/Liked; the author also gets the names of who liked it on hover. */
+/** Readers see Like/Liked; the author also gets a peek at who liked it (hover or tap). */
 function CommentLikeButton({
     comment,
     onToggle,
@@ -313,27 +313,22 @@ function CommentLikeButton({
     onToggle: () => void;
     pending: boolean;
 }) {
-    const button = (
-        <Button
-            aria-pressed={comment.liked}
-            className={cn(comment.liked && 'text-destructive')}
-            disabled={pending}
-            onClick={onToggle}
-            size='sm'
-            variant='ghost'>
-            <HeartIcon className={cn(comment.liked && 'fill-current')} data-icon='inline-start' />
-            {comment.liked ? 'Liked' : 'Like'}
-        </Button>
-    );
-    if (!comment.likers) return button;
     return (
-        <Tooltip>
-            <TooltipTrigger render={button} />
-            <TooltipContent>
-                {comment.likers.length === 0
-                    ? 'No likes yet'
-                    : `${comment.likers.length} ${comment.likers.length === 1 ? 'like' : 'likes'}: ${comment.likers.join(', ')}`}
-            </TooltipContent>
-        </Tooltip>
+        <>
+            <Button
+                aria-pressed={comment.liked}
+                className={cn(comment.liked && 'text-destructive')}
+                disabled={pending}
+                onClick={onToggle}
+                size='sm'
+                variant='ghost'>
+                <HeartIcon
+                    className={cn(comment.liked && 'fill-current')}
+                    data-icon='inline-start'
+                />
+                {comment.liked ? 'Liked' : 'Like'}
+            </Button>
+            {comment.likers ? <LikesPeek className='h-7' names={comment.likers} /> : null}
+        </>
     );
 }

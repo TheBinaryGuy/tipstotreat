@@ -8,7 +8,7 @@ import {
     EmptyTitle,
 } from '@/components/ui/empty';
 import { Link, Outlet, createFileRoute, redirect } from '@tanstack/react-router';
-import { LockIcon, MessageSquareIcon, PlusIcon, UsersIcon } from 'lucide-react';
+import { LockIcon, MessageSquareIcon, UsersIcon } from 'lucide-react';
 
 export const Route = createFileRoute('/_site/admin')({
     beforeLoad: ({ context, location }) => {
@@ -60,12 +60,6 @@ function AdminLayout() {
                     className='hover:text-foreground transition-colors'
                     to='/admin'>
                     Entries
-                </Link>
-                <Link
-                    activeProps={{ className: 'text-foreground font-medium' }}
-                    className='hover:text-foreground inline-flex items-center gap-1 transition-colors'
-                    to='/admin/entries/new'>
-                    <PlusIcon className='size-3.5' /> New entry
                 </Link>
                 <Link
                     activeProps={{ className: 'text-foreground font-medium' }}
