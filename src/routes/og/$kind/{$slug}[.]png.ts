@@ -1,31 +1,18 @@
 import { findPublishedBySlug } from '@/features/entries/server/entries.server';
 import { kindFromPath, kindMeta } from '@/lib/format';
 import { SITE_NAME } from '@/lib/site';
-import { container, text } from '@takumi-rs/helpers';
-import { Renderer, initSync } from '@takumi-rs/wasm';
-import wasmModule from '@takumi-rs/wasm/auto';
 import { createFileRoute } from '@tanstack/react-router';
-import interWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 
-let renderer: Renderer | undefined;
-let fontOrigin: string | undefined;
-
-/** One WASM renderer per isolate, with Inter registered from the site's own asset URL. */
-function getRenderer(origin: string) {
-    if (!renderer) {
-        // Under the Cloudflare Vite plugin the "workerd" export condition resolves
-        // `@takumi-rs/wasm/auto` to a compiled WebAssembly.Module.
-        initSync({ module: wasmModule as unknown as WebAssembly.Module });
-        renderer = new Renderer();
-    }
-    if (fontOrigin !== origin) {
-        renderer.registerFont(new URL(interWoff2, origin).href);
-        fontOrigin = origin;
-    }
-    return renderer;
-}
-
-const ACCENT = '#432dd7';
+import {
+    OG_ACCENT as ACCENT,
+    OG_HEIGHT,
+    OG_WIDTH,
+    container,
+    getOgRenderer,
+    ogHeaders,
+    ogMark,
+    text,
+} from '@/lib/og.server';
 
 export const Route = createFileRoute('/og/$kind/{$slug}.png')({
     server: {
@@ -56,11 +43,22 @@ export const Route = createFileRoute('/og/$kind/{$slug}.png')({
                         container({
                             style: { display: 'flex', flexDirection: 'column', gap: 24 },
                             children: [
-                                text(meta.label.toUpperCase(), {
-                                    fontSize: 24,
-                                    fontWeight: 600,
-                                    letterSpacing: 2,
-                                    color: ACCENT,
+                                container({
+                                    style: {
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        gap: 16,
+                                    },
+                                    children: [
+                                        ogMark(40),
+                                        text(meta.label.toUpperCase(), {
+                                            fontSize: 24,
+                                            fontWeight: 600,
+                                            letterSpacing: 2,
+                                            color: ACCENT,
+                                        }),
+                                    ],
                                 }),
                                 text(entry.title, {
                                     fontSize: entry.title.length > 40 ? 60 : 72,
@@ -111,17 +109,12 @@ export const Route = createFileRoute('/og/$kind/{$slug}.png')({
                     ],
                 });
 
-                const png = await getRenderer(origin).render(node, {
-                    width: 1200,
-                    height: 630,
+                const png = await getOgRenderer(origin).render(node, {
+                    width: OG_WIDTH,
+                    height: OG_HEIGHT,
                     format: 'png',
                 });
-                return new Response(png, {
-                    headers: {
-                        'Content-Type': 'image/png',
-                        'Cache-Control': 'public, max-age=86400, s-maxage=604800',
-                    },
-                });
+                return new Response(png, { headers: ogHeaders });
             },
         },
     },

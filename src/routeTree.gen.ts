@@ -20,6 +20,7 @@ import { Route as SiteAdminRouteRouteImport } from './routes/_site/admin/route'
 import { Route as SiteSearchRouteImport } from './routes/_site/search'
 import { Route as SiteSignInRouteImport } from './routes/_site/sign-in'
 import { Route as SiteSignUpRouteImport } from './routes/_site/sign-up'
+import { Route as OgSiteDotpngRouteImport } from './routes/og/site[.]png'
 import { Route as SiteKindIndexRouteImport } from './routes/_site/$kind/index'
 import { Route as SiteKindSlugRouteImport } from './routes/_site/$kind/$slug'
 import { Route as SiteAdminIndexRouteImport } from './routes/_site/admin/index'
@@ -83,6 +84,11 @@ const SiteSignUpRoute = SiteSignUpRouteImport.update({
   path: '/sign-up',
   getParentRoute: () => SiteRoute,
 } as any)
+const OgSiteDotpngRoute = OgSiteDotpngRouteImport.update({
+  id: '/og/site.png',
+  path: '/og/site.png',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SiteKindIndexRoute = SiteKindIndexRouteImport.update({
   id: '/$kind/',
   path: '/$kind/',
@@ -131,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/search': typeof SiteSearchRoute
   '/sign-in': typeof SiteSignInRoute
   '/sign-up': typeof SiteSignUpRoute
+  '/og/site.png': typeof OgSiteDotpngRoute
   '/$kind/$slug': typeof SiteKindSlugRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/og/$kind/{$slug}.png': typeof OgKindChar123slugChar125DotpngRoute
@@ -148,6 +155,7 @@ export interface FileRoutesByTo {
   '/search': typeof SiteSearchRoute
   '/sign-in': typeof SiteSignInRoute
   '/sign-up': typeof SiteSignUpRoute
+  '/og/site.png': typeof OgSiteDotpngRoute
   '/': typeof SiteIndexRoute
   '/$kind/$slug': typeof SiteKindSlugRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -169,6 +177,7 @@ export interface FileRoutesById {
   '/_site/search': typeof SiteSearchRoute
   '/_site/sign-in': typeof SiteSignInRoute
   '/_site/sign-up': typeof SiteSignUpRoute
+  '/og/site.png': typeof OgSiteDotpngRoute
   '/_site/': typeof SiteIndexRoute
   '/_site/$kind/$slug': typeof SiteKindSlugRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -191,6 +200,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/sign-in'
     | '/sign-up'
+    | '/og/site.png'
     | '/$kind/$slug'
     | '/api/auth/$'
     | '/og/$kind/{$slug}.png'
@@ -208,6 +218,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/sign-in'
     | '/sign-up'
+    | '/og/site.png'
     | '/'
     | '/$kind/$slug'
     | '/api/auth/$'
@@ -228,6 +239,7 @@ export interface FileRouteTypes {
     | '/_site/search'
     | '/_site/sign-in'
     | '/_site/sign-up'
+    | '/og/site.png'
     | '/_site/'
     | '/_site/$kind/$slug'
     | '/api/auth/$'
@@ -245,6 +257,7 @@ export interface RootRouteChildren {
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   KindChar123slugChar125DotmdRoute: typeof KindChar123slugChar125DotmdRoute
+  OgSiteDotpngRoute: typeof OgSiteDotpngRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   OgKindChar123slugChar125DotpngRoute: typeof OgKindChar123slugChar125DotpngRoute
 }
@@ -327,6 +340,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/sign-up'
       preLoaderRoute: typeof SiteSignUpRouteImport
       parentRoute: typeof SiteRoute
+    }
+    '/og/site.png': {
+      id: '/og/site.png'
+      path: '/og/site.png'
+      fullPath: '/og/site.png'
+      preLoaderRoute: typeof OgSiteDotpngRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_site/$kind/': {
       id: '/_site/$kind/'
@@ -425,6 +445,7 @@ const rootRouteChildren: RootRouteChildren = {
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   KindChar123slugChar125DotmdRoute: KindChar123slugChar125DotmdRoute,
+  OgSiteDotpngRoute: OgSiteDotpngRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   OgKindChar123slugChar125DotpngRoute: OgKindChar123slugChar125DotpngRoute,
 }

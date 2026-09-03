@@ -31,10 +31,29 @@ export const Route = createRootRouteWithContext<{
             { name: 'twitter:card', content: 'summary_large_image' },
             ...(loaderData
                 ? [
-                      { property: 'og:image', content: `${loaderData.origin}/og.png` },
+                      { property: 'og:url', content: loaderData.origin },
+                      { property: 'og:locale', content: 'en_IN' },
+                      { property: 'og:title', content: SITE_NAME },
+                      { property: 'og:description', content: description },
+                      { property: 'og:image', content: `${loaderData.origin}/og/site.png` },
+                      {
+                          property: 'og:image:secure_url',
+                          content: `${loaderData.origin}/og/site.png`,
+                      },
+                      { property: 'og:image:type', content: 'image/png' },
                       { property: 'og:image:width', content: '1200' },
                       { property: 'og:image:height', content: '630' },
-                      { name: 'twitter:image', content: `${loaderData.origin}/og.png` },
+                      {
+                          property: 'og:image:alt',
+                          content: `${SITE_NAME}: home remedies, health tips and recipes`,
+                      },
+                      { name: 'twitter:title', content: SITE_NAME },
+                      { name: 'twitter:description', content: description },
+                      { name: 'twitter:image', content: `${loaderData.origin}/og/site.png` },
+                      {
+                          name: 'twitter:image:alt',
+                          content: `${SITE_NAME}: home remedies, health tips and recipes`,
+                      },
                   ]
                 : []),
         ],
