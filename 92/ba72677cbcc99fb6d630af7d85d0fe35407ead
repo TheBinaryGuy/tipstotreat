@@ -1,0 +1,41 @@
+migrations/20260903125931_short_old_lace.sql
+  s_3b9f586cd9a895::t_f66fe18598f4e5 1-12
+src/features/social/server/social.server.ts
+  s_3b9f586cd9a895::t_10de0707f752c5 57-59,113-118,127-128
+  s_3b9f586cd9a895::t_f66fe18598f4e5 2-3,8,10-11,31,42-56,60-63,67,69-70,96,98-109,120-126,129-131,133,148-149
+  s_3b9f586cd9a895::t_ee1de74d8e177c 110-112,119
+src/features/admin/server/admin.functions.ts
+  s_3b9f586cd9a895::t_10de0707f752c5 107,120,140
+  s_3b9f586cd9a895::t_52b6e9867e4f0c 90-102
+src/features/social/components/comments.tsx
+  s_3b9f586cd9a895::t_10de0707f752c5 11,16,20-21,36-41,54-55,63,69-93,98,113-311
+drizzle/20260903125931_short_old_lace/migration.sql
+  s_3b9f586cd9a895::t_f66fe18598f4e5 1-12
+drizzle/20260903125931_short_old_lace/snapshot.json
+  s_3b9f586cd9a895::t_f66fe18598f4e5 1-1148
+src/lib/db/schema.ts
+  s_3b9f586cd9a895::t_f66fe18598f4e5 193-194,201-221
+src/features/social/server/social.functions.ts
+  s_3b9f586cd9a895::t_f66fe18598f4e5 7,39-45,48-55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "92ba72677cbcc99fb6d630af7d85d0fe35407ead",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  },
+  "sessions": {
+    "s_3b9f586cd9a895": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "afda4623-2b20-4651-96f1-f71430a41fb6",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
