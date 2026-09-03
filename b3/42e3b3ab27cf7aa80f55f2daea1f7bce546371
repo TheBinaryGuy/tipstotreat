@@ -1,0 +1,26 @@
+src/features/entries/components/ai-marks.tsx
+  s_3b9f586cd9a895::t_5e047fd542f0d6 15-30
+src/features/entries/components/share-menu.tsx
+  s_3b9f586cd9a895::t_97e89d88fcc753 114-118
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "b342e3b3ab27cf7aa80f55f2daea1f7bce546371",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  },
+  "sessions": {
+    "s_3b9f586cd9a895": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "afda4623-2b20-4651-96f1-f71430a41fb6",
+        "model": "unknown"
+      },
+      "human_author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
