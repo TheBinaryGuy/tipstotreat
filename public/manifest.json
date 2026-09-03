@@ -1,22 +1,25 @@
 {
+    "id": "/",
     "name": "TipsToTreat",
     "short_name": "TipsToTreat",
-    "icons": [
-        {
-            "src": "/web-app-manifest-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "maskable"
-        },
-        {
-            "src": "/web-app-manifest-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "maskable"
-        }
-    ],
-    "start_url": ".",
-    "theme_color": "#ffffff",
+    "description": "Indian home remedies, health tips, and home recipes from one kitchen.",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait",
     "background_color": "#ffffff",
-    "display": "standalone"
+    "theme_color": "#ffffff",
+    "lang": "en",
+    "categories": ["health", "food", "lifestyle"],
+    "icons": [
+        { "src": "/web-app-manifest-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+        { "src": "/web-app-manifest-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+        { "src": "/web-app-manifest-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+        { "src": "/web-app-manifest-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    ],
+    "shortcuts": [
+        { "name": "Remedies", "url": "/remedies" },
+        { "name": "Recipes", "url": "/recipes" },
+        { "name": "Search", "url": "/search" }
+    ]
 }

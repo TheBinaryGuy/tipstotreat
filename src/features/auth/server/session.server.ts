@@ -12,6 +12,8 @@ export async function readSession(): Promise<SessionUser | null> {
         email: session.user.email,
         image: session.user.image ?? null,
         role: session.user.role === 'admin' ? 'admin' : 'user',
+        banned: Boolean(session.user.banned),
+        banReason: session.user.banReason ?? null,
     };
 }
 
@@ -19,6 +21,13 @@ export async function readSession(): Promise<SessionUser | null> {
 export async function requireUser(): Promise<SessionUser> {
     const user = await readSession();
     if (!user) throw new Error('Sign in to do that.');
+    if (user.banned) {
+        throw new Error(
+            user.banReason
+                ? `Your account has been suspended: ${user.banReason}`
+                : 'Your account has been suspended.'
+        );
+    }
     return user;
 }
 

@@ -1,6 +1,10 @@
 import { AuthForm } from '@/components/admin/auth-form';
 import { AuthLayout } from '@/features/auth/components/auth-layout';
-import { getAuthMethodsServerFn } from '@/features/auth/server/auth.functions';
+import {
+    getAuthMethodsServerFn,
+    getBanNoticeServerFn,
+} from '@/features/auth/server/auth.functions';
+import { formatDate } from '@/lib/format';
 import { authClient } from '@/lib/auth-client';
 import { Link, createFileRoute, redirect, useRouter } from '@tanstack/react-router';
 import { useState } from 'react';
@@ -77,6 +81,17 @@ function SignInPage() {
                         password: values.password ?? '',
                     });
                     if (result.error) {
+                        if (result.error.code === 'BANNED_USER') {
+                            const notice = await getBanNoticeServerFn({
+                                data: { email: values.email ?? '' },
+                            });
+                            const reason = notice?.reason ? `: ${notice.reason}` : '';
+                            const until = notice?.expires
+                                ? ` It reopens on ${formatDate(notice.expires)}.`
+                                : '';
+                            setError(`Your account has been suspended${reason}.${until}`);
+                            return;
+                        }
                         setError(
                             result.error.message ??
                                 'Could not sign in. Check the email and password.'

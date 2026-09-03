@@ -17,6 +17,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as KindChar123slugChar125DotmdRouteImport } from './routes/$kind/{$slug}[.]md'
 import { Route as SiteIndexRouteImport } from './routes/_site/index'
 import { Route as SiteAdminRouteRouteImport } from './routes/_site/admin/route'
+import { Route as SiteOfflineRouteImport } from './routes/_site/offline'
 import { Route as SiteSearchRouteImport } from './routes/_site/search'
 import { Route as SiteSignInRouteImport } from './routes/_site/sign-in'
 import { Route as SiteSignUpRouteImport } from './routes/_site/sign-up'
@@ -24,6 +25,8 @@ import { Route as OgSiteDotpngRouteImport } from './routes/og/site[.]png'
 import { Route as SiteKindIndexRouteImport } from './routes/_site/$kind/index'
 import { Route as SiteKindSlugRouteImport } from './routes/_site/$kind/$slug'
 import { Route as SiteAdminIndexRouteImport } from './routes/_site/admin/index'
+import { Route as SiteAdminCommentsRouteImport } from './routes/_site/admin/comments'
+import { Route as SiteAdminUsersRouteImport } from './routes/_site/admin/users'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as OgKindChar123slugChar125DotpngRouteImport } from './routes/og/$kind/{$slug}[.]png'
 import { Route as SiteAdminEntriesIdRouteImport } from './routes/_site/admin/entries/$id'
@@ -69,6 +72,11 @@ const SiteAdminRouteRoute = SiteAdminRouteRouteImport.update({
   path: '/admin',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteOfflineRoute = SiteOfflineRouteImport.update({
+  id: '/offline',
+  path: '/offline',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SiteSearchRoute = SiteSearchRouteImport.update({
   id: '/search',
   path: '/search',
@@ -104,6 +112,16 @@ const SiteAdminIndexRoute = SiteAdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => SiteAdminRouteRoute,
 } as any)
+const SiteAdminCommentsRoute = SiteAdminCommentsRouteImport.update({
+  id: '/comments',
+  path: '/comments',
+  getParentRoute: () => SiteAdminRouteRoute,
+} as any)
+const SiteAdminUsersRoute = SiteAdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => SiteAdminRouteRoute,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -134,11 +152,14 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof SiteAdminRouteRouteWithChildren
   '/$kind/{$slug}.md': typeof KindChar123slugChar125DotmdRoute
+  '/offline': typeof SiteOfflineRoute
   '/search': typeof SiteSearchRoute
   '/sign-in': typeof SiteSignInRoute
   '/sign-up': typeof SiteSignUpRoute
   '/og/site.png': typeof OgSiteDotpngRoute
   '/$kind/$slug': typeof SiteKindSlugRoute
+  '/admin/comments': typeof SiteAdminCommentsRoute
+  '/admin/users': typeof SiteAdminUsersRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/og/$kind/{$slug}.png': typeof OgKindChar123slugChar125DotpngRoute
   '/$kind/': typeof SiteKindIndexRoute
@@ -152,12 +173,15 @@ export interface FileRoutesByTo {
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$kind/{$slug}.md': typeof KindChar123slugChar125DotmdRoute
+  '/offline': typeof SiteOfflineRoute
   '/search': typeof SiteSearchRoute
   '/sign-in': typeof SiteSignInRoute
   '/sign-up': typeof SiteSignUpRoute
   '/og/site.png': typeof OgSiteDotpngRoute
   '/': typeof SiteIndexRoute
   '/$kind/$slug': typeof SiteKindSlugRoute
+  '/admin/comments': typeof SiteAdminCommentsRoute
+  '/admin/users': typeof SiteAdminUsersRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/og/$kind/{$slug}.png': typeof OgKindChar123slugChar125DotpngRoute
   '/$kind': typeof SiteKindIndexRoute
@@ -174,12 +198,15 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_site/admin': typeof SiteAdminRouteRouteWithChildren
   '/$kind/{$slug}.md': typeof KindChar123slugChar125DotmdRoute
+  '/_site/offline': typeof SiteOfflineRoute
   '/_site/search': typeof SiteSearchRoute
   '/_site/sign-in': typeof SiteSignInRoute
   '/_site/sign-up': typeof SiteSignUpRoute
   '/og/site.png': typeof OgSiteDotpngRoute
   '/_site/': typeof SiteIndexRoute
   '/_site/$kind/$slug': typeof SiteKindSlugRoute
+  '/_site/admin/comments': typeof SiteAdminCommentsRoute
+  '/_site/admin/users': typeof SiteAdminUsersRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/og/$kind/{$slug}.png': typeof OgKindChar123slugChar125DotpngRoute
   '/_site/$kind/': typeof SiteKindIndexRoute
@@ -197,11 +224,14 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/admin'
     | '/$kind/{$slug}.md'
+    | '/offline'
     | '/search'
     | '/sign-in'
     | '/sign-up'
     | '/og/site.png'
     | '/$kind/$slug'
+    | '/admin/comments'
+    | '/admin/users'
     | '/api/auth/$'
     | '/og/$kind/{$slug}.png'
     | '/$kind/'
@@ -215,12 +245,15 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/sitemap.xml'
     | '/$kind/{$slug}.md'
+    | '/offline'
     | '/search'
     | '/sign-in'
     | '/sign-up'
     | '/og/site.png'
     | '/'
     | '/$kind/$slug'
+    | '/admin/comments'
+    | '/admin/users'
     | '/api/auth/$'
     | '/og/$kind/{$slug}.png'
     | '/$kind'
@@ -236,12 +269,15 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/_site/admin'
     | '/$kind/{$slug}.md'
+    | '/_site/offline'
     | '/_site/search'
     | '/_site/sign-in'
     | '/_site/sign-up'
     | '/og/site.png'
     | '/_site/'
     | '/_site/$kind/$slug'
+    | '/_site/admin/comments'
+    | '/_site/admin/users'
     | '/api/auth/$'
     | '/og/$kind/{$slug}.png'
     | '/_site/$kind/'
@@ -320,6 +356,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteAdminRouteRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/offline': {
+      id: '/_site/offline'
+      path: '/offline'
+      fullPath: '/offline'
+      preLoaderRoute: typeof SiteOfflineRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/search': {
       id: '/_site/search'
       path: '/search'
@@ -369,6 +412,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteAdminIndexRouteImport
       parentRoute: typeof SiteAdminRouteRoute
     }
+    '/_site/admin/comments': {
+      id: '/_site/admin/comments'
+      path: '/comments'
+      fullPath: '/admin/comments'
+      preLoaderRoute: typeof SiteAdminCommentsRouteImport
+      parentRoute: typeof SiteAdminRouteRoute
+    }
+    '/_site/admin/users': {
+      id: '/_site/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof SiteAdminUsersRouteImport
+      parentRoute: typeof SiteAdminRouteRoute
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -401,12 +458,16 @@ declare module '@tanstack/react-router' {
 }
 
 interface SiteAdminRouteRouteChildren {
+  SiteAdminCommentsRoute: typeof SiteAdminCommentsRoute
+  SiteAdminUsersRoute: typeof SiteAdminUsersRoute
   SiteAdminIndexRoute: typeof SiteAdminIndexRoute
   SiteAdminEntriesIdRoute: typeof SiteAdminEntriesIdRoute
   SiteAdminEntriesNewRoute: typeof SiteAdminEntriesNewRoute
 }
 
 const SiteAdminRouteRouteChildren: SiteAdminRouteRouteChildren = {
+  SiteAdminCommentsRoute: SiteAdminCommentsRoute,
+  SiteAdminUsersRoute: SiteAdminUsersRoute,
   SiteAdminIndexRoute: SiteAdminIndexRoute,
   SiteAdminEntriesIdRoute: SiteAdminEntriesIdRoute,
   SiteAdminEntriesNewRoute: SiteAdminEntriesNewRoute,
@@ -418,6 +479,7 @@ const SiteAdminRouteRouteWithChildren = SiteAdminRouteRoute._addFileChildren(
 
 interface SiteRouteChildren {
   SiteAdminRouteRoute: typeof SiteAdminRouteRouteWithChildren
+  SiteOfflineRoute: typeof SiteOfflineRoute
   SiteSearchRoute: typeof SiteSearchRoute
   SiteSignInRoute: typeof SiteSignInRoute
   SiteSignUpRoute: typeof SiteSignUpRoute
@@ -428,6 +490,7 @@ interface SiteRouteChildren {
 
 const SiteRouteChildren: SiteRouteChildren = {
   SiteAdminRouteRoute: SiteAdminRouteRouteWithChildren,
+  SiteOfflineRoute: SiteOfflineRoute,
   SiteSearchRoute: SiteSearchRoute,
   SiteSignInRoute: SiteSignInRoute,
   SiteSignUpRoute: SiteSignUpRoute,

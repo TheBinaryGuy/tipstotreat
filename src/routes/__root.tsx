@@ -1,4 +1,5 @@
 import { ThemeProvider } from '@/components/theme-provider';
+import { PwaRegister } from '@/components/pwa-register';
 import { Toaster } from '@/components/ui/sonner';
 import { SITE_DESCRIPTION, SITE_NAME, getOriginServerFn } from '@/lib/site';
 import { getThemeServerFn } from '@/lib/theme';
@@ -26,6 +27,11 @@ export const Route = createRootRouteWithContext<{
             { title: 'TipsToTreat · Home remedies, tips and recipes from an Indian kitchen' },
             { name: 'description', content: description },
             { name: 'apple-mobile-web-app-title', content: 'TipsToTreat' },
+            { name: 'mobile-web-app-capable', content: 'yes' },
+            { name: 'apple-mobile-web-app-capable', content: 'yes' },
+            { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
+            { name: 'theme-color', content: '#ffffff', media: '(prefers-color-scheme: light)' },
+            { name: 'theme-color', content: '#09090b', media: '(prefers-color-scheme: dark)' },
             { property: 'og:site_name', content: SITE_NAME },
             { property: 'og:type', content: 'website' },
             { name: 'twitter:card', content: 'summary_large_image' },

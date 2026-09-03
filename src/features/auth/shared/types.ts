@@ -4,4 +4,6 @@ export type SessionUser = {
     email: string;
     image: string | null;
     role: 'admin' | 'user';
+    banned: boolean;
+    banReason: string | null;
 };
