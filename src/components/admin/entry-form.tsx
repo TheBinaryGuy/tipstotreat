@@ -1,4 +1,4 @@
-import { BodyEditor } from '@/components/admin/body-editor';
+import { BodyEditor } from '@/components/admin/body-editor-lazy';
 import { AiAssist } from '@/features/ai/components/ai-assist';
 import { CoverImageField } from '@/features/ai/components/cover-image';
 import type { AiDraft } from '@/features/ai/shared/schema';

@@ -7,7 +7,6 @@ import { Input } from '@/components/ui/input';
 import { authClient } from '@/lib/auth-client';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { CopyIcon, ShieldCheckIcon } from 'lucide-react';
-import QRCode from 'qrcode';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -29,7 +28,10 @@ export function TwoFactorCard({
             setQr(null);
             return;
         }
-        QRCode.toDataURL(setup.totpURI, { margin: 1, width: 220 })
+        if (import.meta.env.SSR) return;
+        // Loaded on demand in the browser only; the QR library stays out of the Worker bundle.
+        import('qrcode')
+            .then(QRCode => QRCode.toDataURL(setup.totpURI, { margin: 1, width: 220 }))
             .then(setQr)
             .catch(() => setQr(null));
     }, [setup]);
