@@ -18,7 +18,10 @@ import {
     entrySlugSchema,
     searchSchema,
 } from '@/features/entries/shared/schema';
+import { submitToIndexNow } from '@/lib/indexnow.server';
+import { kindMeta } from '@/lib/format';
 import { notFound } from '@tanstack/react-router';
+import { getRequest } from '@tanstack/react-start/server';
 import { createServerFn } from '@tanstack/react-start';
 import { z } from 'zod';
 
@@ -66,7 +69,9 @@ export const adminCreateEntryServerFn = createServerFn({ method: 'POST' })
     .handler(async ({ data }) => {
         const author = await requireAuthor();
         if (await slugTaken(data.slug)) throw new Error('That slug is already in use.');
-        return createEntry(data, author.id);
+        const entry = await createEntry(data, author.id);
+        if (entry.status === 'published') await notifyIndexers(entry.kind, entry.slug);
+        return entry;
     });
 
 export const adminUpdateEntryServerFn = createServerFn({ method: 'POST' })
@@ -75,7 +80,9 @@ export const adminUpdateEntryServerFn = createServerFn({ method: 'POST' })
         await requireAuthor();
         if (await slugTaken(data.input.slug, data.id))
             throw new Error('That slug is already in use.');
-        return updateEntry(data.id, data.input);
+        const entry = await updateEntry(data.id, data.input);
+        if (entry.status === 'published') await notifyIndexers(entry.kind, entry.slug);
+        return entry;
     });
 
 export const adminSlugAvailableServerFn = createServerFn()
@@ -92,3 +99,18 @@ export const adminDeleteEntryServerFn = createServerFn({ method: 'POST' })
         await deleteEntry(data.id);
         return { ok: true };
     });
+
+/** Best-effort: tell IndexNow about the entry, its section, and the front page. Never fails a save. */
+async function notifyIndexers(kind: keyof typeof kindMeta, slug: string) {
+    try {
+        const origin = new URL(getRequest().url).origin;
+        await submitToIndexNow(origin, [
+            `${origin}/`,
+            `${origin}/${kindMeta[kind].path}`,
+            `${origin}/${kindMeta[kind].path}/${slug}`,
+            `${origin}/sitemap.xml`,
+        ]);
+    } catch {
+        /* indexing is a nicety */
+    }
+}
