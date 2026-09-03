@@ -1,0 +1,26 @@
+src/components/admin/entry-form.tsx
+  s_dda73c4b992cc4::t_d134ee3b88bf3d 503
+src/features/ai/server/ai.functions.ts
+  s_dda73c4b992cc4::t_d57cfdf4a191ab 24,78
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "7d202f5b3492bce0c263bb15eb7ff5d67e8ea4de",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  },
+  "sessions": {
+    "s_dda73c4b992cc4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "41b53d0c-eb1a-4374-91e9-0eac17bef4ea",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
