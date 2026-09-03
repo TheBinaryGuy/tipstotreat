@@ -44,6 +44,13 @@ pnpm deploy
 
 Set `AUTHOR_EMAIL` in `wrangler.jsonc` before the author signs up on production.
 
+## AI and media
+
+- Writing help runs on Cloudflare Workers AI through TanStack AI (`src/lib/ai/cloudflare` is the TanStack Cloudflare adapter vendored until it is published to npm). No API keys: the `AI` binding in `wrangler.jsonc` is all it needs. Text model `@cf/meta/llama-3.3-70b-instruct-fp8-fast`, images `@cf/black-forest-labs/flux-1-schnell`.
+- In the editor: "Write a draft" generates a whole entry from a brief; "From text" fills the form from anything pasted; the cover card uploads an image or generates one (still-life food photography, no people, no text). The TanStack AI devtools panel sits in the devtools dock.
+- Images live in the `tipstotreat-media` R2 bucket (binding `MEDIA`), uploaded through `POST /api/media` (author only, 8 MB, PNG/JPEG/WebP/GIF/AVIF) and served from `/media/<key>` with immutable caching. Editor images can be pasted, dropped, or picked from the toolbar.
+- Workers AI usage counts against the account's neuron allowance; the free tier covers light daily use.
+
 ## Content and SEO
 
 - Entry notes are Markdown (Tiptap with the Markdown extension in the editor); the server renders sanitized HTML on save.
