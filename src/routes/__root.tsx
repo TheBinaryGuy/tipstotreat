@@ -23,7 +23,10 @@ export const Route = createRootRouteWithContext<{
     head: ({ loaderData }) => ({
         meta: [
             { charSet: 'utf-8' },
-            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+            {
+                name: 'viewport',
+                content: 'width=device-width, initial-scale=1, viewport-fit=cover',
+            },
             { title: 'TipsToTreat · Home remedies, tips and recipes from an Indian kitchen' },
             { name: 'description', content: description },
             { name: 'apple-mobile-web-app-title', content: 'TipsToTreat' },
