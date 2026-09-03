@@ -1,0 +1,32 @@
+src/components/admin/entry-form.tsx
+  s_dda73c4b992cc4::t_1eefd5fe4a80e6 294-295
+src/features/ai/components/cover-image.tsx
+  s_dda73c4b992cc4::t_626d5f73aaa05e 26-27,34-35,92-94
+src/features/ai/server/ai.functions.ts
+  s_dda73c4b992cc4::t_f0ae4df61df075 111-135,144
+src/features/ai/shared/schema.ts
+  s_dda73c4b992cc4::t_5a59bccd9c64e9 52-53
+wrangler.jsonc
+  s_dda73c4b992cc4::t_aff345e7345e28 19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "b270eefc33e2409cbf8e05625b50efb308da2753",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  },
+  "sessions": {
+    "s_dda73c4b992cc4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "41b53d0c-eb1a-4374-91e9-0eac17bef4ea",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
