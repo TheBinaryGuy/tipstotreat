@@ -1,0 +1,42 @@
+src/routes/_site/admin/users.tsx
+  s_dda73c4b992cc4::t_7ab8eddadba588 82-130,134-135,159,166,170,206-219
+  s_dda73c4b992cc4::t_cddc58dc995f6d 220-222
+src/routes/_site/$kind/$slug.tsx
+  s_dda73c4b992cc4::t_f2de9aabda1c3f 9,157
+src/routes/_site/admin/comments.tsx
+  s_dda73c4b992cc4::t_7ab8eddadba588 51-52,54-65,67-68,71,78-90,92-97,99-138,140-160
+  s_dda73c4b992cc4::t_f2de9aabda1c3f 16-17,91,139
+src/routes/_site/admin/index.tsx
+  s_dda73c4b992cc4::t_7ab8eddadba588 114-116,118-132,134-137,139-144,146-177,182-190
+  s_dda73c4b992cc4::t_f2de9aabda1c3f 22,27,138,178-181,218,221
+src/features/social/components/comments.tsx
+  s_dda73c4b992cc4::t_f2de9aabda1c3f 4,306,317-332
+src/features/social/components/like-button.tsx
+  s_dda73c4b992cc4::t_f2de9aabda1c3f 40
+src/features/social/components/likes-peek.tsx
+  s_dda73c4b992cc4::t_f2de9aabda1c3f 1-24,26-34,36-40,45-47,56-126
+  s_dda73c4b992cc4::t_afcd22f8d7d440 25,35,41-44,48-55
+src/routes/_site/admin/route.tsx
+  s_dda73c4b992cc4::t_f2de9aabda1c3f 11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "470e2c6d7c4b880ec8d46e74f3571f6e506a7f5e",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  },
+  "sessions": {
+    "s_dda73c4b992cc4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "41b53d0c-eb1a-4374-91e9-0eac17bef4ea",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
