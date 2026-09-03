@@ -1,4 +1,6 @@
 import { Button } from '@/components/ui/button';
+import { LikePeek, type PeekHandlers } from '@/features/social/components/likes-peek';
+import type { Liker } from '@/features/social/server/social.server';
 import { toggleLikeServerFn } from '@/features/social/server/social.functions';
 import { socialKeys } from '@/features/social/shared/queries';
 import { cn } from '@/lib/utils';
@@ -11,11 +13,14 @@ export function LikeButton({
     slug,
     liked,
     signedIn,
+    likers,
 }: {
     entryId: string;
     slug: string;
     liked: boolean;
     signedIn: boolean;
+    /** Authors only: who liked this, revealed on hover or long-press. */
+    likers?: Liker[];
 }) {
     const queryClient = useQueryClient();
     const location = useLocation();
@@ -37,11 +42,18 @@ export function LikeButton({
         );
     }
 
-    return (
+    const button = (peek?: PeekHandlers) => (
         <Button
             aria-pressed={liked}
             disabled={toggle.isPending}
-            onClick={() => toggle.mutate()}
+            onClick={peek ? peek.guardClick(() => toggle.mutate()) : () => toggle.mutate()}
+            onContextMenu={peek?.onContextMenu}
+            onPointerCancel={peek?.onPointerCancel}
+            onPointerDown={peek?.onPointerDown}
+            onPointerEnter={peek?.onPointerEnter}
+            onPointerLeave={peek?.onPointerLeave}
+            onPointerUp={peek?.onPointerUp}
+            ref={peek?.ref}
             variant={liked ? 'secondary' : 'outline'}>
             <HeartIcon
                 className={cn(liked && 'fill-destructive text-destructive')}
@@ -50,4 +62,6 @@ export function LikeButton({
             {label}
         </Button>
     );
+    if (!likers) return button();
+    return <LikePeek likers={likers}>{button}</LikePeek>;
 }

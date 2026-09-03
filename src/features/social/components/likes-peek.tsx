@@ -4,7 +4,7 @@ import type { Liker } from '@/features/social/server/social.server';
 import { formatDate } from '@/lib/format';
 import { cn } from '@/lib/utils';
 import { HeartIcon } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { type ReactNode, useCallback, useRef, useState } from 'react';
 
 type Props = {
     /** Full liker records (entries). */
@@ -73,6 +73,119 @@ export function LikesPeek({ likers, names, align = 'start', className }: Props) 
                 {likers ? <LikersList likers={likers} /> : <NamesList names={names ?? []} />}
             </PopoverContent>
         </Popover>
+    );
+}
+
+export type PeekHandlers = {
+    ref: (node: HTMLElement | null) => void;
+    onPointerEnter: (event: React.PointerEvent) => void;
+    onPointerLeave: (event: React.PointerEvent) => void;
+    onPointerDown: (event: React.PointerEvent) => void;
+    onPointerUp: (event: React.PointerEvent) => void;
+    onPointerCancel: (event: React.PointerEvent) => void;
+    onContextMenu: (event: React.MouseEvent) => void;
+    /** Wrap the button's click handler: a click that ended a long-press is swallowed. */
+    guardClick: (handler: () => void) => () => void;
+};
+
+const LONG_PRESS_MS = 450;
+
+/**
+ * Attaches "who liked this" to an existing button without adding a chip or a number: hover with a
+ * mouse, long-press on touch. A plain tap still reaches the button's own click handler.
+ */
+export function LikePeek({
+    likers,
+    names,
+    children,
+}: {
+    likers?: Liker[];
+    names?: string[];
+    children: (peek: PeekHandlers) => ReactNode;
+}) {
+    const [open, setOpen] = useState(false);
+    const [anchor, setAnchor] = useState<HTMLElement | null>(null);
+    const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const pressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const longPressed = useRef(false);
+
+    const cancelClose = () => {
+        if (closeTimer.current) clearTimeout(closeTimer.current);
+        closeTimer.current = null;
+    };
+    const cancelPress = () => {
+        if (pressTimer.current) clearTimeout(pressTimer.current);
+        pressTimer.current = null;
+    };
+    const scheduleClose = () => {
+        cancelClose();
+        closeTimer.current = setTimeout(() => setOpen(false), 150);
+    };
+
+    const ref = useCallback((node: HTMLElement | null) => setAnchor(node), []);
+    const peek: PeekHandlers = {
+        ref,
+        onPointerEnter: event => {
+            if (event.pointerType !== 'mouse') return;
+            cancelClose();
+            setOpen(true);
+        },
+        onPointerLeave: event => {
+            cancelPress();
+            if (event.pointerType !== 'mouse') return;
+            scheduleClose();
+        },
+        onPointerDown: event => {
+            if (event.pointerType === 'mouse') return;
+            cancelPress();
+            longPressed.current = false;
+            pressTimer.current = setTimeout(() => {
+                longPressed.current = true;
+                setOpen(true);
+            }, LONG_PRESS_MS);
+        },
+        onPointerUp: cancelPress,
+        onPointerCancel: cancelPress,
+        // The browser's long-press context menu would fight the peek on phones.
+        onContextMenu: event => {
+            if (open || pressTimer.current) event.preventDefault();
+        },
+        guardClick: handler => () => {
+            if (longPressed.current) {
+                longPressed.current = false;
+                return;
+            }
+            handler();
+        },
+    };
+
+    return (
+        <>
+            {children(peek)}
+            <Popover
+                onOpenChange={(next, details) => {
+                    // The tap that ends a long-press lands on the anchor button; it is not "outside".
+                    if (
+                        !next &&
+                        details.reason === 'outside-press' &&
+                        anchor?.contains(details.event.target as Node)
+                    )
+                        return;
+                    setOpen(next);
+                }}
+                open={open}>
+                <PopoverContent
+                    align='start'
+                    anchor={anchor}
+                    className='w-64 p-3'
+                    onPointerEnter={cancelClose}
+                    onPointerLeave={event => {
+                        if (event.pointerType === 'mouse') scheduleClose();
+                    }}>
+                    {likers ? <LikersList likers={likers} /> : <NamesList names={names ?? []} />}
+                </PopoverContent>
+            </Popover>
+        </>
     );
 }
 

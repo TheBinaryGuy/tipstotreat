@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { LikesPeek } from '@/features/social/components/likes-peek';
+import { LikePeek, type PeekHandlers } from '@/features/social/components/likes-peek';
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
 import { Textarea } from '@/components/ui/textarea';
 import type { SessionUser } from '@/features/auth/shared/types';
@@ -303,7 +303,7 @@ function CommentForm({
     );
 }
 
-/** Readers see Like/Liked; the author also gets a peek at who liked it (hover or tap). */
+/** Readers see Like/Liked; the author also gets who liked it on hover or long-press. */
 function CommentLikeButton({
     comment,
     onToggle,
@@ -313,22 +313,25 @@ function CommentLikeButton({
     onToggle: () => void;
     pending: boolean;
 }) {
-    return (
-        <>
-            <Button
-                aria-pressed={comment.liked}
-                className={cn(comment.liked && 'text-destructive')}
-                disabled={pending}
-                onClick={onToggle}
-                size='sm'
-                variant='ghost'>
-                <HeartIcon
-                    className={cn(comment.liked && 'fill-current')}
-                    data-icon='inline-start'
-                />
-                {comment.liked ? 'Liked' : 'Like'}
-            </Button>
-            {comment.likers ? <LikesPeek className='h-7' names={comment.likers} /> : null}
-        </>
+    const button = (peek?: PeekHandlers) => (
+        <Button
+            aria-pressed={comment.liked}
+            className={cn(comment.liked && 'text-destructive')}
+            disabled={pending}
+            onClick={peek ? peek.guardClick(onToggle) : onToggle}
+            onContextMenu={peek?.onContextMenu}
+            onPointerCancel={peek?.onPointerCancel}
+            onPointerDown={peek?.onPointerDown}
+            onPointerEnter={peek?.onPointerEnter}
+            onPointerLeave={peek?.onPointerLeave}
+            onPointerUp={peek?.onPointerUp}
+            ref={peek?.ref}
+            size='sm'
+            variant='ghost'>
+            <HeartIcon className={cn(comment.liked && 'fill-current')} data-icon='inline-start' />
+            {comment.liked ? 'Liked' : 'Like'}
+        </Button>
     );
+    if (!comment.likers) return button();
+    return <LikePeek names={comment.likers}>{button}</LikePeek>;
 }

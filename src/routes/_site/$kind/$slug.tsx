@@ -6,7 +6,6 @@ import { ShareMenu } from '@/features/entries/components/share-menu';
 import { entriesQuery, entryQuery } from '@/features/entries/shared/queries';
 import { Comments } from '@/features/social/components/comments';
 import { LikeButton } from '@/features/social/components/like-button';
-import { LikesPeek } from '@/features/social/components/likes-peek';
 import { entrySocialQuery } from '@/features/social/shared/queries';
 import { formatDate, kindFromPath, kindMeta } from '@/lib/format';
 import { entryJsonLd, metaDescription } from '@/lib/seo';
@@ -151,10 +150,10 @@ function EntryPage() {
                 <LikeButton
                     entryId={entry.id}
                     liked={social.liked}
+                    likers={social.likers}
                     signedIn={viewer !== null}
                     slug={slug}
                 />
-                {social.likers ? <LikesPeek likers={social.likers} /> : null}
                 <ShareMenu
                     markdownUrl={`${pageUrl}.md`}
                     pageUrl={pageUrl}
