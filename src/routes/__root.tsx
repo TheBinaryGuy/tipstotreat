@@ -120,6 +120,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                 <ThemeProvider theme={theme}>
                     {children}
                     <Toaster position='bottom-center' />
+                    <PwaRegister />
                 </ThemeProvider>
                 <TanStackDevtools
                     config={{ position: 'bottom-right' }}
