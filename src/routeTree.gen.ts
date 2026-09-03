@@ -11,11 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SiteRouteImport } from './routes/_site'
 import { Route as FeedDotxmlRouteImport } from './routes/feed[.]xml'
+import { Route as IndexnowDottxtRouteImport } from './routes/indexnow[.]txt'
 import { Route as LlmsFullDottxtRouteImport } from './routes/llms-full[.]txt'
 import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as Char123indexnowKeyChar125DottxtRouteImport } from './routes/{$indexnowKey}[.]txt'
 import { Route as KindChar123slugChar125DotmdRouteImport } from './routes/$kind/{$slug}[.]md'
 import { Route as SiteIndexRouteImport } from './routes/_site/index'
 import { Route as SiteAdminRouteRouteImport } from './routes/_site/admin/route'
@@ -45,6 +45,11 @@ const FeedDotxmlRoute = FeedDotxmlRouteImport.update({
   path: '/feed.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IndexnowDottxtRoute = IndexnowDottxtRouteImport.update({
+  id: '/indexnow.txt',
+  path: '/indexnow.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LlmsFullDottxtRoute = LlmsFullDottxtRouteImport.update({
   id: '/llms-full.txt',
   path: '/llms-full.txt',
@@ -65,12 +70,6 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const Char123indexnowKeyChar125DottxtRoute =
-  Char123indexnowKeyChar125DottxtRouteImport.update({
-    id: '/{$indexnowKey}.txt',
-    path: '/{$indexnowKey}.txt',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const KindChar123slugChar125DotmdRoute =
   KindChar123slugChar125DotmdRouteImport.update({
     id: '/$kind/{$slug}.md',
@@ -172,11 +171,11 @@ const SiteAdminEntriesNewRoute = SiteAdminEntriesNewRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof SiteIndexRoute
   '/feed.xml': typeof FeedDotxmlRoute
+  '/indexnow.txt': typeof IndexnowDottxtRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/{$indexnowKey}.txt': typeof Char123indexnowKeyChar125DottxtRoute
   '/admin': typeof SiteAdminRouteRouteWithChildren
   '/$kind/{$slug}.md': typeof KindChar123slugChar125DotmdRoute
   '/offline': typeof SiteOfflineRoute
@@ -198,11 +197,11 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/feed.xml': typeof FeedDotxmlRoute
+  '/indexnow.txt': typeof IndexnowDottxtRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/{$indexnowKey}.txt': typeof Char123indexnowKeyChar125DottxtRoute
   '/$kind/{$slug}.md': typeof KindChar123slugChar125DotmdRoute
   '/offline': typeof SiteOfflineRoute
   '/search': typeof SiteSearchRoute
@@ -226,11 +225,11 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_site': typeof SiteRouteWithChildren
   '/feed.xml': typeof FeedDotxmlRoute
+  '/indexnow.txt': typeof IndexnowDottxtRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/{$indexnowKey}.txt': typeof Char123indexnowKeyChar125DottxtRoute
   '/_site/admin': typeof SiteAdminRouteRouteWithChildren
   '/$kind/{$slug}.md': typeof KindChar123slugChar125DotmdRoute
   '/_site/offline': typeof SiteOfflineRoute
@@ -256,11 +255,11 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/feed.xml'
+    | '/indexnow.txt'
     | '/llms-full.txt'
     | '/llms.txt'
     | '/robots.txt'
     | '/sitemap.xml'
-    | '/{$indexnowKey}.txt'
     | '/admin'
     | '/$kind/{$slug}.md'
     | '/offline'
@@ -282,11 +281,11 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/feed.xml'
+    | '/indexnow.txt'
     | '/llms-full.txt'
     | '/llms.txt'
     | '/robots.txt'
     | '/sitemap.xml'
-    | '/{$indexnowKey}.txt'
     | '/$kind/{$slug}.md'
     | '/offline'
     | '/search'
@@ -309,11 +308,11 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_site'
     | '/feed.xml'
+    | '/indexnow.txt'
     | '/llms-full.txt'
     | '/llms.txt'
     | '/robots.txt'
     | '/sitemap.xml'
-    | '/{$indexnowKey}.txt'
     | '/_site/admin'
     | '/$kind/{$slug}.md'
     | '/_site/offline'
@@ -338,11 +337,11 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   SiteRoute: typeof SiteRouteWithChildren
   FeedDotxmlRoute: typeof FeedDotxmlRoute
+  IndexnowDottxtRoute: typeof IndexnowDottxtRoute
   LlmsFullDottxtRoute: typeof LlmsFullDottxtRoute
   LlmsDottxtRoute: typeof LlmsDottxtRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  Char123indexnowKeyChar125DottxtRoute: typeof Char123indexnowKeyChar125DottxtRoute
   KindChar123slugChar125DotmdRoute: typeof KindChar123slugChar125DotmdRoute
   ApiMediaRoute: typeof ApiMediaRoute
   MediaSplatRoute: typeof MediaSplatRoute
@@ -365,6 +364,13 @@ declare module '@tanstack/react-router' {
       path: '/feed.xml'
       fullPath: '/feed.xml'
       preLoaderRoute: typeof FeedDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/indexnow.txt': {
+      id: '/indexnow.txt'
+      path: '/indexnow.txt'
+      fullPath: '/indexnow.txt'
+      preLoaderRoute: typeof IndexnowDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/llms-full.txt': {
@@ -393,13 +399,6 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/{$indexnowKey}.txt': {
-      id: '/{$indexnowKey}.txt'
-      path: '/{$indexnowKey}.txt'
-      fullPath: '/{$indexnowKey}.txt'
-      preLoaderRoute: typeof Char123indexnowKeyChar125DottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$kind/{$slug}.md': {
@@ -585,11 +584,11 @@ const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   SiteRoute: SiteRouteWithChildren,
   FeedDotxmlRoute: FeedDotxmlRoute,
+  IndexnowDottxtRoute: IndexnowDottxtRoute,
   LlmsFullDottxtRoute: LlmsFullDottxtRoute,
   LlmsDottxtRoute: LlmsDottxtRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  Char123indexnowKeyChar125DottxtRoute: Char123indexnowKeyChar125DottxtRoute,
   KindChar123slugChar125DotmdRoute: KindChar123slugChar125DotmdRoute,
   ApiMediaRoute: ApiMediaRoute,
   MediaSplatRoute: MediaSplatRoute,

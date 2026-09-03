@@ -16,7 +16,7 @@ export async function submitToIndexNow(origin: string, urls: string[]) {
         body: JSON.stringify({
             host,
             key,
-            keyLocation: `${origin}/${key}.txt`,
+            keyLocation: `${origin}/indexnow.txt`,
             urlList: urls.slice(0, 10_000),
         }),
     });

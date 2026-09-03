@@ -13,7 +13,7 @@
         // whether it signs up with a password or Google. Everyone else is a reader.
         "AUTHOR_EMAIL": "",
         // Google OAuth client id (public). The secret is set with `wrangler secret put`.
-        // IndexNow key (Bing, Yandex, DuckDuckGo via Bing); served at /<key>.txt.
+        // IndexNow key (Bing, Yandex, DuckDuckGo via Bing); served at /indexnow.txt.
         "INDEXNOW_KEY": "70d53f8e382a42d1897aa87d67bd07b0",
         // Google Search Console HTML-tag verification token (the content attribute).
         "GOOGLE_SITE_VERIFICATION": "",
