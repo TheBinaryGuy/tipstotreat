@@ -1,0 +1,64 @@
+src/features/entries/server/entries.server.ts
+  s_dda73c4b992cc4::t_9b3a0fd4b065b0 35
+src/features/ai/components/ai-assist.tsx
+  s_dda73c4b992cc4::t_a56f9755874b01 114-116
+src/components/site/site-header.tsx
+  s_dda73c4b992cc4::t_a56f9755874b01 19
+src/routes/llms[.]txt.ts
+  s_dda73c4b992cc4::t_a56f9755874b01 22
+src/routes/_site/admin/index.tsx
+  s_dda73c4b992cc4::t_a56f9755874b01 30,70
+src/routes/_site/index.tsx
+  s_dda73c4b992cc4::t_a56f9755874b01 21,27
+src/routes/sitemap[.]xml.ts
+  s_dda73c4b992cc4::t_a56f9755874b01 13
+src/features/ai/shared/schema.ts
+  s_dda73c4b992cc4::t_9b3a0fd4b065b0 54-57
+src/components/admin/entry-form.tsx
+  s_dda73c4b992cc4::t_9b3a0fd4b065b0 377-381,438-440,442-505,509-511,513-523,527-529
+  s_dda73c4b992cc4::t_c4948d62a5a08a 57-125,134-137,140-143,170-173,430,525,534,542
+  s_dda73c4b992cc4::t_a56f9755874b01 291,437,506-508,530
+  s_dda73c4b992cc4::t_55c39fb53eeb9c 131-133,138-139,144-169,174-179,292,393,441,512,535,541,547
+src/routes/_site/$kind/index.tsx
+  s_dda73c4b992cc4::t_9b3a0fd4b065b0 37-38
+src/components/site/entry-parts.tsx
+  s_dda73c4b992cc4::t_a56f9755874b01 6,12
+src/components/admin/body-editor.tsx
+  s_dda73c4b992cc4::t_55c39fb53eeb9c 335
+  s_dda73c4b992cc4::t_9b3a0fd4b065b0 15-17,43,416-475
+  s_dda73c4b992cc4::t_7350fef746a41b 476-477
+src/lib/seo.ts
+  s_dda73c4b992cc4::t_a56f9755874b01 43
+src/features/ai/server/ai.functions.ts
+  s_dda73c4b992cc4::t_9b3a0fd4b065b0 7,137-152
+  s_dda73c4b992cc4::t_a56f9755874b01 24,28,76-79,83,122-124
+  s_dda73c4b992cc4::t_009ab7369fe030 153
+src/lib/format.ts
+  s_dda73c4b992cc4::t_9b3a0fd4b065b0 20
+  s_dda73c4b992cc4::t_a56f9755874b01 27
+src/lib/db/schema.ts
+  s_dda73c4b992cc4::t_a56f9755874b01 100
+src/features/admin/server/admin.functions.ts
+  s_dda73c4b992cc4::t_9b3a0fd4b065b0 3,109
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "28892011521a4a2c6ced9ad6c7e7b452b2f4752b",
+  "prompts": {},
+  "humans": {
+    "h_f7ba60a6997566": {
+      "author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  },
+  "sessions": {
+    "s_dda73c4b992cc4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "41b53d0c-eb1a-4374-91e9-0eac17bef4ea",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "TheBinaryGuy <hello@thebinary.dev>"
+    }
+  }
+}
