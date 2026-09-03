@@ -1,12 +1,7 @@
 import { ThemeProvider } from '@/components/theme-provider';
 import { PwaRegister } from '@/components/pwa-register';
 import { Toaster } from '@/components/ui/sonner';
-import {
-    SITE_DESCRIPTION,
-    SITE_NAME,
-    getGoogleSiteVerificationServerFn,
-    getOriginServerFn,
-} from '@/lib/site';
+import { SITE_DESCRIPTION, SITE_NAME, getOriginServerFn } from '@/lib/site';
 import { getThemeServerFn } from '@/lib/theme';
 import appCss from '@/styles.css?url';
 import { TanStackDevtools } from '@tanstack/react-devtools';
@@ -23,12 +18,8 @@ export const Route = createRootRouteWithContext<{
     queryClient: QueryClient;
 }>()({
     loader: async () => {
-        const [theme, origin, googleSiteVerification] = await Promise.all([
-            getThemeServerFn(),
-            getOriginServerFn(),
-            getGoogleSiteVerificationServerFn(),
-        ]);
-        return { theme, origin, googleSiteVerification };
+        const [theme, origin] = await Promise.all([getThemeServerFn(), getOriginServerFn()]);
+        return { theme, origin };
     },
     head: ({ loaderData }) => ({
         meta: [
@@ -48,9 +39,6 @@ export const Route = createRootRouteWithContext<{
             { property: 'og:site_name', content: SITE_NAME },
             { property: 'og:type', content: 'website' },
             { name: 'twitter:card', content: 'summary_large_image' },
-            ...(loaderData?.googleSiteVerification
-                ? [{ name: 'google-site-verification', content: loaderData.googleSiteVerification }]
-                : []),
             ...(loaderData
                 ? [
                       { property: 'og:url', content: loaderData.origin },

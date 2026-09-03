@@ -56,7 +56,7 @@ Set `AUTHOR_EMAIL` in `wrangler.jsonc` before the author signs up on production.
 - Entry notes are Markdown (Tiptap with the Markdown extension in the editor); the server renders sanitized HTML on save.
 - Every entry is also served as Markdown at `/<kind>/<slug>.md`, linked from the page with `rel="alternate"`.
 - `/sitemap.xml`, `/feed.xml` (RSS 2.0), `/llms.txt`, `/llms-full.txt`, `/robots.txt`, canonical links, Open Graph tags, and schema.org JSON-LD (Recipe, HowTo, Article, BlogPosting, WebSite).
-- IndexNow: `INDEXNOW_KEY` in `wrangler.jsonc` is served at `/indexnow.txt`; publishing or updating an entry pings Bing, Yandex, Seznam and Naver (DuckDuckGo uses Bing's index). Google is fed through Search Console, verified with the `GOOGLE_SITE_VERIFICATION` meta tag.
+- IndexNow: `INDEXNOW_KEY` in `wrangler.jsonc` is served at `/indexnow.txt`; publishing or updating an entry pings Bing, Yandex, Seznam and Naver (DuckDuckGo uses Bing's index). The key is left empty until the site is ready to be indexed. Google Search Console is verified through DNS, outside the code.
 
 `BETTER_AUTH_URL` is optional. Left blank (the default in `wrangler.jsonc`), better-auth derives the origin from each request, so version previews and the workers.dev URL both work. Set it to the canonical domain only if you want auth redirects pinned there.
 

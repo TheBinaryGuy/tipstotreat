@@ -1,6 +1,5 @@
 import { createServerFn } from '@tanstack/react-start';
 import { getRequest } from '@tanstack/react-start/server';
-import { env } from 'cloudflare:workers';
 
 export const SITE_NAME = 'TipsToTreat';
 export const SITE_DESCRIPTION =
@@ -8,8 +7,3 @@ export const SITE_DESCRIPTION =
 
 /** The public origin of the current request, for canonical URLs and structured data. */
 export const getOriginServerFn = createServerFn().handler(() => new URL(getRequest().url).origin);
-
-/** Google Search Console verification token, if configured. */
-export const getGoogleSiteVerificationServerFn = createServerFn().handler(
-    () => env.GOOGLE_SITE_VERIFICATION || null
-);
