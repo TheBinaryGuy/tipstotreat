@@ -101,22 +101,26 @@ export function ShareMenu({
     const targets = [
         {
             label: 'WhatsApp',
-            href: `https://wa.me/?text=${encodeURIComponent(`${title}\n${pageUrl}`)}`,
+            mark: 'whatsapp',
+            href: `https://wa.me/?text=${encodeURIComponent(`${title}
+${pageUrl}`)}`,
         },
         {
             label: 'Telegram',
+            mark: 'telegram',
             href: `https://t.me/share/url?url=${encodedUrl}&text=${encodeURIComponent(title)}`,
         },
         {
             label: 'X',
+            mark: 'x',
             href: `https://x.com/intent/post?url=${encodedUrl}&text=${encodeURIComponent(title)}`,
         },
         {
             label: 'Facebook',
-            mark: 'facebook' as const,
+            mark: 'facebook',
             href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
         },
-    ];
+    ] as const;
 
     const CopyState = ({ kind, idle }: { kind: Exclude<Copied, null>; idle: React.ReactNode }) =>
         copied === kind ? <CheckIcon className='text-primary animate-in zoom-in-50' /> : idle;
