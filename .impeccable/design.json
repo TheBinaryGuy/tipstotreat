@@ -1,0 +1,404 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-03T12:00:00Z",
+  "title": "Design System: TipsToTreat",
+  "extensions": {
+    "colorMeta": {
+      "indigo": {
+        "role": "primary",
+        "displayName": "Indigo",
+        "canonical": "oklch(0.457 0.24 277.023)",
+        "dark": "oklch(0.398 0.195 277.366)",
+        "tonalRamp": [
+          "oklch(0.15 0.10 277)",
+          "oklch(0.25 0.16 277)",
+          "oklch(0.35 0.21 277)",
+          "oklch(0.457 0.24 277.023)",
+          "oklch(0.58 0.21 277)",
+          "oklch(0.72 0.15 277)",
+          "oklch(0.85 0.08 277)",
+          "oklch(0.95 0.03 277)"
+        ]
+      },
+      "indigo-text": {
+        "role": "primary",
+        "displayName": "Indigo Text",
+        "canonical": "oklch(0.962 0.018 272.314)",
+        "dark": "oklch(0.962 0.018 272.314)",
+        "tonalRamp": [
+          "oklch(0.15 0.03 272)",
+          "oklch(0.30 0.03 272)",
+          "oklch(0.45 0.03 272)",
+          "oklch(0.60 0.03 272)",
+          "oklch(0.75 0.025 272)",
+          "oklch(0.88 0.02 272)",
+          "oklch(0.93 0.02 272)",
+          "oklch(0.962 0.018 272.314)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "oklch(1 0 0)",
+        "dark": "oklch(0.141 0.005 285.823)",
+        "tonalRamp": [
+          "oklch(0.141 0.005 285.823)",
+          "oklch(0.21 0.006 285.885)",
+          "oklch(0.274 0.006 286.033)",
+          "oklch(0.442 0.017 285.786)",
+          "oklch(0.705 0.015 286.067)",
+          "oklch(0.871 0.006 286.286)",
+          "oklch(0.967 0.001 286.375)",
+          "oklch(1 0 0)"
+        ]
+      },
+      "paper-raised-dark": {
+        "role": "neutral",
+        "displayName": "Paper Raised (dark)",
+        "canonical": "oklch(0.21 0.006 285.885)",
+        "dark": "oklch(0.21 0.006 285.885)",
+        "tonalRamp": [
+          "oklch(0.141 0.005 285.823)",
+          "oklch(0.21 0.006 285.885)",
+          "oklch(0.274 0.006 286.033)",
+          "oklch(0.37 0.013 285.805)",
+          "oklch(0.552 0.016 285.938)",
+          "oklch(0.705 0.015 286.067)",
+          "oklch(0.871 0.006 286.286)",
+          "oklch(0.967 0.001 286.375)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(0.141 0.005 285.823)",
+        "dark": "oklch(0.985 0 0)",
+        "tonalRamp": [
+          "oklch(0.141 0.005 285.823)",
+          "oklch(0.21 0.006 285.885)",
+          "oklch(0.274 0.006 286.033)",
+          "oklch(0.37 0.013 285.805)",
+          "oklch(0.552 0.016 285.938)",
+          "oklch(0.705 0.015 286.067)",
+          "oklch(0.871 0.006 286.286)",
+          "oklch(0.985 0 0)"
+        ]
+      },
+      "quiet-ink": {
+        "role": "neutral",
+        "displayName": "Quiet Ink",
+        "canonical": "oklch(0.552 0.016 285.938)",
+        "dark": "oklch(0.705 0.015 286.067)",
+        "tonalRamp": [
+          "oklch(0.15 0.016 286)",
+          "oklch(0.27 0.016 286)",
+          "oklch(0.37 0.016 286)",
+          "oklch(0.442 0.017 285.786)",
+          "oklch(0.552 0.016 285.938)",
+          "oklch(0.705 0.015 286.067)",
+          "oklch(0.85 0.01 286)",
+          "oklch(0.95 0.005 286)"
+        ]
+      },
+      "tint": {
+        "role": "neutral",
+        "displayName": "Tint",
+        "canonical": "oklch(0.967 0.001 286.375)",
+        "dark": "oklch(0.274 0.006 286.033)",
+        "tonalRamp": [
+          "oklch(0.15 0.004 286)",
+          "oklch(0.21 0.006 285.885)",
+          "oklch(0.274 0.006 286.033)",
+          "oklch(0.44 0.005 286)",
+          "oklch(0.62 0.004 286)",
+          "oklch(0.80 0.003 286)",
+          "oklch(0.92 0.002 286)",
+          "oklch(0.967 0.001 286.375)"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "oklch(0.92 0.004 286.32)",
+        "dark": "oklch(1 0 0 / 10%)",
+        "tonalRamp": [
+          "oklch(0.18 0.004 286)",
+          "oklch(0.30 0.004 286)",
+          "oklch(0.42 0.004 286)",
+          "oklch(0.55 0.004 286)",
+          "oklch(0.68 0.004 286)",
+          "oklch(0.80 0.004 286)",
+          "oklch(0.92 0.004 286.32)",
+          "oklch(0.97 0.002 286)"
+        ]
+      },
+      "field-edge-dark": {
+        "role": "neutral",
+        "displayName": "Field Edge (dark)",
+        "canonical": "oklch(1 0 0 / 15%)",
+        "dark": "oklch(1 0 0 / 15%)",
+        "tonalRamp": [
+          "oklch(1 0 0 / 5%)",
+          "oklch(1 0 0 / 10%)",
+          "oklch(1 0 0 / 15%)",
+          "oklch(1 0 0 / 25%)",
+          "oklch(1 0 0 / 40%)",
+          "oklch(1 0 0 / 60%)",
+          "oklch(1 0 0 / 80%)",
+          "oklch(1 0 0 / 95%)"
+        ]
+      },
+      "focus-ring": {
+        "role": "neutral",
+        "displayName": "Focus Ring",
+        "canonical": "oklch(0.705 0.015 286.067)",
+        "dark": "oklch(0.552 0.016 285.938)",
+        "tonalRamp": [
+          "oklch(0.15 0.015 286)",
+          "oklch(0.27 0.015 286)",
+          "oklch(0.37 0.015 286)",
+          "oklch(0.442 0.017 285.786)",
+          "oklch(0.552 0.016 285.938)",
+          "oklch(0.705 0.015 286.067)",
+          "oklch(0.85 0.01 286)",
+          "oklch(0.95 0.005 286)"
+        ]
+      },
+      "caution": {
+        "role": "tertiary",
+        "displayName": "Caution",
+        "canonical": "oklch(0.577 0.245 27.325)",
+        "dark": "oklch(0.704 0.191 22.216)",
+        "tonalRamp": [
+          "oklch(0.15 0.08 27)",
+          "oklch(0.27 0.14 27)",
+          "oklch(0.40 0.20 27)",
+          "oklch(0.577 0.245 27.325)",
+          "oklch(0.704 0.191 22.216)",
+          "oklch(0.80 0.12 25)",
+          "oklch(0.90 0.06 25)",
+          "oklch(0.96 0.02 25)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Every public h1 at 600; grows to Display Wide from 640px on the home and entry pages." },
+      "display-wide": { "displayName": "Display Wide", "purpose": "Home and entry h1 from the sm breakpoint." },
+      "headline": { "displayName": "Headline", "purpose": "Home-page section titles beside their kind mark; admin index and auth h1s." },
+      "headline-quiet": { "displayName": "Headline Quiet", "purpose": "Article sub-headings inside an entry (Method, More remedies) at regular weight." },
+      "card-title": { "displayName": "Card Title", "purpose": "The featured card's entry title." },
+      "title": { "displayName": "Title", "purpose": "Entry title in a list row; medium weight, underlines on hover." },
+      "lede": { "displayName": "Lede", "purpose": "Home intro paragraph and the entry summary; also the editor's Title input." },
+      "body": { "displayName": "Body", "purpose": "Summaries, steps, ingredient names, rich text; 16px with ss01 on." },
+      "label": { "displayName": "Label", "purpose": "Nav, context lines, blurbs, dates, descriptions, table cells, footer; mostly quiet ink." },
+      "label-strong": { "displayName": "Label Strong", "purpose": "Button text, field labels, table headers, the Newest remedy line." },
+      "caption": { "displayName": "Caption", "purpose": "Every badge: ingredient chips, tags, counts, status." },
+      "mono": { "displayName": "Mono", "purpose": "The slug (Address) input and inline code in prose." }
+    },
+    "shadows": [
+      {
+        "name": "card-ring",
+        "value": "0 0 0 1px color-mix(in oklab, var(--foreground) 10%, transparent)",
+        "purpose": "The only resting shadow: a hairline drawn as a ring on shadcn Cards (ingredients aside, editor action panel)."
+      },
+      {
+        "name": "focus-halo",
+        "value": "0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent)",
+        "purpose": "Focus-visible halo on buttons, inputs, selects, textareas, and chips-as-links, paired with a border in the ring colour."
+      }
+    ],
+    "motion": [
+      {
+        "name": "transition-colors",
+        "value": "color, background-color, border-color 150ms cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "The only transition: hover on links, rows, chips, buttons, inputs."
+      },
+      {
+        "name": "press-nudge",
+        "value": "transform: translateY(1px)",
+        "purpose": "Active state on shadcn buttons; the only movement in the system."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one committed action per view: New entry, Publish / Save changes, Sign in.",
+      "html": "<button class=\"ds-btn-primary\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14\"/><path d=\"M12 5v14\"/></svg>New entry</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 32px; padding: 0 10px 0 8px; border: 1px solid transparent; border-radius: var(--radius-lg, 10px); background: var(--primary); color: var(--primary-foreground); font: 500 0.875rem/1.43 'Inter Variable', sans-serif; white-space: nowrap; cursor: pointer; transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), transform 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-primary:hover { background: color-mix(in oklab, var(--primary) 80%, transparent); } .ds-btn-primary:focus-visible { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent); } .ds-btn-primary:active { transform: translateY(1px); } .ds-btn-primary:disabled { opacity: 0.5; pointer-events: none; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Paper with a hairline; the home-page kind buttons (with a count badge), Add ingredient, Save as draft.",
+      "html": "<button class=\"ds-btn-outline\">Remedies <span class=\"ds-btn-outline__count\">4</span></button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 32px; padding: 0 10px; border: 1px solid var(--border); border-radius: var(--radius-lg, 10px); background: var(--background); color: var(--foreground); font: 500 0.875rem/1.43 'Inter Variable', sans-serif; white-space: nowrap; cursor: pointer; transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), transform 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-outline:hover { background: var(--muted); } .ds-btn-outline:focus-visible { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent); } .ds-btn-outline:active { transform: translateY(1px); } .ds-btn-outline__count { display: inline-flex; align-items: center; height: 20px; padding: 2px 8px; border-radius: 26px; background: var(--secondary); color: var(--secondary-foreground); font-size: 0.75rem; font-weight: 500; line-height: 1; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "No border; Sign out, toolbar buttons, the trash icon, inactive admin filter chips.",
+      "html": "<button class=\"ds-btn-ghost\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4\"/><polyline points=\"16 17 21 12 16 7\"/><line x1=\"21\" x2=\"9\" y1=\"12\" y2=\"12\"/></svg>Sign out</button>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 4px; height: 28px; padding: 0 10px 0 6px; border: 1px solid transparent; border-radius: var(--radius-lg, 10px); background: transparent; color: var(--foreground); font: 500 0.8rem/1.43 'Inter Variable', sans-serif; white-space: nowrap; cursor: pointer; transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), color 150ms cubic-bezier(0.4, 0, 0.2, 1), transform 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-ghost:hover { background: var(--muted); color: var(--foreground); } .ds-btn-ghost:focus-visible { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent); } .ds-btn-ghost:active { transform: translateY(1px); }"
+    },
+    {
+      "name": "Destructive Button",
+      "kind": "button",
+      "refersTo": "button-destructive",
+      "description": "Caution text on a 10% wash; Delete entry in the editor's action card.",
+      "html": "<button class=\"ds-btn-destructive\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 6h18\"/><path d=\"M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6\"/><path d=\"M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2\"/><line x1=\"10\" x2=\"10\" y1=\"11\" y2=\"17\"/><line x1=\"14\" x2=\"14\" y1=\"11\" y2=\"17\"/></svg>Delete entry</button>",
+      "css": ".ds-btn-destructive { display: inline-flex; align-items: center; justify-content: center; gap: 4px; height: 28px; padding: 0 10px 0 6px; border: 1px solid transparent; border-radius: var(--radius-lg, 10px); background: color-mix(in oklab, var(--destructive) 10%, transparent); color: var(--destructive); font: 500 0.8rem/1.43 'Inter Variable', sans-serif; white-space: nowrap; cursor: pointer; transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), transform 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-destructive:hover { background: color-mix(in oklab, var(--destructive) 20%, transparent); } .ds-btn-destructive:focus-visible { outline: none; border-color: color-mix(in oklab, var(--destructive) 40%, transparent); box-shadow: 0 0 0 3px color-mix(in oklab, var(--destructive) 20%, transparent); } .ds-btn-destructive:active { transform: translateY(1px); }"
+    },
+    {
+      "name": "Outline Chip",
+      "kind": "chip",
+      "refersTo": "badge-outline",
+      "description": "Ingredient names under every listed entry, and tags on an entry page (as links).",
+      "html": "<span class=\"ds-chip-row\"><span class=\"ds-chip\">Milk</span><span class=\"ds-chip\">Turmeric powder</span><a class=\"ds-chip\" href=\"#\">Black pepper, crushed</a><span class=\"ds-chip ds-chip--ghost\">+2</span></span>",
+      "css": ".ds-chip-row { display: inline-flex; flex-wrap: wrap; gap: 6px; } .ds-chip { display: inline-flex; align-items: center; justify-content: center; height: 20px; padding: 2px 8px; border: 1px solid var(--border); border-radius: 26px; background: transparent; color: var(--foreground); font: 500 0.75rem/1 'Inter Variable', sans-serif; white-space: nowrap; text-decoration: none; transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), color 150ms cubic-bezier(0.4, 0, 0.2, 1); } a.ds-chip:hover { background: var(--muted); color: var(--muted-foreground); } a.ds-chip:focus-visible { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent); } .ds-chip--ghost { border-color: transparent; }"
+    },
+    {
+      "name": "Status Badge",
+      "kind": "chip",
+      "refersTo": "badge-primary",
+      "description": "Published (solid indigo) and Draft (tint) in the admin table; the only solid indigo outside the primary button.",
+      "html": "<span class=\"ds-chip-row\"><span class=\"ds-badge ds-badge--primary\">Published</span><span class=\"ds-badge ds-badge--secondary\">Draft</span></span>",
+      "css": ".ds-chip-row { display: inline-flex; flex-wrap: wrap; gap: 6px; } .ds-badge { display: inline-flex; align-items: center; justify-content: center; height: 20px; padding: 2px 8px; border: 1px solid transparent; border-radius: 26px; font: 500 0.75rem/1 'Inter Variable', sans-serif; white-space: nowrap; } .ds-badge--primary { background: var(--primary); color: var(--primary-foreground); } .ds-badge--secondary { background: var(--secondary); color: var(--secondary-foreground); }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "shadcn Field: label, input, description; the admin editor's building block.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-field__label\" for=\"ds-usefor\">What it is for</label><input class=\"ds-input\" id=\"ds-usefor\" placeholder=\"Dry cough, scratchy throat\" /><p class=\"ds-field__desc\">The complaint, habit, or occasion. Shown as “For …” under the title.</p></div>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 32rem; font-family: 'Inter Variable', sans-serif; } .ds-field__label { font-size: 0.875rem; font-weight: 500; line-height: 1; color: var(--foreground); } .ds-input { height: 32px; width: 100%; padding: 4px 10px; border: 1px solid var(--input); border-radius: var(--radius-lg, 10px); background: transparent; color: var(--foreground); font: 400 0.875rem/1.43 'Inter Variable', sans-serif; outline: none; transition: border-color 150ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-input::placeholder { color: var(--muted-foreground); } .ds-input:focus-visible { border-color: var(--ring); box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent); } .ds-input[aria-invalid='true'] { border-color: var(--destructive); box-shadow: 0 0 0 3px color-mix(in oklab, var(--destructive) 20%, transparent); } .ds-input:disabled { opacity: 0.5; background: color-mix(in oklab, var(--input) 50%, transparent); cursor: not-allowed; } .ds-field__desc { margin: 0; font-size: 0.875rem; line-height: 1.43; color: var(--muted-foreground); }"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "input-search",
+      "description": "The header search: 36px, hairline on paper, glyph in quiet ink.",
+      "html": "<form class=\"ds-search\" role=\"search\"><svg class=\"ds-search__icon\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg><input class=\"ds-search__input\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\" /></form>",
+      "css": ".ds-search { position: relative; width: 14rem; } .ds-search__icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--muted-foreground); pointer-events: none; } .ds-search__input { height: 36px; width: 100%; padding: 0 12px 0 32px; border: 1px solid var(--border); border-radius: var(--radius-lg, 10px); background: var(--background); color: var(--foreground); font: 400 0.875rem/1.43 'Inter Variable', sans-serif; outline: none; transition: border-color 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-search__input::placeholder { color: var(--muted-foreground); } .ds-search__input:focus-visible { border-color: var(--ring); }"
+    },
+    {
+      "name": "Entry Row",
+      "kind": "custom",
+      "refersTo": "entry-row",
+      "description": "The signature list item: title, context line, summary, ingredient chips; hairline-divided, tint on hover.",
+      "html": "<ul class=\"ds-rows\"><li><a class=\"ds-row\" href=\"#\"><h3 class=\"ds-row__title\">Haldi doodh for a dry cough</h3><p class=\"ds-row__meta\">For dry cough, scratchy throat</p><p class=\"ds-row__summary\">Warm milk with a pinch of turmeric and black pepper, taken at bedtime. Two nights usually settle a tickly cough.</p><ul class=\"ds-row__chips\" aria-label=\"Ingredients\"><li>Milk</li><li>Turmeric powder</li><li>Black pepper, crushed</li><li>Jaggery (optional)</li></ul></a></li><li><a class=\"ds-row\" href=\"#\"><h3 class=\"ds-row__title\">Ajwain water for acidity and bloating</h3><p class=\"ds-row__meta\">For acidity, bloating, heavy stomach</p><p class=\"ds-row__summary\">A teaspoon of carom seeds boiled in water and sipped warm after a heavy meal.</p><ul class=\"ds-row__chips\" aria-label=\"Ingredients\"><li>Carom seeds</li><li>Water</li><li>Black salt</li></ul></a></li></ul>",
+      "css": ".ds-rows { list-style: none; margin: 0; padding: 0 12px; max-width: 40rem; font-family: 'Inter Variable', sans-serif; color: var(--foreground); } .ds-rows > li + li { border-top: 1px solid var(--border); } .ds-row { display: block; margin: 0 -12px; padding: 16px 12px; border-radius: var(--radius-xl, 14px); color: inherit; text-decoration: none; transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-row:hover { background: color-mix(in oklab, var(--muted) 60%, transparent); } .ds-row:hover .ds-row__title { text-decoration: underline; text-underline-offset: 4px; } .ds-row__title { margin: 0; font-size: 1.125rem; font-weight: 500; line-height: 1.56; letter-spacing: -0.025em; text-wrap: balance; } .ds-row__meta { margin: 2px 0 0; font-size: 0.875rem; line-height: 1.43; color: var(--muted-foreground); } .ds-row__summary { margin: 6px 0 0; max-width: 65ch; font-size: 1rem; line-height: 1.5; text-wrap: pretty; } .ds-row__chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; } .ds-row__chips li { display: inline-flex; align-items: center; height: 20px; padding: 2px 8px; border: 1px solid var(--border); border-radius: 26px; font-size: 0.75rem; font-weight: 500; line-height: 1; white-space: nowrap; }"
+    },
+    {
+      "name": "Featured Card",
+      "kind": "card",
+      "refersTo": "featured-card",
+      "description": "The newest entry on the home page: the one tinted resting surface, indigo at 5%.",
+      "html": "<a class=\"ds-featured\" href=\"#\"><p class=\"ds-featured__kicker\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z\"/><path d=\"M20 3v4\"/><path d=\"M22 5h-4\"/><path d=\"M4 17v2\"/><path d=\"M5 18H3\"/></svg>Newest remedy</p><p class=\"ds-featured__title\">Haldi doodh for a dry cough</p><p class=\"ds-featured__meta\">For dry cough, scratchy throat</p><ul class=\"ds-featured__chips\" aria-label=\"Ingredients\"><li>Milk</li><li>Turmeric powder</li><li>Black pepper, crushed</li></ul><p class=\"ds-featured__date\">2 Sept 2026</p></a>",
+      "css": ".ds-featured { display: block; width: 20rem; max-width: 100%; padding: 20px; border: 1px solid var(--border); border-radius: var(--radius-2xl, 18px); background: color-mix(in oklab, var(--primary) 5%, transparent); color: var(--foreground); font-family: 'Inter Variable', sans-serif; text-decoration: none; transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-featured:hover { background: color-mix(in oklab, var(--primary) 10%, transparent); } .ds-featured:hover .ds-featured__title { text-decoration: underline; text-underline-offset: 4px; } .ds-featured__kicker { display: flex; align-items: center; gap: 6px; margin: 0; font-size: 0.875rem; font-weight: 500; line-height: 1.43; color: var(--primary); } .ds-featured__title { margin: 8px 0 0; font-size: 1.25rem; font-weight: 600; line-height: 1.4; letter-spacing: -0.025em; text-wrap: balance; } .ds-featured__meta { margin: 4px 0 0; font-size: 0.875rem; line-height: 1.43; color: var(--muted-foreground); } .ds-featured__chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 0; padding: 0; list-style: none; } .ds-featured__chips li { display: inline-flex; align-items: center; height: 20px; padding: 2px 8px; border: 1px solid var(--border); border-radius: 26px; background: var(--background); font-size: 0.75rem; font-weight: 500; line-height: 1; white-space: nowrap; } .ds-featured__date { margin: 16px 0 0; font-size: 0.75rem; line-height: 1.33; color: var(--muted-foreground); }"
+    },
+    {
+      "name": "Kind Mark",
+      "kind": "custom",
+      "refersTo": "kind-mark",
+      "description": "A 36px indigo-tinted square holding the lucide icon for a kind: Leaf, Lightbulb, CookingPot.",
+      "html": "<span class=\"ds-kind-row\"><span class=\"ds-kind\" aria-hidden=\"true\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z\"/><path d=\"M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12\"/></svg></span><span class=\"ds-kind\" aria-hidden=\"true\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5\"/><path d=\"M9 18h6\"/><path d=\"M10 22h4\"/></svg></span><span class=\"ds-kind\" aria-hidden=\"true\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M2 12h20\"/><path d=\"M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8\"/><path d=\"m4 8 16-4\"/><path d=\"m8.86 6.78-.45-1.81a2 2 0 0 1 1.45-2.43l1.94-.48a2 2 0 0 1 2.43 1.46l.45 1.8\"/></svg></span></span>",
+      "css": ".ds-kind-row { display: inline-flex; gap: 12px; } .ds-kind { display: grid; place-items: center; width: 36px; height: 36px; flex-shrink: 0; border-radius: var(--radius-lg, 10px); background: color-mix(in oklab, var(--primary) 10%, transparent); color: var(--primary); }"
+    },
+    {
+      "name": "Step List",
+      "kind": "custom",
+      "refersTo": "step-number",
+      "description": "Method steps with 28px indigo-tinted number circles.",
+      "html": "<ol class=\"ds-steps\"><li><span class=\"ds-steps__n\">1</span><p>Warm the milk in a small pan until it steams. Do not boil it.</p></li><li><span class=\"ds-steps__n\">2</span><p>Stir in the turmeric and crushed pepper.</p></li><li><span class=\"ds-steps__n\">3</span><p>Pour into a cup, add jaggery if using, and sip slowly while it is warm.</p></li></ol>",
+      "css": ".ds-steps { list-style: none; margin: 0; padding: 0; max-width: 36rem; font-family: 'Inter Variable', sans-serif; color: var(--foreground); } .ds-steps li { display: flex; gap: 16px; } .ds-steps li + li { margin-top: 16px; } .ds-steps__n { display: grid; place-items: center; width: 28px; height: 28px; flex-shrink: 0; border-radius: 9999px; background: color-mix(in oklab, var(--primary) 10%, transparent); color: var(--primary); font-size: 0.875rem; font-weight: 600; font-variant-numeric: tabular-nums; } .ds-steps p { margin: 0; padding-top: 2px; font-size: 1rem; line-height: 1.5; text-wrap: pretty; }"
+    },
+    {
+      "name": "Caution Alert",
+      "kind": "custom",
+      "refersTo": "alert-caution",
+      "description": "shadcn Alert destructive: 'When to see a doctor' on an entry, and form errors.",
+      "html": "<div class=\"ds-alert\" role=\"alert\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3\"/><path d=\"M12 9v4\"/><path d=\"M12 17h.01\"/></svg><div class=\"ds-alert__title\">When to see a doctor</div><div class=\"ds-alert__desc\">If the cough lasts more than ten days, comes with fever, breathlessness, or blood, see a doctor.</div></div>",
+      "css": ".ds-alert { display: grid; grid-template-columns: auto 1fr; column-gap: 8px; row-gap: 2px; width: 100%; max-width: 36rem; padding: 8px 10px; border: 1px solid var(--border); border-radius: var(--radius-lg, 10px); background: var(--card); color: var(--destructive); font-family: 'Inter Variable', sans-serif; font-size: 0.875rem; line-height: 1.43; text-align: left; } .ds-alert > svg { grid-row: span 2; transform: translateY(2px); } .ds-alert__title { grid-column: 2; font-weight: 500; } .ds-alert__desc { grid-column: 2; color: color-mix(in oklab, var(--destructive) 90%, transparent); text-wrap: pretty; }"
+    },
+    {
+      "name": "Site Header",
+      "kind": "nav",
+      "refersTo": "input-search",
+      "description": "Mark and name, section links in quiet ink, search pushed right, theme toggle.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-header__brand\" href=\"#\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m14.479 19.374-.971.939a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5a5.2 5.2 0 0 1-.219 1.49\"/><path d=\"M15 15h6\"/><path d=\"M18 12v6\"/></svg>TipsToTreat</a><nav class=\"ds-header__nav\" aria-label=\"Sections\"><a class=\"is-active\" href=\"#\">Remedies</a><a href=\"#\">Tips</a><a href=\"#\">Recipes</a></nav><form class=\"ds-header__search\" role=\"search\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg><input type=\"search\" placeholder=\"Search\" aria-label=\"Search\" /></form><button class=\"ds-header__toggle\" type=\"button\" aria-label=\"Switch to dark mode\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z\"/></svg></button></header>",
+      "css": ".ds-header { display: flex; flex-wrap: wrap; align-items: center; column-gap: 24px; row-gap: 12px; width: 100%; max-width: 56rem; padding: 16px 20px; border-bottom: 1px solid var(--border); background: var(--background); color: var(--foreground); font-family: 'Inter Variable', sans-serif; box-sizing: border-box; } .ds-header__brand { display: flex; align-items: center; gap: 8px; color: inherit; font-weight: 600; letter-spacing: -0.025em; text-decoration: none; } .ds-header__brand svg { color: var(--primary); } .ds-header__nav { display: flex; align-items: center; gap: 16px; font-size: 0.875rem; } .ds-header__nav a { color: var(--muted-foreground); text-decoration: none; transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-header__nav a:hover, .ds-header__nav a.is-active { color: var(--foreground); } .ds-header__search { position: relative; margin-left: auto; width: 14rem; } .ds-header__search svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--muted-foreground); pointer-events: none; } .ds-header__search input { height: 36px; width: 100%; padding: 0 12px 0 32px; border: 1px solid var(--border); border-radius: var(--radius-lg, 10px); background: var(--background); color: var(--foreground); font: 400 0.875rem/1.43 'Inter Variable', sans-serif; outline: none; box-sizing: border-box; } .ds-header__search input::placeholder { color: var(--muted-foreground); } .ds-header__search input:focus-visible { border-color: var(--ring); } .ds-header__toggle { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--border); border-radius: var(--radius-lg, 10px); background: var(--background); color: var(--muted-foreground); cursor: pointer; transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), color 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-header__toggle:hover { background: var(--muted); color: var(--foreground); } .ds-header__toggle:focus-visible { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Friendly Index",
+    "overview": "TipsToTreat is a well-set list of entries with a little warmth let back in. A visitor arrives from search, on a phone, mid-complaint or mid-cooking; the page gives them a three-line headline that says what this is, a muted paragraph that says who writes it, three outline buttons with counts, and then the entries themselves, one under another, separated by hairlines. The warmth is small and consistent: a pale indigo card for the newest entry, a leaf, a bulb, and a cooking pot in indigo-tinted squares marking the three kinds, ingredient names as outline chips under every title, and numbered circles on the method. Nothing else is decorated.\n\nThe material is shadcn's zinc paper: pure white in light mode, near-black in dark, with one chromatic colour, the mark's indigo. Indigo is almost never a solid fill; it is a 5% or 10% tint behind an icon, a number, or the featured card, and a text colour on the mark, the \"Newest remedy\" line, and the \"Published\" word. Solid indigo appears on exactly two things: the primary button and the Published badge in the admin. Inter Variable carries every role at 16px body; headings are semibold with tight tracking, and the second voice on every page is quiet ink at 14px.\n\nThe admin is the same site, not a separate shell. It lives under /admin inside the public header, adds one slim sub-nav line, and builds every form from the same shadcn primitives (Field, Input, Textarea, NativeSelect, Button, Card, Alert, Table, Badge) at 10px radius. A visitor and the author see one design.",
+    "keyCharacteristics": [
+      "Paper ground, hairline structure, one 56rem column with a 20px gutter on every page, public and admin.",
+      "Inter Variable for every role with ss01 on; page titles semibold and tight, body 16px/1.5, second voice 14px in quiet ink.",
+      "Indigo as tint and signal: 5–10% washes behind icons, numbers, and the featured card; solid only on the primary button and the Published badge.",
+      "Three kind icons (Leaf, Lightbulb, CookingPot) in 36px indigo-tinted rounded squares are the only pictorial element.",
+      "Ingredients as 20px outline chips wherever an entry is listed; tags as the same chip.",
+      "10px base radius on every control; enclosures step up to 14px (cards, row hover) and 18px (featured card).",
+      "Flat: no drop shadows; depth is a hairline, a 1px ring, or a tint. Motion is a 150ms colour transition and a 1px press.",
+      "Sentence case everywhere; no uppercase, no tracked-out labels."
+    ],
+    "rules": [
+      {
+        "name": "The Tinted Indigo Rule",
+        "body": "Indigo is spent as a 5–10% wash behind an icon, a number, or the featured card, or as text and stroke colour. It becomes a solid fill only on the one primary button per view and the Published badge. Headlines, nav, row titles, and hover states are never indigo; hover moves quiet ink to ink and adds an underline.",
+        "section": "colors"
+      },
+      {
+        "name": "The Hairline Structure Rule",
+        "body": "Boundaries are 1px hairlines: dividers, control borders, chip borders, card rings. The tint is a state (hover, active, draft), never a resting surface for content. The featured card is the one tinted resting surface, and it is indigo at 5%, not grey.",
+        "section": "colors"
+      },
+      {
+        "name": "The Sentence Case Rule",
+        "body": "No text is uppercased and no letter-spacing is opened. Small text is set smaller and greyer, never tracked out.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Bold Line Rule",
+        "body": "A page or an entry has one 600 line, its title (plus home-page section titles, which head separate lists). Row titles are 500; article sub-headings are 400; everything below is Label.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Paper Rule",
+        "body": "Surfaces are flat at rest. A card is paper inside a hairline ring; an input is transparent inside a hairline; a hovered row is paper with 60% tint behind it. No element casts a shadow, and nothing gains one on hover.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do build every new list as hairline-divided Entry Rows: Title at 500, context line in quiet ink, summary at Body, up to four outline chips, 60% tint on hover with an underlined title.",
+      "Do keep every page, public and admin, inside the 56rem column with a 20px gutter, and open each section with a hairline and 40px of padding.",
+      "Do carry hierarchy with ink versus quiet ink and with weight; a second line under a title is Label in quiet ink.",
+      "Do spend indigo as a 5–10% tint behind an icon, number, or the featured card, or as text; reserve solid indigo for one primary button per view and the Published badge.",
+      "Do use the shadcn primitives in src/components/ui for controls (Button, Badge, Card, Alert, Field, Input, Textarea, NativeSelect, Table) rather than hand-styled equivalents; the 10px radius, focus halo, and dark-mode field treatment come with them.",
+      "Do mark a kind with its lucide icon (Leaf, Lightbulb, CookingPot) in a 36px indigo-tinted square, and always name the kind in words beside it.",
+      "Do write labels, nav items, buttons, and table headers in sentence case at natural tracking.",
+      "Do set tabular figures on any column of numbers, quantities, or dates.",
+      "Do define every colour for both themes through the :root / .dark tokens; never hard-code a colour in a component."
+    ],
+    "donts": [
+      "Don't add drop shadows, gradients, grey tinted section backgrounds, colour bands, or imagery blocks; the ground is paper, a card is a ring, and the one tinted surface is the featured card at 5% indigo.",
+      "Don't wrap list entries in cards or card grids; the row and the hairline are the container. The Card is for an aside or an action panel, not for content in a list.",
+      "Don't uppercase or letter-space any text.",
+      "Don't colour headings, row titles, nav items, or hover states indigo; hover goes quiet ink to ink plus an underline, and focus is grey.",
+      "Don't introduce a second accent or per-kind colours for Remedies, Tips, and Recipes; the kinds share indigo and differ by icon and word.",
+      "Don't animate beyond a 150ms colour transition and the 1px button press; no reveals, slides, or scale on hover.",
+      "Don't set row titles at 600 or article sub-headings (\"Method\") above 400; the semibold weight belongs to page titles and home-page section titles.",
+      "Don't use a system or display face for any role; Inter Variable carries everything except the slug field and inline code."
+    ]
+  }
+}

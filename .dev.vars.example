@@ -1,0 +1,7 @@
+BETTER_AUTH_SECRET=generate-with-openssl-rand-base64-32
+# The account with this email becomes the site's author (admin). Everyone else is a reader.
+AUTHOR_EMAIL=
+# Google sign-in (Google Cloud console > APIs & Services > Credentials > OAuth client, Web).
+# Authorised redirect URI: <site origin>/api/auth/callback/google
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=

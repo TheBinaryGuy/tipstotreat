@@ -4,4 +4,23 @@
     "compatibility_date": "2026-07-11",
     "compatibility_flags": ["nodejs_compat"],
     "main": "@tanstack/react-start/server-entry",
+    "observability": { "enabled": true },
+    "vars": {
+        // Optional. Leave blank to derive the auth origin from each request (works for previews);
+        // set it to the canonical site URL in production if you want redirects pinned to it.
+        "BETTER_AUTH_URL": "",
+        // The account with this email becomes the site's author (better-auth admin role),
+        // whether it signs up with a password or Google. Everyone else is a reader.
+        "AUTHOR_EMAIL": "",
+        // Google OAuth client id (public). The secret is set with `wrangler secret put`.
+        "GOOGLE_CLIENT_ID": "273459277368-uuat056qvmoe40o5s2bjuqbth6bdteiu.apps.googleusercontent.com"
+    },
+    "d1_databases": [
+        {
+            "binding": "DB",
+            "database_name": "tipstotreat",
+            "database_id": "20b1ed94-9517-42e2-85d6-7080ee22a0c4",
+            "migrations_dir": "migrations"
+        }
+    ]
 }

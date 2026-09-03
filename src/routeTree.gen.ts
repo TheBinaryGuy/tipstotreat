@@ -9,50 +9,424 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as SiteRouteImport } from './routes/_site'
+import { Route as LlmsFullDottxtRouteImport } from './routes/llms-full[.]txt'
+import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as KindChar123slugChar125DotmdRouteImport } from './routes/$kind/{$slug}[.]md'
+import { Route as SiteIndexRouteImport } from './routes/_site/index'
+import { Route as SiteAdminRouteRouteImport } from './routes/_site/admin/route'
+import { Route as SiteSearchRouteImport } from './routes/_site/search'
+import { Route as SiteSignInRouteImport } from './routes/_site/sign-in'
+import { Route as SiteSignUpRouteImport } from './routes/_site/sign-up'
+import { Route as SiteKindIndexRouteImport } from './routes/_site/$kind/index'
+import { Route as SiteKindSlugRouteImport } from './routes/_site/$kind/$slug'
+import { Route as SiteAdminIndexRouteImport } from './routes/_site/admin/index'
+import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as OgKindChar123slugChar125DotpngRouteImport } from './routes/og/$kind/{$slug}[.]png'
+import { Route as SiteAdminEntriesIdRouteImport } from './routes/_site/admin/entries/$id'
+import { Route as SiteAdminEntriesNewRouteImport } from './routes/_site/admin/entries/new'
 
-const IndexRoute = IndexRouteImport.update({
+const SiteRoute = SiteRouteImport.update({
+  id: '/_site',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LlmsFullDottxtRoute = LlmsFullDottxtRouteImport.update({
+  id: '/llms-full.txt',
+  path: '/llms-full.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
+  id: '/llms.txt',
+  path: '/llms.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KindChar123slugChar125DotmdRoute =
+  KindChar123slugChar125DotmdRouteImport.update({
+    id: '/$kind/{$slug}.md',
+    path: '/$kind/{$slug}.md',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SiteIndexRoute = SiteIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteAdminRouteRoute = SiteAdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteSearchRoute = SiteSearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteSignInRoute = SiteSignInRouteImport.update({
+  id: '/sign-in',
+  path: '/sign-in',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteSignUpRoute = SiteSignUpRouteImport.update({
+  id: '/sign-up',
+  path: '/sign-up',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteKindIndexRoute = SiteKindIndexRouteImport.update({
+  id: '/$kind/',
+  path: '/$kind/',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteKindSlugRoute = SiteKindSlugRouteImport.update({
+  id: '/$kind/$slug',
+  path: '/$kind/$slug',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteAdminIndexRoute = SiteAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SiteAdminRouteRoute,
+} as any)
+const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
+  id: '/api/auth/$',
+  path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
+} as any)
+const OgKindChar123slugChar125DotpngRoute =
+  OgKindChar123slugChar125DotpngRouteImport.update({
+    id: '/og/$kind/{$slug}.png',
+    path: '/og/$kind/{$slug}.png',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SiteAdminEntriesIdRoute = SiteAdminEntriesIdRouteImport.update({
+  id: '/entries/$id',
+  path: '/entries/$id',
+  getParentRoute: () => SiteAdminRouteRoute,
+} as any)
+const SiteAdminEntriesNewRoute = SiteAdminEntriesNewRouteImport.update({
+  id: '/entries/new',
+  path: '/entries/new',
+  getParentRoute: () => SiteAdminRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof SiteIndexRoute
+  '/llms-full.txt': typeof LlmsFullDottxtRoute
+  '/llms.txt': typeof LlmsDottxtRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin': typeof SiteAdminRouteRouteWithChildren
+  '/$kind/{$slug}.md': typeof KindChar123slugChar125DotmdRoute
+  '/search': typeof SiteSearchRoute
+  '/sign-in': typeof SiteSignInRoute
+  '/sign-up': typeof SiteSignUpRoute
+  '/$kind/$slug': typeof SiteKindSlugRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/og/$kind/{$slug}.png': typeof OgKindChar123slugChar125DotpngRoute
+  '/$kind/': typeof SiteKindIndexRoute
+  '/admin/': typeof SiteAdminIndexRoute
+  '/admin/entries/$id': typeof SiteAdminEntriesIdRoute
+  '/admin/entries/new': typeof SiteAdminEntriesNewRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/llms-full.txt': typeof LlmsFullDottxtRoute
+  '/llms.txt': typeof LlmsDottxtRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/$kind/{$slug}.md': typeof KindChar123slugChar125DotmdRoute
+  '/search': typeof SiteSearchRoute
+  '/sign-in': typeof SiteSignInRoute
+  '/sign-up': typeof SiteSignUpRoute
+  '/': typeof SiteIndexRoute
+  '/$kind/$slug': typeof SiteKindSlugRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/og/$kind/{$slug}.png': typeof OgKindChar123slugChar125DotpngRoute
+  '/$kind': typeof SiteKindIndexRoute
+  '/admin': typeof SiteAdminIndexRoute
+  '/admin/entries/$id': typeof SiteAdminEntriesIdRoute
+  '/admin/entries/new': typeof SiteAdminEntriesNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_site': typeof SiteRouteWithChildren
+  '/llms-full.txt': typeof LlmsFullDottxtRoute
+  '/llms.txt': typeof LlmsDottxtRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_site/admin': typeof SiteAdminRouteRouteWithChildren
+  '/$kind/{$slug}.md': typeof KindChar123slugChar125DotmdRoute
+  '/_site/search': typeof SiteSearchRoute
+  '/_site/sign-in': typeof SiteSignInRoute
+  '/_site/sign-up': typeof SiteSignUpRoute
+  '/_site/': typeof SiteIndexRoute
+  '/_site/$kind/$slug': typeof SiteKindSlugRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/og/$kind/{$slug}.png': typeof OgKindChar123slugChar125DotpngRoute
+  '/_site/$kind/': typeof SiteKindIndexRoute
+  '/_site/admin/': typeof SiteAdminIndexRoute
+  '/_site/admin/entries/$id': typeof SiteAdminEntriesIdRoute
+  '/_site/admin/entries/new': typeof SiteAdminEntriesNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/llms-full.txt'
+    | '/llms.txt'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/admin'
+    | '/$kind/{$slug}.md'
+    | '/search'
+    | '/sign-in'
+    | '/sign-up'
+    | '/$kind/$slug'
+    | '/api/auth/$'
+    | '/og/$kind/{$slug}.png'
+    | '/$kind/'
+    | '/admin/'
+    | '/admin/entries/$id'
+    | '/admin/entries/new'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/llms-full.txt'
+    | '/llms.txt'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/$kind/{$slug}.md'
+    | '/search'
+    | '/sign-in'
+    | '/sign-up'
+    | '/'
+    | '/$kind/$slug'
+    | '/api/auth/$'
+    | '/og/$kind/{$slug}.png'
+    | '/$kind'
+    | '/admin'
+    | '/admin/entries/$id'
+    | '/admin/entries/new'
+  id:
+    | '__root__'
+    | '/_site'
+    | '/llms-full.txt'
+    | '/llms.txt'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/_site/admin'
+    | '/$kind/{$slug}.md'
+    | '/_site/search'
+    | '/_site/sign-in'
+    | '/_site/sign-up'
+    | '/_site/'
+    | '/_site/$kind/$slug'
+    | '/api/auth/$'
+    | '/og/$kind/{$slug}.png'
+    | '/_site/$kind/'
+    | '/_site/admin/'
+    | '/_site/admin/entries/$id'
+    | '/_site/admin/entries/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  SiteRoute: typeof SiteRouteWithChildren
+  LlmsFullDottxtRoute: typeof LlmsFullDottxtRoute
+  LlmsDottxtRoute: typeof LlmsDottxtRoute
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  KindChar123slugChar125DotmdRoute: typeof KindChar123slugChar125DotmdRoute
+  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  OgKindChar123slugChar125DotpngRoute: typeof OgKindChar123slugChar125DotpngRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_site': {
+      id: '/_site'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof SiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/llms-full.txt': {
+      id: '/llms-full.txt'
+      path: '/llms-full.txt'
+      fullPath: '/llms-full.txt'
+      preLoaderRoute: typeof LlmsFullDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/llms.txt': {
+      id: '/llms.txt'
+      path: '/llms.txt'
+      fullPath: '/llms.txt'
+      preLoaderRoute: typeof LlmsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$kind/{$slug}.md': {
+      id: '/$kind/{$slug}.md'
+      path: '/$kind/{$slug}.md'
+      fullPath: '/$kind/{$slug}.md'
+      preLoaderRoute: typeof KindChar123slugChar125DotmdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_site/': {
+      id: '/_site/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof SiteIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/admin': {
+      id: '/_site/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof SiteAdminRouteRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/search': {
+      id: '/_site/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SiteSearchRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/sign-in': {
+      id: '/_site/sign-in'
+      path: '/sign-in'
+      fullPath: '/sign-in'
+      preLoaderRoute: typeof SiteSignInRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/sign-up': {
+      id: '/_site/sign-up'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof SiteSignUpRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/$kind/': {
+      id: '/_site/$kind/'
+      path: '/$kind'
+      fullPath: '/$kind/'
+      preLoaderRoute: typeof SiteKindIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/$kind/$slug': {
+      id: '/_site/$kind/$slug'
+      path: '/$kind/$slug'
+      fullPath: '/$kind/$slug'
+      preLoaderRoute: typeof SiteKindSlugRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/admin/': {
+      id: '/_site/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof SiteAdminIndexRouteImport
+      parentRoute: typeof SiteAdminRouteRoute
+    }
+    '/api/auth/$': {
+      id: '/api/auth/$'
+      path: '/api/auth/$'
+      fullPath: '/api/auth/$'
+      preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/og/$kind/{$slug}.png': {
+      id: '/og/$kind/{$slug}.png'
+      path: '/og/$kind/{$slug}.png'
+      fullPath: '/og/$kind/{$slug}.png'
+      preLoaderRoute: typeof OgKindChar123slugChar125DotpngRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_site/admin/entries/$id': {
+      id: '/_site/admin/entries/$id'
+      path: '/entries/$id'
+      fullPath: '/admin/entries/$id'
+      preLoaderRoute: typeof SiteAdminEntriesIdRouteImport
+      parentRoute: typeof SiteAdminRouteRoute
+    }
+    '/_site/admin/entries/new': {
+      id: '/_site/admin/entries/new'
+      path: '/entries/new'
+      fullPath: '/admin/entries/new'
+      preLoaderRoute: typeof SiteAdminEntriesNewRouteImport
+      parentRoute: typeof SiteAdminRouteRoute
     }
   }
 }
 
+interface SiteAdminRouteRouteChildren {
+  SiteAdminIndexRoute: typeof SiteAdminIndexRoute
+  SiteAdminEntriesIdRoute: typeof SiteAdminEntriesIdRoute
+  SiteAdminEntriesNewRoute: typeof SiteAdminEntriesNewRoute
+}
+
+const SiteAdminRouteRouteChildren: SiteAdminRouteRouteChildren = {
+  SiteAdminIndexRoute: SiteAdminIndexRoute,
+  SiteAdminEntriesIdRoute: SiteAdminEntriesIdRoute,
+  SiteAdminEntriesNewRoute: SiteAdminEntriesNewRoute,
+}
+
+const SiteAdminRouteRouteWithChildren = SiteAdminRouteRoute._addFileChildren(
+  SiteAdminRouteRouteChildren,
+)
+
+interface SiteRouteChildren {
+  SiteAdminRouteRoute: typeof SiteAdminRouteRouteWithChildren
+  SiteSearchRoute: typeof SiteSearchRoute
+  SiteSignInRoute: typeof SiteSignInRoute
+  SiteSignUpRoute: typeof SiteSignUpRoute
+  SiteIndexRoute: typeof SiteIndexRoute
+  SiteKindSlugRoute: typeof SiteKindSlugRoute
+  SiteKindIndexRoute: typeof SiteKindIndexRoute
+}
+
+const SiteRouteChildren: SiteRouteChildren = {
+  SiteAdminRouteRoute: SiteAdminRouteRouteWithChildren,
+  SiteSearchRoute: SiteSearchRoute,
+  SiteSignInRoute: SiteSignInRoute,
+  SiteSignUpRoute: SiteSignUpRoute,
+  SiteIndexRoute: SiteIndexRoute,
+  SiteKindSlugRoute: SiteKindSlugRoute,
+  SiteKindIndexRoute: SiteKindIndexRoute,
+}
+
+const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  SiteRoute: SiteRouteWithChildren,
+  LlmsFullDottxtRoute: LlmsFullDottxtRoute,
+  LlmsDottxtRoute: LlmsDottxtRoute,
+  RobotsDottxtRoute: RobotsDottxtRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  KindChar123slugChar125DotmdRoute: KindChar123slugChar125DotmdRoute,
+  ApiAuthSplatRoute: ApiAuthSplatRoute,
+  OgKindChar123slugChar125DotpngRoute: OgKindChar123slugChar125DotpngRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

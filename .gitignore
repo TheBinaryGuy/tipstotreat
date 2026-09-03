@@ -13,3 +13,8 @@ todos.json
 
 # typescript
 *.tsbuildinfo
+
+# local secrets and design review captures
+.dev.vars
+.impeccable/review/
+.impeccable/build/
