@@ -12,7 +12,7 @@ import {
 import type { SessionUser } from '@/features/auth/shared/types';
 import { authClient } from '@/lib/auth-client';
 import { Link, useRouter } from '@tanstack/react-router';
-import { LogOutIcon, PenLineIcon } from 'lucide-react';
+import { LogOutIcon, PenLineIcon, SettingsIcon } from 'lucide-react';
 
 export function UserMenu({ user }: { user: SessionUser }) {
     const router = useRouter();
@@ -56,6 +56,9 @@ export function UserMenu({ user }: { user: SessionUser }) {
                     </>
                 ) : null}
                 <DropdownMenuSeparator />
+                <DropdownMenuItem render={<Link to='/account' />}>
+                    <SettingsIcon /> Settings
+                </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => void signOut()}>
                     <LogOutIcon /> Sign out
                 </DropdownMenuItem>

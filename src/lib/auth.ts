@@ -2,7 +2,9 @@ import { getDb, schema } from '@/lib/db';
 import { user } from '@/lib/db/schema';
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
-import { admin, lastLoginMethod } from 'better-auth/plugins';
+import { passkey } from '@better-auth/passkey';
+import { admin, lastLoginMethod, twoFactor } from 'better-auth/plugins';
+import { resetPasswordEmail, sendEmail } from '@/lib/email.server';
 import { tanstackStartCookies } from 'better-auth/tanstack-start';
 import { env } from 'cloudflare:workers';
 import { count } from 'drizzle-orm';
@@ -34,11 +36,26 @@ function createAuth() {
         plugins: [
             admin({ defaultRole: 'user', adminRoles: ['admin'] }),
             lastLoginMethod(),
+            twoFactor({ issuer: 'TipsToTreat' }),
+            passkey({
+                rpID: env.PASSKEY_RP_ID || 'localhost',
+                rpName: 'TipsToTreat',
+                origin: env.SITE_URL || env.BETTER_AUTH_URL || 'http://localhost:5173',
+            }),
             tanstackStartCookies(),
         ],
         emailAndPassword: {
             enabled: true,
             minPasswordLength: 10,
+            sendResetPassword: async ({ user: account, url }) => {
+                const mail = resetPasswordEmail(account.name, url);
+                await sendEmail({
+                    to: account.email,
+                    subject: 'Reset your TipsToTreat password',
+                    ...mail,
+                });
+            },
+            resetPasswordTokenExpiresIn: 60 * 60,
         },
         socialProviders: google ? { google } : {},
         session: {

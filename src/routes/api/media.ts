@@ -1,17 +1,23 @@
-import { requireAuthor } from '@/features/auth/server/session.server';
+import { requireUser } from '@/features/auth/server/session.server';
 import { MEDIA_MAX_BYTES, MEDIA_TYPES, putMedia } from '@/lib/media.server';
 import { createFileRoute } from '@tanstack/react-router';
 
-/** Author-only image upload: multipart/form-data with a `file` field. Returns { url }. */
+/**
+ * Image upload: multipart/form-data with a `file` field. Returns { url }. Authors upload covers
+ * and inline images (8 MB); every other signed-in user may upload a profile picture (2 MB).
+ */
 export const Route = createFileRoute('/api/media')({
     server: {
         handlers: {
             POST: async ({ request }) => {
+                let isAuthor = false;
                 try {
-                    await requireAuthor();
+                    const me = await requireUser();
+                    isAuthor = me.role === 'admin';
                 } catch (error) {
                     return Response.json({ error: (error as Error).message }, { status: 401 });
                 }
+                const maxBytes = isAuthor ? MEDIA_MAX_BYTES : 2 * 1024 * 1024;
                 const form = await request.formData();
                 const file = form.get('file');
                 if (!(file instanceof File)) {
@@ -23,10 +29,17 @@ export const Route = createFileRoute('/api/media')({
                         { status: 415 }
                     );
                 }
-                if (file.size > MEDIA_MAX_BYTES) {
-                    return Response.json({ error: 'Images must be under 8 MB.' }, { status: 413 });
+                if (file.size > maxBytes) {
+                    return Response.json(
+                        { error: `Images must be under ${Math.round(maxBytes / 1024 / 1024)} MB.` },
+                        { status: 413 }
+                    );
                 }
-                const { url } = await putMedia(await file.arrayBuffer(), file.type, 'uploads');
+                const { url } = await putMedia(
+                    await file.arrayBuffer(),
+                    file.type,
+                    isAuthor ? 'uploads' : 'avatars'
+                );
                 return Response.json({ url });
             },
         },

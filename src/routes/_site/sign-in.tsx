@@ -7,7 +7,9 @@ import {
 import { formatDate } from '@/lib/format';
 import { authClient } from '@/lib/auth-client';
 import { Link, createFileRoute, redirect, useRouter } from '@tanstack/react-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { KeyRoundIcon } from 'lucide-react';
 import { z } from 'zod';
 
 const search = z.object({ redirect: z.string().optional().catch(undefined) });
@@ -40,6 +42,30 @@ function SignInPage() {
     const { methods, redirectTo } = Route.useRouteContext();
     const router = useRouter();
     const [error, setError] = useState<string | null>(null);
+    const [passkeySupported, setPasskeySupported] = useState(false);
+
+    useEffect(() => {
+        if (!('PublicKeyCredential' in window)) return;
+        setPasskeySupported(true);
+        // Conditional UI: the browser offers saved passkeys when the email field is focused.
+        void authClient.signIn.passkey({ autoFill: true }).then(async result => {
+            if (result && !result.error) {
+                await router.invalidate();
+                await router.navigate({ href: redirectTo });
+            }
+        });
+    }, [redirectTo, router]);
+
+    async function signInWithPasskey() {
+        setError(null);
+        const result = await authClient.signIn.passkey();
+        if (result?.error) {
+            setError(result.error.message ?? 'Passkey sign-in did not complete.');
+            return;
+        }
+        await router.invalidate();
+        await router.navigate({ href: redirectTo });
+    }
 
     return (
         <AuthLayout
@@ -105,6 +131,22 @@ function SignInPage() {
                 schema={loginSchema}
                 submitLabel='Sign in'
             />
+            <div className='mt-3 flex items-center justify-between gap-3 text-sm'>
+                <Link
+                    className='text-muted-foreground hover:text-foreground underline-offset-4 hover:underline'
+                    to='/forgot-password'>
+                    Forgot password?
+                </Link>
+                {passkeySupported ? (
+                    <Button
+                        onClick={() => void signInWithPasskey()}
+                        size='sm'
+                        type='button'
+                        variant='ghost'>
+                        <KeyRoundIcon data-icon='inline-start' /> Use a passkey
+                    </Button>
+                ) : null}
+            </div>
         </AuthLayout>
     );
 }

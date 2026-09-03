@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "@base-ui/react": "^1.7.0",
+        "@better-auth/passkey": "^1.7.2",
         "@fontsource-variable/inter": "^5.3.0",
         "@tailwindcss/vite": "^4.3.3",
         "@takumi-rs/helpers": "^2.13.4",
@@ -58,6 +59,7 @@
         "drizzle-orm": "1.0.0-rc.4",
         "lucide-react": "^1.31.0",
         "openai": "^6.49.0",
+        "qrcode": "^1.5.4",
         "react": "^19.2.8",
         "react-dom": "^19.2.8",
         "rehype-sanitize": "^6.0.0",
@@ -82,6 +84,7 @@
         "@tanstack/react-ai-devtools": "^0.2.71",
         "@total-typescript/ts-reset": "^0.6.1",
         "@types/node": "^26.2.0",
+        "@types/qrcode": "^1.5.6",
         "@types/react": "^19.2.18",
         "@types/react-dom": "^19.2.4",
         "@vitejs/plugin-react": "^6.0.5",

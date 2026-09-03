@@ -18,11 +18,15 @@ import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as KindChar123slugChar125DotmdRouteImport } from './routes/$kind/{$slug}[.]md'
 import { Route as SiteIndexRouteImport } from './routes/_site/index'
+import { Route as SiteAccountRouteImport } from './routes/_site/account'
 import { Route as SiteAdminRouteRouteImport } from './routes/_site/admin/route'
+import { Route as SiteForgotPasswordRouteImport } from './routes/_site/forgot-password'
 import { Route as SiteOfflineRouteImport } from './routes/_site/offline'
+import { Route as SiteResetPasswordRouteImport } from './routes/_site/reset-password'
 import { Route as SiteSearchRouteImport } from './routes/_site/search'
 import { Route as SiteSignInRouteImport } from './routes/_site/sign-in'
 import { Route as SiteSignUpRouteImport } from './routes/_site/sign-up'
+import { Route as SiteTwoFactorRouteImport } from './routes/_site/two-factor'
 import { Route as ApiMediaRouteImport } from './routes/api/media'
 import { Route as MediaSplatRouteImport } from './routes/media/$'
 import { Route as OgSiteDotpngRouteImport } from './routes/og/site[.]png'
@@ -81,14 +85,29 @@ const SiteIndexRoute = SiteIndexRouteImport.update({
   path: '/',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteAccountRoute = SiteAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SiteAdminRouteRoute = SiteAdminRouteRouteImport.update({
   id: '/admin',
   path: '/admin',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteForgotPasswordRoute = SiteForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SiteOfflineRoute = SiteOfflineRouteImport.update({
   id: '/offline',
   path: '/offline',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteResetPasswordRoute = SiteResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => SiteRoute,
 } as any)
 const SiteSearchRoute = SiteSearchRouteImport.update({
@@ -104,6 +123,11 @@ const SiteSignInRoute = SiteSignInRouteImport.update({
 const SiteSignUpRoute = SiteSignUpRouteImport.update({
   id: '/sign-up',
   path: '/sign-up',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteTwoFactorRoute = SiteTwoFactorRouteImport.update({
+  id: '/two-factor',
+  path: '/two-factor',
   getParentRoute: () => SiteRoute,
 } as any)
 const ApiMediaRoute = ApiMediaRouteImport.update({
@@ -178,10 +202,14 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof SiteAdminRouteRouteWithChildren
   '/$kind/{$slug}.md': typeof KindChar123slugChar125DotmdRoute
+  '/account': typeof SiteAccountRoute
+  '/forgot-password': typeof SiteForgotPasswordRoute
   '/offline': typeof SiteOfflineRoute
+  '/reset-password': typeof SiteResetPasswordRoute
   '/search': typeof SiteSearchRoute
   '/sign-in': typeof SiteSignInRoute
   '/sign-up': typeof SiteSignUpRoute
+  '/two-factor': typeof SiteTwoFactorRoute
   '/api/media': typeof ApiMediaRoute
   '/media/$': typeof MediaSplatRoute
   '/og/site.png': typeof OgSiteDotpngRoute
@@ -203,10 +231,14 @@ export interface FileRoutesByTo {
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$kind/{$slug}.md': typeof KindChar123slugChar125DotmdRoute
+  '/account': typeof SiteAccountRoute
+  '/forgot-password': typeof SiteForgotPasswordRoute
   '/offline': typeof SiteOfflineRoute
+  '/reset-password': typeof SiteResetPasswordRoute
   '/search': typeof SiteSearchRoute
   '/sign-in': typeof SiteSignInRoute
   '/sign-up': typeof SiteSignUpRoute
+  '/two-factor': typeof SiteTwoFactorRoute
   '/api/media': typeof ApiMediaRoute
   '/media/$': typeof MediaSplatRoute
   '/og/site.png': typeof OgSiteDotpngRoute
@@ -232,10 +264,14 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_site/admin': typeof SiteAdminRouteRouteWithChildren
   '/$kind/{$slug}.md': typeof KindChar123slugChar125DotmdRoute
+  '/_site/account': typeof SiteAccountRoute
+  '/_site/forgot-password': typeof SiteForgotPasswordRoute
   '/_site/offline': typeof SiteOfflineRoute
+  '/_site/reset-password': typeof SiteResetPasswordRoute
   '/_site/search': typeof SiteSearchRoute
   '/_site/sign-in': typeof SiteSignInRoute
   '/_site/sign-up': typeof SiteSignUpRoute
+  '/_site/two-factor': typeof SiteTwoFactorRoute
   '/api/media': typeof ApiMediaRoute
   '/media/$': typeof MediaSplatRoute
   '/og/site.png': typeof OgSiteDotpngRoute
@@ -262,10 +298,14 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/admin'
     | '/$kind/{$slug}.md'
+    | '/account'
+    | '/forgot-password'
     | '/offline'
+    | '/reset-password'
     | '/search'
     | '/sign-in'
     | '/sign-up'
+    | '/two-factor'
     | '/api/media'
     | '/media/$'
     | '/og/site.png'
@@ -287,10 +327,14 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/sitemap.xml'
     | '/$kind/{$slug}.md'
+    | '/account'
+    | '/forgot-password'
     | '/offline'
+    | '/reset-password'
     | '/search'
     | '/sign-in'
     | '/sign-up'
+    | '/two-factor'
     | '/api/media'
     | '/media/$'
     | '/og/site.png'
@@ -315,10 +359,14 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/_site/admin'
     | '/$kind/{$slug}.md'
+    | '/_site/account'
+    | '/_site/forgot-password'
     | '/_site/offline'
+    | '/_site/reset-password'
     | '/_site/search'
     | '/_site/sign-in'
     | '/_site/sign-up'
+    | '/_site/two-factor'
     | '/api/media'
     | '/media/$'
     | '/og/site.png'
@@ -415,6 +463,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteIndexRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/account': {
+      id: '/_site/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof SiteAccountRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/admin': {
       id: '/_site/admin'
       path: '/admin'
@@ -422,11 +477,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteAdminRouteRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/forgot-password': {
+      id: '/_site/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof SiteForgotPasswordRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/offline': {
       id: '/_site/offline'
       path: '/offline'
       fullPath: '/offline'
       preLoaderRoute: typeof SiteOfflineRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/reset-password': {
+      id: '/_site/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof SiteResetPasswordRouteImport
       parentRoute: typeof SiteRoute
     }
     '/_site/search': {
@@ -448,6 +517,13 @@ declare module '@tanstack/react-router' {
       path: '/sign-up'
       fullPath: '/sign-up'
       preLoaderRoute: typeof SiteSignUpRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/two-factor': {
+      id: '/_site/two-factor'
+      path: '/two-factor'
+      fullPath: '/two-factor'
+      preLoaderRoute: typeof SiteTwoFactorRouteImport
       parentRoute: typeof SiteRoute
     }
     '/api/media': {
@@ -559,10 +635,14 @@ const SiteAdminRouteRouteWithChildren = SiteAdminRouteRoute._addFileChildren(
 
 interface SiteRouteChildren {
   SiteAdminRouteRoute: typeof SiteAdminRouteRouteWithChildren
+  SiteAccountRoute: typeof SiteAccountRoute
+  SiteForgotPasswordRoute: typeof SiteForgotPasswordRoute
   SiteOfflineRoute: typeof SiteOfflineRoute
+  SiteResetPasswordRoute: typeof SiteResetPasswordRoute
   SiteSearchRoute: typeof SiteSearchRoute
   SiteSignInRoute: typeof SiteSignInRoute
   SiteSignUpRoute: typeof SiteSignUpRoute
+  SiteTwoFactorRoute: typeof SiteTwoFactorRoute
   SiteIndexRoute: typeof SiteIndexRoute
   SiteKindSlugRoute: typeof SiteKindSlugRoute
   SiteKindIndexRoute: typeof SiteKindIndexRoute
@@ -570,10 +650,14 @@ interface SiteRouteChildren {
 
 const SiteRouteChildren: SiteRouteChildren = {
   SiteAdminRouteRoute: SiteAdminRouteRouteWithChildren,
+  SiteAccountRoute: SiteAccountRoute,
+  SiteForgotPasswordRoute: SiteForgotPasswordRoute,
   SiteOfflineRoute: SiteOfflineRoute,
+  SiteResetPasswordRoute: SiteResetPasswordRoute,
   SiteSearchRoute: SiteSearchRoute,
   SiteSignInRoute: SiteSignInRoute,
   SiteSignUpRoute: SiteSignUpRoute,
+  SiteTwoFactorRoute: SiteTwoFactorRoute,
   SiteIndexRoute: SiteIndexRoute,
   SiteKindSlugRoute: SiteKindSlugRoute,
   SiteKindIndexRoute: SiteKindIndexRoute,

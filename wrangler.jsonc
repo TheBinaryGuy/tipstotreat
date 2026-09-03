@@ -16,12 +16,19 @@
         // IndexNow key (Bing, Yandex, DuckDuckGo via Bing); served at /indexnow.txt. Leave empty to
         // disable the pings that run when an entry is published; fill it in when the site is ready.
         "INDEXNOW_KEY": "",
+        // Public site URL and WebAuthn relying-party id (the bare domain) for passkeys.
+        "SITE_URL": "https://tipstotreat.com",
+        "PASSKEY_RP_ID": "tipstotreat.com",
+        // Sender for password resets etc. The domain must be enabled for Email Sending in the
+        // Cloudflare dashboard (Email Service) before mail leaves the Worker.
+        "EMAIL_FROM": "TipsToTreat <hello@tipstotreat.com>",
         "GOOGLE_CLIENT_ID": "273459277368-uuat056qvmoe40o5s2bjuqbth6bdteiu.apps.googleusercontent.com"
     },
     "ai": { "binding": "AI" },
     "r2_buckets": [
         { "binding": "MEDIA", "bucket_name": "tipstotreat-media" }
     ],
+    "send_email": [{ "name": "EMAIL" }],
     "d1_databases": [
         {
             "binding": "DB",
