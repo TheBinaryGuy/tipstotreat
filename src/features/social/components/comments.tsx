@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
 import { Textarea } from '@/components/ui/textarea';
 import type { SessionUser } from '@/features/auth/shared/types';
@@ -160,19 +161,11 @@ function CommentItem({
                 <p className='mt-1 whitespace-pre-line'>{comment.body}</p>
                 <div className='mt-1.5 -ml-2 flex items-center gap-1'>
                     {viewer ? (
-                        <Button
-                            aria-pressed={comment.liked}
-                            className={cn(comment.liked && 'text-destructive')}
-                            disabled={like.isPending}
-                            onClick={() => like.mutate()}
-                            size='sm'
-                            variant='ghost'>
-                            <HeartIcon
-                                className={cn(comment.liked && 'fill-current')}
-                                data-icon='inline-start'
-                            />
-                            Like
-                        </Button>
+                        <CommentLikeButton
+                            comment={comment}
+                            onToggle={() => like.mutate()}
+                            pending={like.isPending}
+                        />
                     ) : (
                         <Button
                             render={<Link search={{ redirect: location.href }} to='/sign-in' />}
@@ -307,5 +300,40 @@ function CommentForm({
                 ) : null}
             </div>
         </form>
+    );
+}
+
+/** Readers see Like/Liked; the author also gets the names of who liked it on hover. */
+function CommentLikeButton({
+    comment,
+    onToggle,
+    pending,
+}: {
+    comment: CommentView;
+    onToggle: () => void;
+    pending: boolean;
+}) {
+    const button = (
+        <Button
+            aria-pressed={comment.liked}
+            className={cn(comment.liked && 'text-destructive')}
+            disabled={pending}
+            onClick={onToggle}
+            size='sm'
+            variant='ghost'>
+            <HeartIcon className={cn(comment.liked && 'fill-current')} data-icon='inline-start' />
+            {comment.liked ? 'Liked' : 'Like'}
+        </Button>
+    );
+    if (!comment.likers) return button;
+    return (
+        <Tooltip>
+            <TooltipTrigger render={button} />
+            <TooltipContent>
+                {comment.likers.length === 0
+                    ? 'No likes yet'
+                    : `${comment.likers.length} ${comment.likers.length === 1 ? 'like' : 'likes'}: ${comment.likers.join(', ')}`}
+            </TooltipContent>
+        </Tooltip>
     );
 }

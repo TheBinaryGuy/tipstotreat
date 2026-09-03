@@ -19,7 +19,7 @@ export const getEntrySocialServerFn = createServerFn()
         const entry = await findPublishedBySlug(data.slug);
         if (!entry) throw notFound();
         const viewer = await readSession();
-        return entrySocial(entry.id, viewer?.id ?? null);
+        return entrySocial(entry.id, viewer ? { id: viewer.id, role: viewer.role } : null);
     });
 
 export const toggleLikeServerFn = createServerFn({ method: 'POST' })

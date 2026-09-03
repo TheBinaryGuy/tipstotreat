@@ -8,7 +8,7 @@ import {
     type AiDraft,
 } from '@/features/ai/shared/schema';
 import { createCloudflareImage, createCloudflareText } from '@/lib/ai/cloudflare';
-import { putMedia } from '@/lib/media.server';
+import { putOptimizedMedia } from '@/lib/media.server';
 import { chat, generateImage } from '@tanstack/ai';
 import { createServerFn } from '@tanstack/react-start';
 import { env } from 'cloudflare:workers';
@@ -140,7 +140,7 @@ export const aiGenerateImageServerFn = createServerFn({ method: 'POST' })
         const image = result.images[0];
         if (!image?.b64Json) throw new Error('The model returned no image. Try again.');
         const bytes = Uint8Array.from(atob(image.b64Json), c => c.charCodeAt(0));
-        const { url } = await putMedia(bytes, 'image/png', 'generated');
+        const { url } = await putOptimizedMedia(bytes, 'image/png', 'generated', 'cover');
         return { url, prompt };
     });
 
@@ -157,6 +157,6 @@ export const aiGenerateInlineImageServerFn = createServerFn({ method: 'POST' })
         const image = result.images[0];
         if (!image?.b64Json) throw new Error('The model returned no image. Try again.');
         const bytes = Uint8Array.from(atob(image.b64Json), c => c.charCodeAt(0));
-        const { url } = await putMedia(bytes, 'image/png', 'generated');
+        const { url } = await putOptimizedMedia(bytes, 'image/png', 'generated', 'cover');
         return { url };
     });

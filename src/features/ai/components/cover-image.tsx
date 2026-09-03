@@ -16,9 +16,13 @@ import { ImageIcon, SparklesIcon, Trash2Icon, UploadIcon } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { toast } from 'sonner';
 
-export async function uploadImage(file: File): Promise<string> {
+export async function uploadImage(
+    file: File,
+    purpose: 'cover' | 'inline' | 'avatar' = 'inline'
+): Promise<string> {
     const body = new FormData();
     body.append('file', file);
+    body.append('purpose', purpose);
     const response = await fetch('/api/media', { method: 'POST', body });
     const json = (await response.json()) as { url?: string; error?: string };
     if (!response.ok || !json.url) throw new Error(json.error ?? 'Upload failed');
@@ -51,7 +55,7 @@ export function CoverImageField({
         defaultImageModel
     );
     const upload = useMutation({
-        mutationFn: uploadImage,
+        mutationFn: (file: File) => uploadImage(file, 'cover'),
         onSuccess: url => onChange(url),
         onError: error => toast.error(error.message),
     });

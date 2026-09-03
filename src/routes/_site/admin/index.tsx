@@ -17,12 +17,15 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import { adminEntryLikesQuery } from '@/features/admin/shared/queries';
 import { adminEntriesQuery } from '@/features/entries/shared/queries';
+import { LikersList } from '@/features/social/components/like-button';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import type { EntryKind, EntryStatus } from '@/lib/db/schema';
 import { formatDate, kindMeta } from '@/lib/format';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { Link, createFileRoute, useNavigate } from '@tanstack/react-router';
-import { FileTextIcon, PlusIcon } from 'lucide-react';
+import { FileTextIcon, HeartIcon, PlusIcon } from 'lucide-react';
 import { z } from 'zod';
 
 export const Route = createFileRoute('/_site/admin/')({
@@ -30,13 +33,18 @@ export const Route = createFileRoute('/_site/admin/')({
         kind: z.enum(['remedy', 'tip', 'recipe', 'article']).optional().catch(undefined),
         status: z.enum(['draft', 'published']).optional().catch(undefined),
     }),
-    loader: ({ context }) => context.queryClient.ensureQueryData(adminEntriesQuery()),
+    loader: ({ context }) =>
+        Promise.all([
+            context.queryClient.ensureQueryData(adminEntriesQuery()),
+            context.queryClient.ensureQueryData(adminEntryLikesQuery()),
+        ]),
     component: AdminIndex,
 });
 
 function AdminIndex() {
     const { kind, status } = Route.useSearch();
     const { data: all } = useSuspenseQuery(adminEntriesQuery());
+    const { data: entryLikes } = useSuspenseQuery(adminEntryLikesQuery());
     const rows = all.filter(e => (!kind || e.kind === kind) && (!status || e.status === status));
 
     const counts = {
@@ -110,6 +118,7 @@ function AdminIndex() {
                             <TableHead>Title</TableHead>
                             <TableHead className='hidden sm:table-cell'>Kind</TableHead>
                             <TableHead>Status</TableHead>
+                            <TableHead className='text-right'>Likes</TableHead>
                             <TableHead className='hidden md:table-cell'>Updated</TableHead>
                         </TableRow>
                     </TableHeader>
@@ -134,6 +143,20 @@ function AdminIndex() {
                                 </TableCell>
                                 <TableCell>
                                     <StatusPill status={entry.status} />
+                                </TableCell>
+                                <TableCell className='text-right tabular-nums'>
+                                    <HoverCard>
+                                        <HoverCardTrigger
+                                            render={
+                                                <span className='text-muted-foreground inline-flex cursor-default items-center gap-1' />
+                                            }>
+                                            <HeartIcon className='size-3.5' />
+                                            {entryLikes[entry.id]?.length ?? 0}
+                                        </HoverCardTrigger>
+                                        <HoverCardContent align='end' className='w-64 p-3'>
+                                            <LikersList likers={entryLikes[entry.id] ?? []} />
+                                        </HoverCardContent>
+                                    </HoverCard>
                                 </TableCell>
                                 <TableCell className='text-muted-foreground hidden tabular-nums md:table-cell'>
                                     {formatDate(entry.updatedAt)}

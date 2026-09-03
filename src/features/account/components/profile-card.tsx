@@ -44,7 +44,7 @@ export function ProfileCard({
     const upload = useMutation({
         mutationFn: async (file: File) => {
             if (file.size > 2 * 1024 * 1024) throw new Error('Pictures must be under 2 MB.');
-            return uploadImage(file);
+            return uploadImage(file, 'avatar');
         },
         onSuccess: url => save.mutate({ image: url }),
         onError: error => toast.error(error.message),

@@ -29,6 +29,8 @@
         { "binding": "MEDIA", "bucket_name": "tipstotreat-media" }
     ],
     "send_email": [{ "name": "EMAIL" }],
+    // Cloudflare Images: resizes and re-encodes uploads (covers, inline images, avatars, OG).
+    "images": { "binding": "IMAGES" },
     "d1_databases": [
         {
             "binding": "DB",

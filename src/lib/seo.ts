@@ -1,6 +1,18 @@
 import type { Entry } from '@/lib/db/schema';
 import { SITE_NAME } from '@/lib/site';
 
+/**
+ * Search and social previews truncate around 155-160 characters; cut on a word boundary so the
+ * visible text never ends mid-word. JSON-LD keeps the full summary.
+ */
+export function metaDescription(text: string, max = 155) {
+    const clean = text.replace(/\s+/g, ' ').trim();
+    if (clean.length <= max) return clean;
+    const cut = clean.slice(0, max - 1);
+    const at = cut.lastIndexOf(' ');
+    return `${(at > max * 0.6 ? cut.slice(0, at) : cut).replace(/[,;:.\s]+$/, '')}…`;
+}
+
 /** schema.org structured data for an entry: Recipe, HowTo (remedies), or Article (tips). */
 export function entryJsonLd(entry: Entry, url: string) {
     const base = {

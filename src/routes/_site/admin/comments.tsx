@@ -13,7 +13,8 @@ import { deleteCommentServerFn } from '@/features/social/server/social.functions
 import { formatDate, kindMeta } from '@/lib/format';
 import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import { Link, createFileRoute } from '@tanstack/react-router';
-import { Trash2Icon } from 'lucide-react';
+import { HeartIcon, Trash2Icon } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { toast } from 'sonner';
 
 export const Route = createFileRoute('/_site/admin/comments')({
@@ -52,6 +53,7 @@ function CommentsPage() {
                         <TableRow>
                             <TableHead>Comment</TableHead>
                             <TableHead className='hidden md:table-cell'>On</TableHead>
+                            <TableHead className='text-right'>Likes</TableHead>
                             <TableHead className='hidden sm:table-cell'>When</TableHead>
                             <TableHead className='text-right'>Actions</TableHead>
                         </TableRow>
@@ -81,6 +83,22 @@ function CommentsPage() {
                                         to='/$kind/$slug'>
                                         {comment.entry.title}
                                     </Link>
+                                </TableCell>
+                                <TableCell className='text-right tabular-nums'>
+                                    <Tooltip>
+                                        <TooltipTrigger
+                                            render={
+                                                <span className='text-muted-foreground inline-flex cursor-default items-center gap-1' />
+                                            }>
+                                            <HeartIcon className='size-3.5' />
+                                            {comment.likers.length}
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                            {comment.likers.length === 0
+                                                ? 'No likes yet'
+                                                : comment.likers.join(', ')}
+                                        </TooltipContent>
+                                    </Tooltip>
                                 </TableCell>
                                 <TableCell className='text-muted-foreground hidden tabular-nums sm:table-cell'>
                                     {formatDate(comment.createdAt)}

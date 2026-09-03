@@ -36,6 +36,7 @@ import { Route as SiteAdminIndexRouteImport } from './routes/_site/admin/index'
 import { Route as SiteAdminCommentsRouteImport } from './routes/_site/admin/comments'
 import { Route as SiteAdminUsersRouteImport } from './routes/_site/admin/users'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as OgKindChar123slugChar125DotjpgRouteImport } from './routes/og/$kind/{$slug}[.]jpg'
 import { Route as OgKindChar123slugChar125DotpngRouteImport } from './routes/og/$kind/{$slug}[.]png'
 import { Route as SiteAdminEntriesIdRouteImport } from './routes/_site/admin/entries/$id'
 import { Route as SiteAdminEntriesNewRouteImport } from './routes/_site/admin/entries/new'
@@ -175,6 +176,12 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OgKindChar123slugChar125DotjpgRoute =
+  OgKindChar123slugChar125DotjpgRouteImport.update({
+    id: '/og/$kind/{$slug}.jpg',
+    path: '/og/$kind/{$slug}.jpg',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const OgKindChar123slugChar125DotpngRoute =
   OgKindChar123slugChar125DotpngRouteImport.update({
     id: '/og/$kind/{$slug}.png',
@@ -217,6 +224,7 @@ export interface FileRoutesByFullPath {
   '/admin/comments': typeof SiteAdminCommentsRoute
   '/admin/users': typeof SiteAdminUsersRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/og/$kind/{$slug}.jpg': typeof OgKindChar123slugChar125DotjpgRoute
   '/og/$kind/{$slug}.png': typeof OgKindChar123slugChar125DotpngRoute
   '/$kind/': typeof SiteKindIndexRoute
   '/admin/': typeof SiteAdminIndexRoute
@@ -247,6 +255,7 @@ export interface FileRoutesByTo {
   '/admin/comments': typeof SiteAdminCommentsRoute
   '/admin/users': typeof SiteAdminUsersRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/og/$kind/{$slug}.jpg': typeof OgKindChar123slugChar125DotjpgRoute
   '/og/$kind/{$slug}.png': typeof OgKindChar123slugChar125DotpngRoute
   '/$kind': typeof SiteKindIndexRoute
   '/admin': typeof SiteAdminIndexRoute
@@ -280,6 +289,7 @@ export interface FileRoutesById {
   '/_site/admin/comments': typeof SiteAdminCommentsRoute
   '/_site/admin/users': typeof SiteAdminUsersRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/og/$kind/{$slug}.jpg': typeof OgKindChar123slugChar125DotjpgRoute
   '/og/$kind/{$slug}.png': typeof OgKindChar123slugChar125DotpngRoute
   '/_site/$kind/': typeof SiteKindIndexRoute
   '/_site/admin/': typeof SiteAdminIndexRoute
@@ -313,6 +323,7 @@ export interface FileRouteTypes {
     | '/admin/comments'
     | '/admin/users'
     | '/api/auth/$'
+    | '/og/$kind/{$slug}.jpg'
     | '/og/$kind/{$slug}.png'
     | '/$kind/'
     | '/admin/'
@@ -343,6 +354,7 @@ export interface FileRouteTypes {
     | '/admin/comments'
     | '/admin/users'
     | '/api/auth/$'
+    | '/og/$kind/{$slug}.jpg'
     | '/og/$kind/{$slug}.png'
     | '/$kind'
     | '/admin'
@@ -375,6 +387,7 @@ export interface FileRouteTypes {
     | '/_site/admin/comments'
     | '/_site/admin/users'
     | '/api/auth/$'
+    | '/og/$kind/{$slug}.jpg'
     | '/og/$kind/{$slug}.png'
     | '/_site/$kind/'
     | '/_site/admin/'
@@ -395,6 +408,7 @@ export interface RootRouteChildren {
   MediaSplatRoute: typeof MediaSplatRoute
   OgSiteDotpngRoute: typeof OgSiteDotpngRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  OgKindChar123slugChar125DotjpgRoute: typeof OgKindChar123slugChar125DotjpgRoute
   OgKindChar123slugChar125DotpngRoute: typeof OgKindChar123slugChar125DotpngRoute
 }
 
@@ -589,6 +603,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/og/$kind/{$slug}.jpg': {
+      id: '/og/$kind/{$slug}.jpg'
+      path: '/og/$kind/{$slug}.jpg'
+      fullPath: '/og/$kind/{$slug}.jpg'
+      preLoaderRoute: typeof OgKindChar123slugChar125DotjpgRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/og/$kind/{$slug}.png': {
       id: '/og/$kind/{$slug}.png'
       path: '/og/$kind/{$slug}.png'
@@ -678,6 +699,7 @@ const rootRouteChildren: RootRouteChildren = {
   MediaSplatRoute: MediaSplatRoute,
   OgSiteDotpngRoute: OgSiteDotpngRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  OgKindChar123slugChar125DotjpgRoute: OgKindChar123slugChar125DotjpgRoute,
   OgKindChar123slugChar125DotpngRoute: OgKindChar123slugChar125DotpngRoute,
 }
 export const routeTree = rootRouteImport

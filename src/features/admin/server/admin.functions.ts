@@ -1,10 +1,11 @@
 import { requireAuthor } from '@/features/auth/server/session.server';
 import { getDb } from '@/lib/db';
-import { comments, entries, user, type EntryKind } from '@/lib/db/schema';
+import { commentLikes, comments, entries, likes, user, type EntryKind } from '@/lib/db/schema';
+import type { Liker } from '@/features/social/server/social.server';
 import { getAuth } from '@/lib/auth';
 import { createServerFn } from '@tanstack/react-start';
 import { getRequestHeaders } from '@tanstack/react-start/server';
-import { desc, eq } from 'drizzle-orm';
+import { desc, eq, inArray } from 'drizzle-orm';
 import { z } from 'zod';
 
 export type AdminUser = {
@@ -105,6 +106,7 @@ export type AdminComment = {
     body: string;
     createdAt: Date;
     isReply: boolean;
+    likers: string[];
     author: { id: string; name: string; email: string; banned: boolean };
     entry: { id: string; title: string; slug: string; kind: EntryKind };
 };
@@ -133,11 +135,28 @@ export const adminListCommentsServerFn = createServerFn().handler(
             .innerJoin(entries, eq(comments.entryId, entries.id))
             .orderBy(desc(comments.createdAt))
             .limit(500);
+        const likers = new Map<string, string[]>();
+        if (rows.length > 0) {
+            const who = await getDb()
+                .select({ commentId: commentLikes.commentId, name: user.name })
+                .from(commentLikes)
+                .innerJoin(user, eq(commentLikes.userId, user.id))
+                .where(
+                    inArray(
+                        commentLikes.commentId,
+                        rows.map(r => r.id)
+                    )
+                )
+                .orderBy(desc(commentLikes.createdAt));
+            for (const row of who)
+                likers.set(row.commentId, [...(likers.get(row.commentId) ?? []), row.name]);
+        }
         return rows.map(row => ({
             id: row.id,
             body: row.body,
             createdAt: row.createdAt,
             isReply: row.parentId !== null,
+            likers: likers.get(row.id) ?? [],
             author: {
                 id: row.authorId,
                 name: row.authorName,
@@ -153,3 +172,31 @@ export const adminListCommentsServerFn = createServerFn().handler(
         }));
     }
 );
+
+export type EntryLikes = Record<string, Liker[]>;
+
+/** Who liked each entry, newest first, keyed by entry id. */
+export const adminEntryLikesServerFn = createServerFn().handler(async (): Promise<EntryLikes> => {
+    await requireAuthor();
+    const rows = await getDb()
+        .select({
+            entryId: likes.entryId,
+            id: user.id,
+            name: user.name,
+            image: user.image,
+            at: likes.createdAt,
+        })
+        .from(likes)
+        .innerJoin(user, eq(likes.userId, user.id))
+        .orderBy(desc(likes.createdAt));
+    const out: EntryLikes = {};
+    for (const row of rows) {
+        (out[row.entryId] ??= []).push({
+            id: row.id,
+            name: row.name,
+            image: row.image,
+            at: row.at,
+        });
+    }
+    return out;
+});

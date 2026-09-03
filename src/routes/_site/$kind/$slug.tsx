@@ -8,7 +8,7 @@ import { Comments } from '@/features/social/components/comments';
 import { LikeButton } from '@/features/social/components/like-button';
 import { entrySocialQuery } from '@/features/social/shared/queries';
 import { formatDate, kindFromPath, kindMeta } from '@/lib/format';
-import { entryJsonLd } from '@/lib/seo';
+import { entryJsonLd, metaDescription } from '@/lib/seo';
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { Link, createFileRoute, getRouteApi, notFound } from '@tanstack/react-router';
 
@@ -34,17 +34,17 @@ export const Route = createFileRoute('/_site/$kind/$slug')({
         const { entry } = loaderData;
         const origin = (matches[0]?.loaderData as { origin?: string } | undefined)?.origin;
         const url = origin ? `${origin}/${params.kind}/${params.slug}` : undefined;
+        // Covers are re-cut to 1200x630 JPEG by /og/…/slug.jpg; the drawn card is a PNG.
         const image = origin
-            ? entry.coverImage
-                ? `${origin}${entry.coverImage}`
-                : `${origin}/og/${params.kind}/${params.slug}.png`
+            ? `${origin}/og/${params.kind}/${params.slug}.${entry.coverImage ? 'jpg' : 'png'}`
             : undefined;
+        const description = metaDescription(entry.summary);
         return {
             meta: [
                 { title: `${entry.title} · TipsToTreat` },
-                { name: 'description', content: entry.summary },
+                { name: 'description', content: description },
                 { property: 'og:title', content: entry.title },
-                { property: 'og:description', content: entry.summary },
+                { property: 'og:description', content: description },
                 { property: 'og:type', content: 'article' },
                 ...(url ? [{ property: 'og:url', content: url }] : []),
                 ...(entry.publishedAt
@@ -66,13 +66,16 @@ export const Route = createFileRoute('/_site/$kind/$slug')({
                               property: 'og:image:secure_url',
                               content: image,
                           },
-                          { property: 'og:image:type', content: 'image/png' },
+                          {
+                              property: 'og:image:type',
+                              content: entry.coverImage ? 'image/jpeg' : 'image/png',
+                          },
                           { property: 'og:image:width', content: '1200' },
                           { property: 'og:image:height', content: '630' },
                           { property: 'og:image:alt', content: entry.title },
                           { name: 'twitter:card', content: 'summary_large_image' },
                           { name: 'twitter:title', content: entry.title },
-                          { name: 'twitter:description', content: entry.summary },
+                          { name: 'twitter:description', content: description },
                           {
                               name: 'twitter:image',
                               content: image,
@@ -147,6 +150,7 @@ function EntryPage() {
                 <LikeButton
                     entryId={entry.id}
                     liked={social.liked}
+                    likers={social.likers}
                     signedIn={viewer !== null}
                     slug={slug}
                 />

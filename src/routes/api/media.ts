@@ -1,5 +1,10 @@
 import { requireUser } from '@/features/auth/server/session.server';
-import { MEDIA_MAX_BYTES, MEDIA_TYPES, putMedia } from '@/lib/media.server';
+import {
+    MEDIA_MAX_BYTES,
+    MEDIA_TYPES,
+    type MediaVariant,
+    putOptimizedMedia,
+} from '@/lib/media.server';
 import { createFileRoute } from '@tanstack/react-router';
 
 /**
@@ -20,6 +25,12 @@ export const Route = createFileRoute('/api/media')({
                 const maxBytes = isAuthor ? MEDIA_MAX_BYTES : 2 * 1024 * 1024;
                 const form = await request.formData();
                 const file = form.get('file');
+                const requested = form.get('purpose');
+                const variant: MediaVariant = !isAuthor
+                    ? 'avatar'
+                    : requested === 'cover' || requested === 'avatar'
+                      ? requested
+                      : 'inline';
                 if (!(file instanceof File)) {
                     return Response.json({ error: 'No file received.' }, { status: 400 });
                 }
@@ -35,10 +46,11 @@ export const Route = createFileRoute('/api/media')({
                         { status: 413 }
                     );
                 }
-                const { url } = await putMedia(
+                const { url } = await putOptimizedMedia(
                     await file.arrayBuffer(),
                     file.type,
-                    isAuthor ? 'uploads' : 'avatars'
+                    variant === 'avatar' ? 'avatars' : 'uploads',
+                    variant
                 );
                 return Response.json({ url });
             },
